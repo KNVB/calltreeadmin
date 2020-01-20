@@ -1,0 +1,9 @@
+DataStoreImplementationClassName = com.rosterWeb.util.DbOp
+dbServerName=server
+dbms=mysql
+dbName=call_tree_info
+dbUserName=cstsang
+dbUserPwd=30Dec2010
+jdbcDriver = com.mysql.jdbc.Driver
+#inputExcelFilePath=G:\\workspace\\template.xlsx
+#outputExcelFilePath=G:\\workspace\\output.xlsx
