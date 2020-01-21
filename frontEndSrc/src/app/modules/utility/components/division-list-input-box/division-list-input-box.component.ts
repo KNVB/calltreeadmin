@@ -1,6 +1,6 @@
 import {Component, forwardRef} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import { CallTreeService } from 'src/app/services/call-tree.service';
+import { DivisionService } from 'src/app/services/division.service';
 @Component({
   selector: 'app-division-list-input-box',
   templateUrl: './division-list-input-box.component.html',
@@ -20,8 +20,8 @@ export class DivisionListInputBoxComponent implements ControlValueAccessor {
 
   onChange: (value) => {};
   onTouched: () => {};
-  constructor(private callTreeService: CallTreeService) {
-    this.callTreeService.getActiveDivisionList().subscribe((res: string[]) => {
+  constructor(private divisionService: DivisionService) {
+    this.divisionService.getActiveDivisionList().subscribe((res: string[]) => {
         this.divisionList = res;
         this.filteredDivisionList = this.divisionList;
     });
