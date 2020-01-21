@@ -1,4 +1,4 @@
 export class CallTree {
-  contactId = -1;
-  contactDetail = '';
+  callTreeId = -1;
+  callTreeDetail = '';
 }

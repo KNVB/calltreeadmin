@@ -1,1 +1,99 @@
-<p>edit-call-tree-info works!</p>
+<div class="center">Call Tree Info Maintenance</div>
+<table style="width:90%;margin-left: 30px;" >
+  <tr>
+    <td>
+      <mat-form-field>
+        <mat-label>
+          Filter
+        </mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)">
+      </mat-form-field>
+    </td>
+    <td>
+      <button  style="float:right" mat-raised-button color="primary" (click)="popupDialog('Add',callTreeInfoTemplate)">Add New Call Tree</button>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <table mat-table [dataSource]="callTreeInfoDataSource" matSort matSortActive="systemName" matSortDirection="asc" class="mat-elevation-z8">
+        <ng-container matColumnDef="division">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Division</th>
+            <td mat-cell style="text-align: left !important;" *matCellDef="let element"> {{element.division}} </td>
+        </ng-container>
+        <ng-container matColumnDef="systemName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="systemName">System</th>
+            <td mat-cell style="text-align: left !important;" *matCellDef="let element"> {{element.systemName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+            <td mat-cell *matCellDef="let element" [innerHTML]="element.location| safeHtml"></td>
+        </ng-container>
+        <ng-container matColumnDef="serviceLevel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Service<br>Level<a href="#serviceLevel">*</a></th>
+            <td mat-cell *matCellDef="let element">{{element.serviceLevel}}</td>
+        </ng-container>
+        <ng-container matColumnDef="missionCritical">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mission Critical</th>
+          <td mat-cell *matCellDef="let element">{{element.missionCritical}}</td>
+      </ng-container>
+      <ng-container matColumnDef="timeToStartProcedure">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Interval to start established<br>procedures<a href="#timeLimit">#</a></th>
+            <td mat-cell *matCellDef="let element">{{element.timeToStartProcedure}}</td>
+        </ng-container>
+        <ng-container matColumnDef="contact">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Call tree</th>
+          <td mat-cell *matCellDef="let element">
+            <a href="javascript:openContactEditor(element.callTreeId)">Edit CallTree</a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="timeToEscalate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Interval to <br>escalate<br>if no reply</th>
+            <td mat-cell *matCellDef="let element"> {{element.timeToEscalate}} </td>
+        </ng-container>
+        <ng-container matColumnDef="logRecipients">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Appreciation<br>Log Recipients</th>
+            <td mat-cell style="text-align: left !important;padding-left: 10px;" *matCellDef="let element" [innerHTML]="element.logRecipients| safeHtml"></td>
+        </ng-container>
+        <ng-container matColumnDef="manual">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Operation Manual</th>
+          <td mat-cell *matCellDef="let element">
+            <a href="javascript:openManualEditor(element.callTreeId)">Edit Manual Info</a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td mat-cell *matCellDef="let element" [innerHTML]="(element.status === activeCallTreeInfo)?'Active':'Inactive'"></td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a href="javascript:void(0)" (click)="popupDialog('Edit',element)">Edit</a>|<a *ngIf="(element.status === activeCallTreeInfo)" href="javascript:void(0)" (click)="popupDialog('Disable',element)">Disable</a><a *ngIf="(element.status === inActiveCallTreeInfo)" href="javascript:void(0)" (click)="popupDialog('Enable',element)">Enable</a>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true" class="heading"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      Remark:
+      <p>
+        If a problematic system reported is under all Branches but not listed in the F5 Operator Call Tree,<br>Operator should let the originator (the one who reported the problematic system) know the system is not covered in the list of systems monitored by F5 Operator <br>and ask the originator to provide the follow-up contacts, and call the relevant officers accordingly.In case the originator does not know who should be contacted,<br>Operator should call SEO(F)51, SO(F)51 or SSO(F)5 for assistance.
+      </p>
+      <ul style="margin: 0; padding: 0;list-style: none">
+        <li>
+          <a name="serviceLevel">*Service Level</a>
+          <ol>
+            <li>system monitoring + problem reporting</li>
+            <li>system monitoring + problem reporting + system reboot</li>
+            <li>system monitoring + problem reporting + system reboot+ routine computer operation</li>
+          </ol>
+          <br>
+        </li>
+        <li>
+          <a name="timeLimit">
+            # Start to count after identified the system
+          </a>
+        </li>
+      </ul>
+    </td>
+  </tr>
+</table>

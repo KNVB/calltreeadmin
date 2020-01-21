@@ -1,6 +1,6 @@
-package com.calltree.util;
+package com.calltreeinfo.util;
 
-import com.calltree.CallTreeInfo;
+import com.calltreeinfo.CallTreeInfo;
 
 public interface DataStore {
 

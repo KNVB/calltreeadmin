@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CallTreeService } from './call-tree.service';
+import { CallTreeInfoService } from './call-tree-info.service';
 
-describe('CallTreeService', () => {
+describe('CallTreeInfoService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CallTreeService = TestBed.get(CallTreeService);
+    const service: CallTreeInfoService = TestBed.get(CallTreeInfoService);
     expect(service).toBeTruthy();
   });
 });

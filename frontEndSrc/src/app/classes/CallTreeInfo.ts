@@ -4,7 +4,7 @@ import { CallTree } from './CallTree';
 export class CallTreeInfo {
   static readonly active = 1;
   static readonly inactive = 0;
-  callTreeId = -1;
+  callTreeInfoId = -1;
   callTree = new CallTree();
   division = '';
   location = '';

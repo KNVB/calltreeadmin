@@ -1,6 +1,6 @@
 import {Component, forwardRef} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import { CallTreeService } from 'src/app/services/call-tree.service';
+import { CallTreeInfoService } from 'src/app/services/call-tree-info.service';
 
 @Component({
   selector: 'app-contact-id-selector',
@@ -17,7 +17,7 @@ import { CallTreeService } from 'src/app/services/call-tree.service';
 export class ContactIdSelectorComponent implements ControlValueAccessor{
   division: string;
   contactId: number;
-  constructor(private callTreeService: CallTreeService) {
+  constructor(private callTreeInfoService: CallTreeInfoService) {
 
   }
   onChange: (value) => {};

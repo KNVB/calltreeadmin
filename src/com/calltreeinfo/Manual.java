@@ -1,4 +1,4 @@
-package com.calltree;
+package com.calltreeinfo;
 
 public class Manual {
 

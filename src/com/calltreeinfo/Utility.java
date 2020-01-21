@@ -1,9 +1,9 @@
-package com.calltree;
+package com.calltreeinfo;
 
 import java.io.InputStream;
 import java.util.PropertyResourceBundle;
 
-import com.calltree.util.DataStore;
+import com.calltreeinfo.util.DataStore;
 
 public class Utility {
 	private static Utility instance;

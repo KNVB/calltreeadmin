@@ -7,7 +7,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DivisionService {
-  url = '../RestfulServices/Division/';
+  url = '../RestfulServices/DivisionService/';
+
   constructor(private http: HttpClient) { }
   getActiveDivisionList(): Observable<string[]> {
     const serviceURL = this.url + 'getActiveDivisionList';

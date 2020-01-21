@@ -1,4 +1,4 @@
-package com.calltree;
+package com.calltreeinfo;
 
 public class CallTreeInfo {
 	public static final int active=1;
@@ -13,7 +13,7 @@ public class CallTreeInfo {
 	private String timeToEscalate=new String();
 	private String logRecipients=new String();
 	private int status=CallTreeInfo.inactive;	
-	private int callTreeId;
+	private int callTreeInfoId;
 	private float version=0.0f;
 
 	private Manual[] manuals=null;
@@ -31,12 +31,12 @@ public class CallTreeInfo {
 		this.callTree = callTree;
 	}
 
-	public int getCallTreeId() {
-		return callTreeId;
+	public int getCallTreeInfoId() {
+		return callTreeInfoId;
 	}
 
-	public void setCallTreeId(int callTreeId) {
-		this.callTreeId = callTreeId;
+	public void setCallTreeInfoId(int callTreeId) {
+		this.callTreeInfoId = callTreeId;
 	}
 	public String getDivision() {
 		return division;

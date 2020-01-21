@@ -1,4 +1,4 @@
-package com.calltree.util;
+package com.calltreeinfo.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +10,10 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.calltree.CallTree;
-import com.calltree.CallTreeInfo;
-import com.calltree.Division;
-
-import com.calltree.Utility;
+import com.calltreeinfo.CallTree;
+import com.calltreeinfo.CallTreeInfo;
+import com.calltreeinfo.Division;
+import com.calltreeinfo.Utility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -42,8 +41,53 @@ public class DbOp implements DataStore {
 	}
 	@Override
 	public CallTreeInfo[] getAllCallTreeInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CallTreeInfo> result=new ArrayList<CallTreeInfo>();
+		CallTreeInfo callTreeInfo;
+		CallTree callTree;
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+	 
+		sqlString ="select a.*,c.* from ";  
+		sqlString+="calltreeinfo a left outer join calltreeinfo_calltree b ";
+		sqlString+="on a.calltreeinfo_id = b.calltreeinfo_id ";
+		sqlString+="left outer join calltree c ";
+		sqlString+="on b.calltree_id= c.calltree_id ";
+		sqlString+="order by a.division,system_name,a.calltreeinfo_id";
+		try
+		{
+			stmt=dbConn.prepareStatement(sqlString);
+			rs=stmt.executeQuery();
+			while (rs.next())
+			{
+				callTreeInfo =new CallTreeInfo();
+				callTreeInfo.setDivision(rs.getString("division"));
+				callTreeInfo.setLocation(rs.getString("location"));
+				callTreeInfo.setMissionCritical(rs.getString("mission_Critical"));
+				callTreeInfo.setLogRecipients(rs.getString("log_recipients"));
+				callTreeInfo.setServiceLevel(rs.getString("service_level"));
+				callTreeInfo.setStatus(rs.getInt("status"));
+				callTreeInfo.setSystemName(rs.getString("system_name"));
+				callTreeInfo.setTimeToEscalate(rs.getString("time_to_escalate"));
+				callTreeInfo.setTimeToStartProcedure(rs.getString("time_to_start_procedure"));
+				callTreeInfo.setCallTreeInfoId(rs.getInt("calltreeinfo_id"));
+				callTree=new CallTree();
+				if (rs.getString("calltree_id")!=null) {
+					callTree.setCallTreeId(rs.getInt("calltree_id"));
+					callTree.setCallTreeDetail(rs.getString("calltreeDetail"));
+				}
+				callTreeInfo.setCallTree(callTree);
+				result.add(callTreeInfo);
+			}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			releaseResource(rs, stmt);
+		}
+		return result.toArray(new CallTreeInfo[0]);
 	}
 
 	@Override
