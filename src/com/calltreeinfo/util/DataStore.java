@@ -7,7 +7,7 @@ public interface DataStore {
 
 	public CallTreeInfo[] getAllCallTreeInfo();
 	public String[] getActiveDivisionNameList();
-	
+	public CallTreeInfo[] getCallTreeInfoByCallTreeId(int callTreeId)throws Exception;
 	public boolean addCallTreeInfo(CallTreeInfo callTreeInfo) throws Exception;
 	public boolean updateCallTreeInfo(CallTreeInfo callTreeInfo) throws Exception;
 	

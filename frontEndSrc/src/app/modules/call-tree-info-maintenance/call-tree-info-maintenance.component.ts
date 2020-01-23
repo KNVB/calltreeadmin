@@ -1,12 +1,14 @@
+import { CallTree } from 'src/app/classes/CallTree';
 import { CallTreeInfo } from 'src/app/classes/CallTreeInfo';
 import { CallTreeInfoService } from 'src/app/services/call-tree-info.service';
+import { CallTreeEditorComponent } from './call-tree-editor/call-tree-editor.component';
 import { CallTreeInfoEditorComponent } from './call-tree-info-editor/call-tree-info-editor.component';
 import { Component, ViewChild } from '@angular/core';
 import { ConfirmationBoxComponent } from '../utility/components/confirmation-box/confirmation-box.component';
-import { DivisionService } from 'src/app/services/division.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+
 
 
 @Component({
@@ -62,7 +64,23 @@ export class CallTreeInfoMaintenanceComponent  {
       case 'Disable':
       case 'Enable': this.popupConfirmationBox(action, callTreeInfo);
                      break;
+      case 'EditCallTree': this.popupCallTreeEditor(callTreeInfo);
+                           break;
+      case 'EditManual': this.popupManualEditor(callTreeInfo);
+                         break;
     }
+  }
+  popupCallTreeEditor(callTreeInfo: CallTreeInfo) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = true;
+    // dialogConfig.minHeight = '600px';
+
+    dialogConfig.autoFocus = false; // do not set focus on the first form element
+    dialogConfig.width = '900px';
+    dialogConfig.data = {
+      callTree: callTreeInfo.callTree
+    };
+    const dialogRef = this.dialog.open(CallTreeEditorComponent, dialogConfig);
   }
   popupCallTreeInfoEditor(action: string, callTreeInfo: CallTreeInfo) {
     const dialogConfig = new MatDialogConfig();
@@ -71,13 +89,7 @@ export class CallTreeInfoMaintenanceComponent  {
 
     dialogConfig.autoFocus = false; // do not set focus on the first form element
     dialogConfig.width = '900px';
-    /*
-    if (callTreeInfo.callTreeInfoId === -1) {
-      dialogConfig.height = '900px';
-    } else {
-      dialogConfig.height = '500px';
-    }
-    */
+
     dialogConfig.data = {
       action,
       callTreeInfoId: callTreeInfo.callTreeInfoId,
@@ -122,6 +134,7 @@ export class CallTreeInfoMaintenanceComponent  {
                 message = 'The call tree info status is fail to set to active.';
                 callTreeInfo.status = CallTreeInfo.inactive;
               }
+              alert(message);
           });
         } else {
           callTreeInfo.status = CallTreeInfo.inactive;
@@ -132,11 +145,14 @@ export class CallTreeInfoMaintenanceComponent  {
               message = 'The call tree info status is fail to set to inactive.';
               callTreeInfo.status = CallTreeInfo.active;
             }
+            alert(message);
           });
         }
-        alert(message);
       }
     });
+  }
+  popupManualEditor(callTreeInfo: CallTreeInfo) {
+
   }
   refreshDataSource() {
     this.callTreeInfoList = this.callTreeInfoDataSource.sortData(this.callTreeInfoList, this.sort);

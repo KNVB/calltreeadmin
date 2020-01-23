@@ -13,13 +13,13 @@ export class CallTreeInfoService {
   url = '../RestfulServices/CallTreeInfo/';
   constructor(private http: HttpClient) { }
 
-  getAllCallTreeInfo(): Observable<CallTreeInfo[]> {
-    const serviceURL = this.url + 'getAllCallTreeInfo';
-    return this.http.get(serviceURL).pipe(map((res: CallTreeInfo[]) => res));
-  }
   addCallTreeInfo(callTreeInfo: CallTreeInfo): Observable<boolean> {
     const serviceURL = this.url + 'addCallTreeInfo';
     return this.http.post(serviceURL , callTreeInfo).pipe(map((res: boolean) => res));
+  }
+  getAllCallTreeInfo(): Observable<CallTreeInfo[]> {
+    const serviceURL = this.url + 'getAllCallTreeInfo';
+    return this.http.get(serviceURL).pipe(map((res: CallTreeInfo[]) => res));
   }
   updateCallTreeInfo(callTreeInfo: CallTreeInfo): Observable<boolean> {
     const serviceURL = this.url + 'updateCallTreeInfo';

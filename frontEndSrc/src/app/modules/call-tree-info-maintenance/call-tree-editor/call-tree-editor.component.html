@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Edit a Call Tree</h2>
+<form #callTreeEditForm="ngForm" (ngSubmit)="onSubmit(callTreeEditForm)" novalidate>
+  Call Tree Detail:
+  <ckeditor
+    required
+    name="callTreeDetail"
+    [config]="ckeditorConfig"
+    #callTreeDetail1="ngModel"
+    [(ngModel)]="this.callTree.callTreeDetail">
+  </ckeditor>
+  <mat-dialog-actions>
+    <button mat-raised-button type="submit" color="primary" class="Update-btn">Save</button>
+    <button mat-raised-button type="button" class="Discard-btn" (click)="closeDialog()">Close</button>
+  </mat-dialog-actions>
+</form>
+

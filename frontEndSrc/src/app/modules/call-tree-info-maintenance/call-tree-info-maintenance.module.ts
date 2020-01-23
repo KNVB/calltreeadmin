@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import {CallTreeEditorComponent} from './call-tree-editor/call-tree-editor.component';
 import { CallTreeInfoEditorComponent } from './call-tree-info-editor/call-tree-info-editor.component';
 import { CallTreeInfoMaintenanceComponent } from './call-tree-info-maintenance.component';
 import { CKEditorModule } from 'ckeditor4-angular';
@@ -20,8 +21,9 @@ import {UtilityModule } from '../utility/utility.module';
 
 @NgModule({
   declarations: [
-                CallTreeInfoMaintenanceComponent,
+                CallTreeEditorComponent,
                 CallTreeInfoEditorComponent,
+                CallTreeInfoMaintenanceComponent,
                 SafeHtml,
                ],
   imports: [
@@ -40,7 +42,8 @@ import {UtilityModule } from '../utility/utility.module';
             UtilityModule,
            ],
   exports: [CallTreeInfoMaintenanceComponent],
-  entryComponents: [CallTreeInfoEditorComponent],
+  entryComponents: [CallTreeEditorComponent,
+                    CallTreeInfoEditorComponent],
   providers: [DatePipe]
 })
 export class CallTreeInfoMaintenanceModule { }

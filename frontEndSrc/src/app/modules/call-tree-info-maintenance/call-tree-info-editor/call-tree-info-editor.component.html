@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ action }} a Call Tree</h2>
+<h2 mat-dialog-title>{{ action }} a Call Tree Info</h2>
 <form #callTreeInfoEditForm="ngForm" (ngSubmit)="onSubmit(callTreeInfoEditForm)" novalidate>
     <input type=hidden name="callTreeInfoId" [(ngModel)]="this.callTreeInfo.callTreeInfoId">
     <app-division-list-input-box

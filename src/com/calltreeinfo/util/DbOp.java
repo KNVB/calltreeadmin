@@ -118,7 +118,46 @@ public class DbOp implements DataStore {
 		}
 		return result.toArray(new String[0]);
 	}
-
+	@Override
+	public CallTreeInfo[] getCallTreeInfoByCallTreeId(int callTreeId)throws Exception {
+		ArrayList<CallTreeInfo> result=new ArrayList<CallTreeInfo>();
+		CallTreeInfo callTreeInfo;
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		try
+		{
+			sqlString ="select a.* from ";  
+			sqlString+="calltreeinfo a inner join calltreeinfo_calltree b ";
+			sqlString+="on b.calltree_id=? and a.calltreeinfo_id = b.calltreeinfo_id ";
+			sqlString+="order by a.division,system_name,a.calltreeinfo_id";
+			stmt=dbConn.prepareStatement(sqlString);
+			stmt.setInt(1, callTreeId);
+			rs=stmt.executeQuery();
+			while (rs.next()) {
+				callTreeInfo =new CallTreeInfo();
+				callTreeInfo.setDivision(rs.getString("division"));
+				callTreeInfo.setLocation(rs.getString("location"));
+				callTreeInfo.setMissionCritical(rs.getString("mission_Critical"));
+				callTreeInfo.setLogRecipients(rs.getString("log_recipients"));
+				callTreeInfo.setServiceLevel(rs.getString("service_level"));
+				callTreeInfo.setStatus(rs.getInt("status"));
+				callTreeInfo.setSystemName(rs.getString("system_name"));
+				callTreeInfo.setTimeToEscalate(rs.getString("time_to_escalate"));
+				callTreeInfo.setTimeToStartProcedure(rs.getString("time_to_start_procedure"));
+				callTreeInfo.setCallTreeInfoId(rs.getInt("calltreeinfo_id"));
+				result.add(callTreeInfo);
+			}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			releaseResource(rs, stmt);
+		}
+		return result.toArray(new CallTreeInfo[0]);
+	}
 	@Override
 	public boolean addCallTreeInfo(CallTreeInfo callTreeInfo) throws Exception {
 		int callTreeId,callTreeInfoId,manualId;
@@ -207,15 +246,16 @@ public class DbOp implements DataStore {
 				}
 			}
 			dbConn.commit();
-			dbConn.setAutoCommit(true);
 			addSuccess=true;
 		}
 		catch (Exception e) 
 		{
+			dbConn.rollback();
 			e.printStackTrace();
 		} 
 		finally 
 		{
+			dbConn.setAutoCommit(true);
 			releaseResource(rs, stmt);
 		}
 		return addSuccess;

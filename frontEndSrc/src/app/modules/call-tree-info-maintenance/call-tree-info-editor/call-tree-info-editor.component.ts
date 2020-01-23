@@ -1,11 +1,10 @@
 import { CallTreeInfo } from 'src/app/classes/CallTreeInfo';
 import { CallTreeInfoService } from 'src/app/services/call-tree-info.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { DivisionService } from 'src/app/services/division.service';
 import { Manual } from 'src/app/classes/Manual';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
-import { SharedCallTree } from 'src/app/classes/SharedCallTree';
+
 
 @Component({
   selector: 'app-call-tree-info-editor',
@@ -37,7 +36,6 @@ export class CallTreeInfoEditorComponent implements OnInit {
                       ]
                     };
   constructor(private callTreeInfoService: CallTreeInfoService,
-              private divisionService: DivisionService,
               public dialog: MatDialog,
               private dialogRef: MatDialogRef<CallTreeInfoEditorComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
