@@ -5,29 +5,35 @@ public class Manual {
 	public static final int active=1;
 	public static final int inactive=0;
 
-	private String manualLink=new String();
-	private String manualDescription=new String();
-	private int status=Manual.inactive;	
+	private int manualId;
+	private String manualLocation;
+	private String description;
+	private String lastUpdateDate;
 	public Manual() {
 		
 	}
-	public String getManualLink() {
-		return manualLink;
+	public int getManualId() {
+		return manualId;
 	}
-	public void setManualLink(String manualLink) {
-		this.manualLink = manualLink;
+	public void setManualId(int manualId) {
+		this.manualId = manualId;
 	}
-	public String getManualDescription() {
-		return manualDescription;
+	public String getManualLocation() {
+		return manualLocation;
 	}
-	public void setManualDescription(String manualDescription) {
-		this.manualDescription = manualDescription;
+	public void setManualLocation(String manualLocation) {
+		this.manualLocation = manualLocation;
 	}
-	public int getStatus() {
-		return status;
+	public String getDescription() {
+		return description;
 	}
-	public void setStatus(int status) {
-		this.status = status;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
+	public String getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+	public void setLastUpdateDate(String lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
+	}
 }

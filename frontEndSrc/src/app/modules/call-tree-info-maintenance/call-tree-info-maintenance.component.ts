@@ -1,7 +1,7 @@
 import { CallTreeInfo } from 'src/app/classes/CallTreeInfo';
 import { CallTreeInfoService } from 'src/app/services/call-tree-info.service';
 import { CallTreeInfoEditorComponent } from './call-tree-info-editor/call-tree-info-editor.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ConfirmationBoxComponent } from '../utility/components/confirmation-box/confirmation-box.component';
 import { DivisionService } from 'src/app/services/division.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -10,11 +10,11 @@ import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
-  selector: 'app-edit-call-tree-info',
-  templateUrl: './edit-call-tree-info.component.html',
-  styleUrls: ['./edit-call-tree-info.component.css']
+  selector: 'app-call-tree-info-maintenance',
+  templateUrl: './call-tree-info-maintenance.component.html',
+  styleUrls: ['./call-tree-info-maintenance.component.css']
 })
-export class EditCallTreeInfoComponent implements OnInit {
+export class CallTreeInfoMaintenanceComponent  {
   activeCallTreeInfo = CallTreeInfo.active;
   inActiveCallTreeInfo = CallTreeInfo.inactive;
   callTreeInfoList: CallTreeInfo[];
@@ -26,7 +26,6 @@ export class EditCallTreeInfoComponent implements OnInit {
                                 'manual', 'status',  'action'];
   constructor(private callTreeInfoService: CallTreeInfoService,
               public dialog: MatDialog) {
-
     this.callTreeInfoService.getAllCallTreeInfo().subscribe((res: CallTreeInfo[]) => {
       this.callTreeInfoList = res;
       this.callTreeInfoDataSource = new MatTableDataSource<CallTreeInfo>(res);
@@ -49,9 +48,6 @@ export class EditCallTreeInfoComponent implements OnInit {
         return result;
       };
     });
-  }
-
-  ngOnInit() {
   }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace

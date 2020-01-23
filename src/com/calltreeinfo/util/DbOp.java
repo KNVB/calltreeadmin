@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,9 +14,9 @@ import org.apache.logging.log4j.Logger;
 import com.calltreeinfo.CallTree;
 import com.calltreeinfo.CallTreeInfo;
 import com.calltreeinfo.Division;
-import com.calltreeinfo.SharedCallTree;
+import com.calltreeinfo.Manual;
 import com.calltreeinfo.Utility;
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DbOp implements DataStore {
@@ -120,59 +118,14 @@ public class DbOp implements DataStore {
 		}
 		return result.toArray(new String[0]);
 	}
-	@Override
-	public Map<String,SharedCallTree[]> getSharedCallTree() throws Exception {
-		ArrayList<SharedCallTree> sharedCallTreeList; 
-		Map<String,ArrayList<SharedCallTree>> tempResult=new TreeMap<String, ArrayList<SharedCallTree>>(); 
-		Map<String,SharedCallTree[]> result=new TreeMap<String,SharedCallTree[]>();
-		
-		SharedCallTree sharedCallTree;
-		ResultSet rs = null;
-		PreparedStatement stmt = null;
-		
-		try
-		{
-			sqlString ="select division,system_Name,c.calltree_id,calltree_detail ";
-			sqlString+="from calltreeinfo a inner join calltreeinfo_calltree b ";
-			sqlString+="on a.calltreeinfo_id=b.calltreeinfo_id ";
-			sqlString+="inner join calltree c on b.calltree_id=c.calltree_id ";
-			sqlString+="order by division,system_name";
-			stmt=dbConn.prepareStatement(sqlString);
-			
-			rs=stmt.executeQuery();
-			while (rs.next()) {
-				sharedCallTree=new SharedCallTree();
-				sharedCallTree.setCallTreeDetail(rs.getString("callTree_Detail"));
-				sharedCallTree.setCallTreeId(rs.getInt("callTree_Id"));
-				sharedCallTree.setSystemName(rs.getString("system_Name"));
-				sharedCallTreeList=tempResult.remove(rs.getString("division"));
-				if (sharedCallTreeList==null) {
-					sharedCallTreeList=new ArrayList<SharedCallTree>();
-				}
-				sharedCallTreeList.add(sharedCallTree);
-				tempResult.put(rs.getString("division"),sharedCallTreeList);
-			}
-			 for (Map.Entry<String,ArrayList<SharedCallTree>> entry : tempResult.entrySet()) {
-				 result.put(entry.getKey(), entry.getValue().toArray(new SharedCallTree[0]));
-			 }
-		}
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		} 
-		finally 
-		{
-			releaseResource(rs, stmt);
-		}
-		return result;
-	}
 
 	@Override
 	public boolean addCallTreeInfo(CallTreeInfo callTreeInfo) throws Exception {
-		int callTreeId,callTreeInfoId;
+		int callTreeId,callTreeInfoId,manualId;
 		boolean addSuccess=false;
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
+		String insertMappingSqlString;
 		try
 		{
 			sqlString ="insert into calltreeinfo ";
@@ -201,18 +154,22 @@ public class DbOp implements DataStore {
 			logger.debug("new call tree Info Id="+callTreeInfoId);
 			rs.close();
 			stmt.close();
-			sqlString ="insert into calltree ";
-			sqlString+="(calltree_detail)";
-			sqlString+="values (?)";
-			stmt=dbConn.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1,callTreeInfo.getCallTree().getCallTreeDetail());
-			stmt.executeUpdate();
-			rs = stmt.getGeneratedKeys();
-			rs.next();
-			callTreeId=rs.getInt(1);
-			logger.debug("new call tree Id="+callTreeId);
-			rs.close();
-			stmt.close();
+			if (callTreeInfo.getCallTree().getCallTreeId()==-1) {
+				sqlString ="insert into calltree ";
+				sqlString+="(calltree_detail)";
+				sqlString+="values (?)";
+				stmt=dbConn.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
+				stmt.setString(1,callTreeInfo.getCallTree().getCallTreeDetail());
+				stmt.executeUpdate();
+				rs = stmt.getGeneratedKeys();
+				rs.next();
+				callTreeId=rs.getInt(1);
+				logger.debug("new call tree Id="+callTreeId);
+				rs.close();
+				stmt.close();
+			} else {
+				callTreeId=callTreeInfo.getCallTree().getCallTreeId();
+			}
 			sqlString ="insert into calltreeinfo_calltree ";
 			sqlString+="(calltreeinfo_id,calltree_id)";
 			sqlString+="values (?,?)";
@@ -220,6 +177,35 @@ public class DbOp implements DataStore {
 			stmt.setInt(1,callTreeInfoId);
 			stmt.setInt(2,callTreeId);
 			stmt.executeUpdate();
+			if (callTreeInfo.getManuals().length>0) {
+				stmt.close();
+				sqlString ="insert into manual ";
+				sqlString+="(manual_location,manual_description,manual_last_update_date)";
+				sqlString+="values (?,?,?)";
+				
+				insertMappingSqlString ="insert into calltreeinfo_manual ";
+				insertMappingSqlString+="(calltreeinfo_id,manual_id)";
+				insertMappingSqlString+="values(?,?)";
+				for (Manual manual:callTreeInfo.getManuals()) {
+					logger.debug(objectMapper.writeValueAsString(manual));
+					stmt=dbConn.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
+					stmt.setString(1, manual.getManualLocation());
+					stmt.setString(2, manual.getDescription());
+					stmt.setString(3, manual.getLastUpdateDate());
+					stmt.executeUpdate();
+					rs = stmt.getGeneratedKeys();
+					rs.next();
+					manualId=rs.getInt(1);
+					rs.close();
+					stmt.close();
+					stmt=dbConn.prepareStatement(insertMappingSqlString);
+					stmt.setInt(1,callTreeInfoId);
+					stmt.setInt(2,manualId);
+					stmt.executeUpdate();
+					stmt.close();
+					rs.close();
+				}
+			}
 			dbConn.commit();
 			dbConn.setAutoCommit(true);
 			addSuccess=true;
@@ -236,13 +222,32 @@ public class DbOp implements DataStore {
 	}
 	@Override
 	public boolean updateCallTreeInfo(CallTreeInfo callTreeInfo) throws Exception {
-		int callTreeId,callTreeInfoId;
 		boolean updateSuccess=false;
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 		try
 		{
+			sqlString ="update calltreeinfo ";
+			sqlString+="set division = ?,system_name=?,service_level=?,mission_critical=?,time_to_start_procedure=?,";
+			sqlString+="time_to_escalate=?,log_recipients=?,status=?,version=?,location=? ";
+			sqlString+="where calltreeinfo_id=?";
 			
+			logger.debug("update a new call tree info.");
+			logger.debug(objectMapper.writeValueAsString(callTreeInfo));
+			stmt=dbConn.prepareStatement(sqlString);
+			stmt.setString(1,callTreeInfo.getDivision());
+			stmt.setString(2,callTreeInfo.getSystemName());
+			stmt.setString(3,callTreeInfo.getServiceLevel());
+			stmt.setString(4,callTreeInfo.getMissionCritical());
+			stmt.setString(5,callTreeInfo.getTimeToStartProcedure());
+			stmt.setString(6,callTreeInfo.getTimeToEscalate());
+			stmt.setString(7,callTreeInfo.getLogRecipients());
+			stmt.setInt(8,callTreeInfo.getStatus());
+			stmt.setFloat(9,callTreeInfo.getVersion());
+			stmt.setString(10,callTreeInfo.getLocation());
+			stmt.setInt(11,callTreeInfo.getCallTreeInfoId());
+			stmt.executeUpdate();
+			updateSuccess=true;
 		}
 		catch (Exception e) 
 		{

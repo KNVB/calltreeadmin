@@ -16,7 +16,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.calltreeinfo.CallTree;
 import com.calltreeinfo.CallTreeInfo;
-import com.calltreeinfo.SharedCallTree;
 import com.calltreeinfo.util.DbOp;
 
 @Path("/CallTreeInfo")
@@ -33,16 +32,7 @@ public class CallTreeInfoService {
 		dbo.close();
 		return Response.ok(result).build();
 	}
-	@Path("/getCallTreeByDivision")
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getSharedCallTree() throws Exception {
-		logger.debug("getSharedCallTree is called");
-		DbOp dbo=new DbOp();
-		Map<String,SharedCallTree[]> result= dbo.getSharedCallTree();
-		dbo.close();
-		return Response.ok(result).build();
-	}
+	
 	@Path("/addCallTreeInfo")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -59,7 +49,7 @@ public class CallTreeInfoService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateCallTreeInfo (CallTreeInfo callTreeInfo) throws Exception {
-		logger.debug("addCallTreeInfo is called");
+		logger.debug("updateCallTreeInfo is called");
 		DbOp dbo=new DbOp();
 		boolean updateResult=dbo.updateCallTreeInfo(callTreeInfo);
 		dbo.close();

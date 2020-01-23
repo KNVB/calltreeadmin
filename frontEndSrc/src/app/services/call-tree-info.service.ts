@@ -17,10 +17,6 @@ export class CallTreeInfoService {
     const serviceURL = this.url + 'getAllCallTreeInfo';
     return this.http.get(serviceURL).pipe(map((res: CallTreeInfo[]) => res));
   }
-  getSharedCallTree(): Observable<CallTreeInfo[]> {
-    const serviceURL = this.url + 'getSharedCallTree';
-    return this.http.get(serviceURL).pipe(map((res: []) => res));
-  }
   addCallTreeInfo(callTreeInfo: CallTreeInfo): Observable<boolean> {
     const serviceURL = this.url + 'addCallTreeInfo';
     return this.http.post(serviceURL , callTreeInfo).pipe(map((res: boolean) => res));

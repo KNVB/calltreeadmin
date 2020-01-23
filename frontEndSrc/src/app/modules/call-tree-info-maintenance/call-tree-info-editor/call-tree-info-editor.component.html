@@ -114,11 +114,15 @@
     <div *ngIf="(this.callTreeInfo.callTreeInfoId==-1)">
       <hr>
       Call Tree:
-      <mat-radio-group name="callTreeType"  [(ngModel)]="callTreeType">
+      <mat-radio-group
+        name="callTreeType"
+        (ngModelChange)=onCallTreeTypeChange($event)
+        [(ngModel)]="callTreeType">
         <div style="display:flex;flex-direction: column;padding-top: 5px;">
           <div style="display:flex;flex-direction: column;">
             <mat-radio-button style="padding-bottom: 5px;" [value]="1">Create an individual CallTree</mat-radio-button>
             <div tyle="display:flex;" *ngIf="(callTreeType==1)">
+              Call Tree Detail:
               <ckeditor
                 required
                 name="callTreeDetail"
@@ -133,14 +137,14 @@
           </div>
           <div style="display:flex;flex-direction: column;padding-top: 5px;">
             <mat-radio-button [value]="2">Share CallTree with the following system:</mat-radio-button>
-            <div tyle="display:flex;" *ngIf="(callTreeType==2)">
+            <div tyle="display:flex;padding-top:5px;" *ngIf="(callTreeType==2)">
               <mat-form-field>
                 <mat-label>Division</mat-label>
                 <mat-select
                   required
                   name="sharedDivision"
                   [(ngModel)]="sharedDivision"
-                  (ngModelChange)=onChange($event)
+                  (ngModelChange)=onSharedDivisionChange($event)
                   #sharedDivisionValidator="ngModel">
                   <mat-option *ngFor="let division of this.sharedDivisionList" [value]="division">
                     {{division}}
@@ -154,14 +158,21 @@
                 <mat-label>System</mat-label>
                 <mat-select
                   required
-                  [(ngModel)]="this.sharedSystemName"
-                  name="sharedSystem">
+                  name="sharedCallTreeId"
+                  [(ngModel)]="this.callTreeInfo.callTree.callTreeId"
+                  (selectionChange)="updateCallTreeDetail($event)"
+                  #sharedSystemValidator="ngModel">
                   <mat-option
-                    *ngFor="let sharedSystemName of this.sharedSystemNameList" [value]="sharedSystemName">
+                    *ngFor="let sharedSystemName of this.sharedSystemNameList" [value]="this.systemToCalltree[sharedSystemName].callTreeId">
                     {{sharedSystemName}}
                   </mat-option>
                 </mat-select>
-              </mat-form-field>
+                <mat-error *ngIf="sharedSystemValidator.hasError('required')">
+                  System is <strong>required</strong>
+                </mat-error>
+              </mat-form-field><br>
+              Call Tree Detail:
+              <div [innerHTML]="this.sharedCallTreeDetail|safeHtml"></div>
             </div>
           </div>
         </div>
@@ -234,4 +245,6 @@
     <button mat-raised-button type="button" class="Discard-btn" (click)="closeDialog()">Close</button>
   </mat-dialog-actions>
 </form>
-{{this.callTreeInfo|json}}<br>
+<!--
+{{this.callTreeInfo|json}}
+-->

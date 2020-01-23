@@ -18,14 +18,15 @@ export class CallTreeInfoEditorComponent implements OnInit {
   inActiveCallTree = CallTreeInfo.inactive;
   callTreeInfo: CallTreeInfo = null;
   callTreeType = 1;
+  divisionToSystem = [];
+  systemToCalltree = [];
   serviceLevelList = ['1', '2', '3'];
 
   sharedCallTreeId: number;
-  shareCallTreeList = [];
   sharedDivision: string;
   sharedDivisionList: string[];
-  sharedSystemName: string;
-  sharedSystemNameList: [];
+  sharedCallTreeDetail: string;
+  sharedSystemNameList: string[];
   ckeditorConfig = {extraPlugins: 'colorbutton',
                     removeButtons: 'BulletedList,PasteFromWord,PasteText',
                     toolbarGroups: [
@@ -46,15 +47,24 @@ export class CallTreeInfoEditorComponent implements OnInit {
                   this.callTreeInfo = new CallTreeInfo();
                 }
                 data.callTreeInfoList.forEach((sharedCallTreeInfo: CallTreeInfo) => {
-                  if (!this.shareCallTreeList.hasOwnProperty(sharedCallTreeInfo.division)) {
-                    this.shareCallTreeList[sharedCallTreeInfo.division] = [];
+                  if ( callTreeInfoId > -1) {
+                    if (sharedCallTreeInfo.callTreeInfoId === callTreeInfoId) {
+                      this.callTreeInfo = sharedCallTreeInfo;
+                    }
                   }
+                  if (!this.divisionToSystem.hasOwnProperty(sharedCallTreeInfo.division)) {
+                    this.divisionToSystem[sharedCallTreeInfo.division] = [];
+                  }
+                  this.divisionToSystem[sharedCallTreeInfo.division].push(sharedCallTreeInfo.systemName);
+
+                  if (!this.systemToCalltree.hasOwnProperty(sharedCallTreeInfo.systemName)) {
+                    this.systemToCalltree[sharedCallTreeInfo.systemName] = [];
+                  }
+                  this.systemToCalltree[sharedCallTreeInfo.systemName] = sharedCallTreeInfo.callTree;
                 });
-                data.callTreeInfoList.forEach((sharedCallTreeInfo: CallTreeInfo) => {
-                  this.shareCallTreeList[sharedCallTreeInfo.division][sharedCallTreeInfo.systemName] = sharedCallTreeInfo.callTree;
-                });
-                console.log(this.shareCallTreeList);
-                this.sharedDivisionList = Object.keys(this.shareCallTreeList);
+                this.sharedDivisionList = Object.keys(this.divisionToSystem);
+                console.log(this.systemToCalltree);
+                console.log(this.divisionToSystem);
               }
   addCallInfo() {
     let message = '';
@@ -78,9 +88,14 @@ export class CallTreeInfoEditorComponent implements OnInit {
   }
   ngOnInit() {
   }
-  onChange(event) {
-    this.sharedSystemNameList = (this.shareCallTreeList[event]);
-    console.log(this.sharedSystemNameList);
+  onCallTreeTypeChange(callTreeType) {
+    if (callTreeType === 1) {// new a individual call tree
+      this.callTreeInfo.callTree.callTreeId = -1;
+      this.sharedCallTreeDetail = '';
+    }
+  }
+  onSharedDivisionChange(division) {
+    this.sharedSystemNameList = this.divisionToSystem[division];
   }
   onSubmit(form: NgForm) {
     console.log('form.dirty=' + form.dirty);
@@ -102,7 +117,23 @@ export class CallTreeInfoEditorComponent implements OnInit {
   removeManual(index: number) {
     this.callTreeInfo.manuals.splice(index, 1);
   }
+  updateCallTreeDetail(event) {
+    const target = event.source.selected._element.nativeElement;
+    const systemName = target.innerText.trim();
+    this.sharedCallTreeDetail = this.systemToCalltree[systemName].callTreeDetail;
+    this.sharedCallTreeDetail = this.sharedCallTreeDetail.replace(/<br \/>/g, '');
+  }
   updateCallInfo() {
-
+    let message = '';
+    this.callTreeInfoService.updateCallTreeInfo(this.callTreeInfo).subscribe((res: boolean) => {
+      if (res) {
+        message += 'Update Call Tree success.';
+        this.dialogRef.close({addSuccess: res, action: this.action, callTreeInfo: this.callTreeInfo});
+      } else {
+        message += 'Update Call Tree failure.';
+      }
+      alert(message);
+      console.log('action:' + this.action);
+    });
   }
 }
