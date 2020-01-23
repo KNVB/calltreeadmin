@@ -3,6 +3,7 @@ package com.calltreeinfo;
 public class CallTree {
 	private int callTreeId =-1;
 	private String callTreeDetail;
+	
 	public int getCallTreeId() {
 		return callTreeId;
 	}

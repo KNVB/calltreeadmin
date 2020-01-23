@@ -16,7 +16,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {SystemNameValidatorDirective} from './directives/system-name-validator.directive';
-import { ContactIdSelectorComponent } from './components/contact-id-selector/contact-id-selector.component';
 
 
 @NgModule({
@@ -26,7 +25,6 @@ import { ContactIdSelectorComponent } from './components/contact-id-selector/con
                   DivisionValidatorDirective,
                   LogRecipientValidatorDirective,
                   SystemNameValidatorDirective,
-                  ContactIdSelectorComponent,
                 ],
   imports: [
     CKEditorModule,

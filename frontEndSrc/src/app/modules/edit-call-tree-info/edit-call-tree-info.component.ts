@@ -17,7 +17,6 @@ import { MatTableDataSource } from '@angular/material/table';
 export class EditCallTreeInfoComponent implements OnInit {
   activeCallTreeInfo = CallTreeInfo.active;
   inActiveCallTreeInfo = CallTreeInfo.inactive;
-  divisionList: string [];
   callTreeInfoList: CallTreeInfo[];
   callTreeInfoDataSource: MatTableDataSource<CallTreeInfo>;
   callTreeInfoTemplate = new CallTreeInfo();
@@ -26,11 +25,8 @@ export class EditCallTreeInfoComponent implements OnInit {
                                 'timeToStartProcedure', 'contact', 'timeToEscalate', 'logRecipients',
                                 'manual', 'status',  'action'];
   constructor(private callTreeInfoService: CallTreeInfoService,
-              private divisionService: DivisionService,
               public dialog: MatDialog) {
-    this.divisionService.getActiveDivisionList().subscribe((res: string[]) => {
-      this.divisionList = res;
-    });
+
     this.callTreeInfoService.getAllCallTreeInfo().subscribe((res: CallTreeInfo[]) => {
       this.callTreeInfoList = res;
       this.callTreeInfoDataSource = new MatTableDataSource<CallTreeInfo>(res);
@@ -79,24 +75,31 @@ export class EditCallTreeInfoComponent implements OnInit {
 
     dialogConfig.autoFocus = false; // do not set focus on the first form element
     dialogConfig.width = '900px';
-    dialogConfig.height = '900px';
+    /*
+    if (callTreeInfo.callTreeInfoId === -1) {
+      dialogConfig.height = '900px';
+    } else {
+      dialogConfig.height = '500px';
+    }
+    */
     dialogConfig.data = {
       action,
-      callTreeInfo: JSON.parse(JSON.stringify(callTreeInfo)),
-      divisionList: this.divisionList
+      callTreeInfoId: callTreeInfo.callTreeInfoId,
+      callTreeInfoList : this.callTreeInfoList,
     };
     const dialogRef = this.dialog.open(CallTreeInfoEditorComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((res) => {
       if (res !== undefined) {
-        if (res.updateSuccess) {
-          switch (res.action) {
-            case 'Add':
+        switch (res.action) {
+          case 'Add': if (res.addSuccess) {
                         this.callTreeInfoList.push(res.callTreeInfo);
                         this.refreshDataSource();
-                        break;
-            case 'Edit': this.updateCallTreeTable(res.callTree);
-                         break;
-          }
+                      }
+                      break;
+          case 'Edit': if (res.updateSuccess) {
+                        this.updateCallTreeInfoTable(res.callTreeInfo);
+                      }
+                       break;
         }
       }
     });
@@ -116,23 +119,26 @@ export class EditCallTreeInfoComponent implements OnInit {
       if (sayYes) {
         if (action === 'Enable') {
           callTreeInfo.status = CallTreeInfo.active;
+          this.callTreeInfoService.enableCallTreeInfo(callTreeInfo.callTreeInfoId).subscribe((res: boolean) => {
+              if (res) {
+                message = 'The call tree info status is set to active succesfully.';
+              } else {
+                message = 'The call tree info status is fail to set to active.';
+                callTreeInfo.status = CallTreeInfo.inactive;
+              }
+          });
         } else {
           callTreeInfo.status = CallTreeInfo.inactive;
+          this.callTreeInfoService.disableCallTreeInfo(callTreeInfo.callTreeInfoId).subscribe((res: boolean) => {
+            if (res) {
+              message = 'The call tree info status is set to inactive succesfully.';
+            } else {
+              message = 'The call tree info status is fail to set to inactive.';
+              callTreeInfo.status = CallTreeInfo.active;
+            }
+          });
         }
-        this.callTreeInfoService.saveCallTreeInfo(callTreeInfo).subscribe((res: boolean) => {
-          switch (action) {
-            case 'Enable':  message = 'active';
-                            break;
-            case 'Disable':
-                            message = 'inactive';
-                            break;
-          }
-          if (res) {
-            message = 'The call tree status is set to ' + message + ' succesfully.';
-          } else {
-            message = 'The call tree status is fail to set ' + message + '.';
-          }
-        });
+        alert(message);
       }
     });
   }
@@ -141,7 +147,7 @@ export class EditCallTreeInfoComponent implements OnInit {
     this.callTreeInfoDataSource = new MatTableDataSource<CallTreeInfo>(this.callTreeInfoList);
     this.callTreeInfoDataSource.sort = this.sort;
   }
-  updateCallTreeTable(res: CallTreeInfo) {
+  updateCallTreeInfoTable(res: CallTreeInfo) {
     this.callTreeInfoList.filter((value) => {
       if (value.callTreeInfoId === res.callTreeInfoId) {
         value.division = res.division;

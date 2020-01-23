@@ -5,6 +5,7 @@ import { DivisionService } from 'src/app/services/division.service';
 import { Manual } from 'src/app/classes/Manual';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
+import { SharedCallTree } from 'src/app/classes/SharedCallTree';
 
 @Component({
   selector: 'app-call-tree-info-editor',
@@ -15,11 +16,16 @@ export class CallTreeInfoEditorComponent implements OnInit {
   action: string;
   activeCallTree = CallTreeInfo.active;
   inActiveCallTree = CallTreeInfo.inactive;
-  callTreeInfo: CallTreeInfo;
+  callTreeInfo: CallTreeInfo = null;
   callTreeType = 1;
   serviceLevelList = ['1', '2', '3'];
+
   sharedCallTreeId: number;
-  shareCallTreeInfoList: CallTreeInfo[];
+  shareCallTreeList = [];
+  sharedDivision: string;
+  sharedDivisionList: string[];
+  sharedSystemName: string;
+  sharedSystemNameList: [];
   ckeditorConfig = {extraPlugins: 'colorbutton',
                     removeButtons: 'BulletedList,PasteFromWord,PasteText',
                     toolbarGroups: [
@@ -34,10 +40,35 @@ export class CallTreeInfoEditorComponent implements OnInit {
               public dialog: MatDialog,
               private dialogRef: MatDialogRef<CallTreeInfoEditorComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
+                const callTreeInfoId = data.callTreeInfoId;
                 this.action = data.action;
-                this.callTreeInfo = data.callTreeInfo;
+                if ( callTreeInfoId === -1) {
+                  this.callTreeInfo = new CallTreeInfo();
+                }
+                data.callTreeInfoList.forEach((sharedCallTreeInfo: CallTreeInfo) => {
+                  if (!this.shareCallTreeList.hasOwnProperty(sharedCallTreeInfo.division)) {
+                    this.shareCallTreeList[sharedCallTreeInfo.division] = [];
+                  }
+                });
+                data.callTreeInfoList.forEach((sharedCallTreeInfo: CallTreeInfo) => {
+                  this.shareCallTreeList[sharedCallTreeInfo.division][sharedCallTreeInfo.systemName] = sharedCallTreeInfo.callTree;
+                });
+                console.log(this.shareCallTreeList);
+                this.sharedDivisionList = Object.keys(this.shareCallTreeList);
               }
-
+  addCallInfo() {
+    let message = '';
+    this.callTreeInfoService.addCallTreeInfo(this.callTreeInfo).subscribe((res: boolean) => {
+      if (res) {
+        message += 'Add Call Tree success.';
+        this.dialogRef.close({addSuccess: res, action: this.action, callTreeInfo: this.callTreeInfo});
+      } else {
+        message += 'Add Call Tree failure.';
+      }
+      alert(message);
+      console.log('action:' + this.action);
+    });
+  }
   addManual() {
     const manual = new Manual();
     this.callTreeInfo.manuals.push(manual);
@@ -47,6 +78,10 @@ export class CallTreeInfoEditorComponent implements OnInit {
   }
   ngOnInit() {
   }
+  onChange(event) {
+    this.sharedSystemNameList = (this.shareCallTreeList[event]);
+    console.log(this.sharedSystemNameList);
+  }
   onSubmit(form: NgForm) {
     console.log('form.dirty=' + form.dirty);
     console.log('form.valid=' + form.valid);
@@ -54,27 +89,20 @@ export class CallTreeInfoEditorComponent implements OnInit {
       this.closeDialog();
     } else {
       if (form.valid) {
-        let message = '';
-        this.callTreeInfoService.saveCallTreeInfo(this.callTreeInfo).subscribe((res: boolean) => {
-          switch (this.action) {
-            case 'Add': message = 'Add Call Tree';
-                        break;
-            case 'Edit': message = 'Update Call Tree';
-                         break;
-          }
-          if (res) {
-            message += ' success.';
-          } else {
-            message += ' failure.';
-          }
-          alert(message);
-          console.log('action:' + this.action);
-          this.dialogRef.close({updateSuccess: res, action: this.action, callTree: this.callTreeInfo});
-        });
+
+        switch (this.action) {
+          case 'Add': this.addCallInfo();
+                      break;
+          case 'Edit': this.updateCallInfo();
+                       break;
+        }
       }
     }
   }
   removeManual(index: number) {
     this.callTreeInfo.manuals.splice(index, 1);
+  }
+  updateCallInfo() {
+
   }
 }

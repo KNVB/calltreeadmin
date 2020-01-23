@@ -45,7 +45,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>{{ action }} a Call Tree</h2>\n<form #callTreeInfoEditForm=\"ngForm\" (ngSubmit)=\"onSubmit(callTreeInfoEditForm)\" novalidate>\n    <input type=hidden name=\"callTreeInfoId\" [(ngModel)]=\"this.callTreeInfo.callTreeInfoId\">\n    <app-division-list-input-box\n      name=\"division\"\n      [(ngModel)]=\"this.callTreeInfo.division\">\n    </app-division-list-input-box>\n    <mat-form-field>\n      <mat-label>System</mat-label>\n      <input matInput\n        type=\"text\"\n        required\n        [(ngModel)]=\"this.callTreeInfo.systemName\"\n        name=\"systemName\"\n        #systemName=\"ngModel\">\n      <mat-error [hidden]=\"systemName.valid || systemName.pristine\">\n        System Name is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Location</mat-label>\n      <textarea matInput\n                cdkTextareaAutosize\n                #autosize=\"cdkTextareaAutosize\"\n                cdkAutosizeMinRows=\"1\"\n                cdkAutosizeMaxRows=\"5\"\n                required\n                name=\"location\"\n                #location=\"ngModel\"\n                [(ngModel)]=\"this.callTreeInfo.location\">\n      </textarea>\n      <mat-error  [hidden]=\"location.valid || location.pristine\">\n        Location is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Service Level</mat-label>\n      <mat-select [(ngModel)]=\"this.callTreeInfo.serviceLevel\" name=\"serviceLevel\" #serviceLevel=\"ngModel\" required>\n        <mat-option *ngFor=\"let serviceLevel of this.serviceLevelList\" [value]=serviceLevel>\n          {{serviceLevel}}\n        </mat-option>\n      </mat-select>\n      <mat-error  [hidden]=\"serviceLevel.valid || serviceLevel.pristine\">\n        Service Level is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <br>\n    <mat-form-field>\n      <mat-label>Mission Critical</mat-label>\n        <input matInput type=\"text\"\n                [(ngModel)]=\"this.callTreeInfo.missionCritical\"\n                required\n                name=\"missionCritical\"\n                #missionCritical=\"ngModel\">\n        <mat-error [hidden]=\"missionCritical.valid || missionCritical.pristine\">\n          Missiong Critical is <strong>required</strong>\n        </mat-error>\n    </mat-form-field>\n    <mat-form-field style=\"width:350px\">\n      <mat-label>\n        Time Interval to start established procedures\n      </mat-label>\n      <input matInput type=\"text\"\n            [(ngModel)]=\"this.callTreeInfo.timeToStartProcedure\"\n            required\n            #timeToStartProcedure=\"ngModel\"\n            name=\"timeToStartProcedure\">\n      <mat-error [hidden]=\"timeToStartProcedure.valid||timeToStartProcedure.pristine\">\n        Time Interval to start established procedures is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field style=\"width:300px\">\n        <mat-label>\n          Time Interval to escalate if no reply\n        </mat-label>\n        <input matInput type=\"text\" [(ngModel)]=\"this.callTreeInfo.timeToEscalate\"\n              required\n              name=\"timeToEscalate\"\n              #timeToEscalate=\"ngModel\">\n        <mat-error [hidden]=\"timeToEscalate.valid||timeToEscalate.pristine\">\n          Time Interval to escalate if no reply is <strong>required</strong>\n        </mat-error>\n    </mat-form-field>\n    <br>\n    <mat-form-field style=\"width:250px\">\n      <mat-label>Appreciation Log Recipients</mat-label>\n        <textarea matInput\n                  cdkTextareaAutosize\n                  #autosize=\"cdkTextareaAutosize\"\n                  cdkAutosizeMinRows=\"1\"\n                  cdkAutosizeMaxRows=\"5\"\n                  required\n                  appLogRecipientValidator\n                  name=\"logRecipients\"\n                  #logRecipients=\"ngModel\"\n                  [(ngModel)]=\"this.callTreeInfo.logRecipients\"></textarea>\n      <mat-error *ngIf=\"logRecipients.hasError('required')\">\n        Appreciation Log Recipients is <strong>required</strong>\n      </mat-error>\n      <mat-error *ngIf=\"logRecipients.hasError('email')\">\n        {{logRecipients.errors['email']}} is not a valid email address.\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Status</mat-label>\n      <mat-select\n        [(ngModel)]=\"this.callTreeInfo.status\"\n        name=\"status\"\n        #status=\"ngModel\">\n        <mat-option [value]=\"activeCallTree\">Active</mat-option>\n        <mat-option [value]=\"inActiveCallTree\">Inactive</mat-option>\n      </mat-select>\n    </mat-form-field>\n    <hr>\n    Call Tree:\n    <mat-radio-group name=\"callTreeType\"  [(ngModel)]=\"callTreeType\">\n      <div style=\"display:flex;flex-direction: column;padding-top: 5px;\">\n        <div style=\"display:flex;flex-direction: column;\">\n          <mat-radio-button style=\"padding-bottom: 5px;\" [value]=\"1\">Create an individual CallTree</mat-radio-button>\n          <div tyle=\"display:flex;\" *ngIf=\"(callTreeType==1)\">\n            <ckeditor\n              required\n              name=\"callTreeDetail\"\n              [config]=\"ckeditorConfig\"\n              #callTreeDetail1=\"ngModel\"\n              [(ngModel)]=\"this.callTreeInfo.callTree.callTreeDetail\">\n            </ckeditor>\n            <mat-error *ngIf=\"(callTreeDetail1.touched || callTreeInfoEditForm.submitted)  && callTreeDetail1.hasError('required')\">\n              Call tree contact is <strong>required</strong>\n            </mat-error>\n          </div>\n        </div>\n        <div style=\"display:flex;flex-direction: column;padding-top: 5px;\">\n          <mat-radio-button [value]=\"2\">Share CallTree with the following system:</mat-radio-button>\n          <div tyle=\"display:flex;\" *ngIf=\"(callTreeType==2)\">\n            <app-division-list-input-box\n              name=\"calltree_division\">\n            </app-division-list-input-box>\n            <mat-form-field>\n              <mat-label>System</mat-label>\n              <mat-select\n                [(ngModel)]=\"sharedCallTreeId\"\n                required\n                name=\"sharedCallTreeId\"\n                #sharedCallTreeIdValidator=\"ngModel\">\n                <mat-option *ngFor=\"let systemName of this.shareCallTreeInfoList\" [value]=\"systemName\">\n                  {{systemName}}\n                </mat-option>\n              </mat-select>\n              <mat-error *ngIf=\"sharedCallTreeIdValidator.hasError('required')\">\n                System Name is <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n          </div>\n        </div>\n      </div>\n    </mat-radio-group>\n    <hr>\n    <table style=\"width:100%;\">\n      <tr>\n        <td>Operation Manual(Optional):</td>\n        <td>\n          <button style=\"float:right\" mat-raised-button type=\"button\" color=\"primary\" class=\"Update-btn\" (click)=\"addManual()\">\n            Add Operation Manual\n          </button>\n        </td>\n      </tr>\n      <tr *ngFor=\"let manual of this.callTreeInfo.manuals; let i = index\">\n        <td colspan=2>\n          <mat-form-field>\n            <mat-label>Manual Location</mat-label>\n            <input\n              matInput\n              required\n              type=\"text\"\n              [(ngModel)]=\"manual.manualLocation\"\n              name=\"manualLocation\"\n              #manualLocationValidator=\"ngModel\">\n            <mat-error *ngIf=\"manualLocationValidator.hasError('required')\">\n              Manual location is <strong>required</strong>\n            </mat-error>\n          </mat-form-field>\n          <mat-form-field>\n            <mat-label>Manual Description</mat-label>\n            <input\n              matInput\n              required\n              type=\"text\"\n              [(ngModel)]=\"manual.description\"\n              name=\"manualDesc\"\n              #manualDescValidator=\"ngModel\">\n            <mat-error *ngIf=\"manualDescValidator.hasError('required')\">\n              Manual Description is <strong>required</strong>\n            </mat-error>\n          </mat-form-field>\n          <mat-form-field>\n            <mat-label>Last Update Date</mat-label>\n            <input\n              matInput\n              required\n              type=\"text\"\n              [(ngModel)]=\"manual.lastUpdateDate\"\n              name=\"manualLastUpdateDate\"\n              #manualLastUpdateDateValidator=\"ngModel\">\n            <mat-error *ngIf=\"manualLastUpdateDateValidator.hasError('required')\">\n              Last Update Date is <strong>required</strong>\n            </mat-error>\n          </mat-form-field>\n          &nbsp;&nbsp;&nbsp;&nbsp;\n          <button\n            style=\"font-weight: bold;;font-size: 30px;vertical-align: middle;\"\n            mat-raised-button type=\"button\"\n            color=\"primary\"\n            class=\"Update-btn\"\n            (click)=\"removeManual(i)\">\n              -\n          </button>\n        </td>\n    </table>\n  <mat-dialog-actions>\n    <button mat-raised-button type=\"submit\" color=\"primary\" class=\"Update-btn\">Save</button>\n    <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"closeDialog()\">Close</button>\n  </mat-dialog-actions>\n</form>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>{{ action }} a Call Tree</h2>\n<form #callTreeInfoEditForm=\"ngForm\" (ngSubmit)=\"onSubmit(callTreeInfoEditForm)\" novalidate>\n    <input type=hidden name=\"callTreeInfoId\" [(ngModel)]=\"this.callTreeInfo.callTreeInfoId\">\n    <app-division-list-input-box\n      name=\"division\"\n      [(ngModel)]=\"this.callTreeInfo.division\">\n    </app-division-list-input-box>\n    <mat-form-field>\n      <mat-label>System</mat-label>\n      <input matInput\n        type=\"text\"\n        required\n        [(ngModel)]=\"this.callTreeInfo.systemName\"\n        name=\"systemName\"\n        #systemName=\"ngModel\">\n      <mat-error [hidden]=\"systemName.valid || systemName.pristine\">\n        System Name is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Location</mat-label>\n      <textarea matInput\n                cdkTextareaAutosize\n                #autosize=\"cdkTextareaAutosize\"\n                cdkAutosizeMinRows=\"1\"\n                cdkAutosizeMaxRows=\"5\"\n                required\n                name=\"location\"\n                #location=\"ngModel\"\n                [(ngModel)]=\"this.callTreeInfo.location\">\n      </textarea>\n      <mat-error  [hidden]=\"location.valid || location.pristine\">\n        Location is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Service Level</mat-label>\n      <mat-select [(ngModel)]=\"this.callTreeInfo.serviceLevel\" name=\"serviceLevel\" #serviceLevel=\"ngModel\" required>\n        <mat-option *ngFor=\"let serviceLevel of this.serviceLevelList\" [value]=serviceLevel>\n          {{serviceLevel}}\n        </mat-option>\n      </mat-select>\n      <mat-error  [hidden]=\"serviceLevel.valid || serviceLevel.pristine\">\n        Service Level is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <br>\n    <mat-form-field>\n      <mat-label>Mission Critical</mat-label>\n        <input matInput type=\"text\"\n                [(ngModel)]=\"this.callTreeInfo.missionCritical\"\n                required\n                name=\"missionCritical\"\n                #missionCritical=\"ngModel\">\n        <mat-error [hidden]=\"missionCritical.valid || missionCritical.pristine\">\n          Missiong Critical is <strong>required</strong>\n        </mat-error>\n    </mat-form-field>\n    <mat-form-field style=\"width:350px\">\n      <mat-label>\n        Time Interval to start established procedures\n      </mat-label>\n      <input matInput type=\"text\"\n            [(ngModel)]=\"this.callTreeInfo.timeToStartProcedure\"\n            required\n            #timeToStartProcedure=\"ngModel\"\n            name=\"timeToStartProcedure\">\n      <mat-error [hidden]=\"timeToStartProcedure.valid||timeToStartProcedure.pristine\">\n        Time Interval to start established procedures is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field style=\"width:300px\">\n        <mat-label>\n          Time Interval to escalate if no reply\n        </mat-label>\n        <input matInput type=\"text\" [(ngModel)]=\"this.callTreeInfo.timeToEscalate\"\n              required\n              name=\"timeToEscalate\"\n              #timeToEscalate=\"ngModel\">\n        <mat-error [hidden]=\"timeToEscalate.valid||timeToEscalate.pristine\">\n          Time Interval to escalate if no reply is <strong>required</strong>\n        </mat-error>\n    </mat-form-field>\n    <br>\n    <mat-form-field style=\"width:250px\">\n      <mat-label>Appreciation Log Recipients</mat-label>\n        <textarea matInput\n                  cdkTextareaAutosize\n                  #autosize=\"cdkTextareaAutosize\"\n                  cdkAutosizeMinRows=\"1\"\n                  cdkAutosizeMaxRows=\"5\"\n                  required\n                  appLogRecipientValidator\n                  name=\"logRecipients\"\n                  #logRecipients=\"ngModel\"\n                  [(ngModel)]=\"this.callTreeInfo.logRecipients\"></textarea>\n      <mat-error *ngIf=\"logRecipients.hasError('required')\">\n        Appreciation Log Recipients is <strong>required</strong>\n      </mat-error>\n      <mat-error *ngIf=\"logRecipients.hasError('email')\">\n        {{logRecipients.errors['email']}} is not a valid email address.\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Status</mat-label>\n      <mat-select\n        [(ngModel)]=\"this.callTreeInfo.status\"\n        name=\"status\"\n        #status=\"ngModel\">\n        <mat-option [value]=\"activeCallTree\">Active</mat-option>\n        <mat-option [value]=\"inActiveCallTree\">Inactive</mat-option>\n      </mat-select>\n    </mat-form-field>\n    <div *ngIf=\"(this.callTreeInfo.callTreeInfoId==-1)\">\n      <hr>\n      Call Tree:\n      <mat-radio-group name=\"callTreeType\"  [(ngModel)]=\"callTreeType\">\n        <div style=\"display:flex;flex-direction: column;padding-top: 5px;\">\n          <div style=\"display:flex;flex-direction: column;\">\n            <mat-radio-button style=\"padding-bottom: 5px;\" [value]=\"1\">Create an individual CallTree</mat-radio-button>\n            <div tyle=\"display:flex;\" *ngIf=\"(callTreeType==1)\">\n              <ckeditor\n                required\n                name=\"callTreeDetail\"\n                [config]=\"ckeditorConfig\"\n                #callTreeDetail1=\"ngModel\"\n                [(ngModel)]=\"this.callTreeInfo.callTree.callTreeDetail\">\n              </ckeditor>\n              <mat-error *ngIf=\"(callTreeDetail1.touched || callTreeInfoEditForm.submitted)  && callTreeDetail1.hasError('required')\">\n                Call tree contact is <strong>required</strong>\n              </mat-error>\n            </div>\n          </div>\n          <div style=\"display:flex;flex-direction: column;padding-top: 5px;\">\n            <mat-radio-button [value]=\"2\">Share CallTree with the following system:</mat-radio-button>\n            <div tyle=\"display:flex;\" *ngIf=\"(callTreeType==2)\">\n              <mat-form-field>\n                <mat-label>Division</mat-label>\n                <mat-select\n                  required\n                  name=\"sharedDivision\"\n                  [(ngModel)]=\"sharedDivision\"\n                  (ngModelChange)=onChange($event)\n                  #sharedDivisionValidator=\"ngModel\">\n                  <mat-option *ngFor=\"let division of this.sharedDivisionList\" [value]=\"division\">\n                    {{division}}\n                  </mat-option>\n                </mat-select>\n                <mat-error *ngIf=\"sharedDivisionValidator.hasError('required')\">\n                  Division is <strong>required</strong>\n                </mat-error>\n              </mat-form-field>\n              <mat-form-field>\n                <mat-label>System</mat-label>\n                <mat-select\n                  required\n                  [(ngModel)]=\"this.sharedSystemName\"\n                  name=\"sharedSystem\">\n                  <mat-option\n                    *ngFor=\"let sharedSystemName of this.sharedSystemNameList\" [value]=\"sharedSystemName\">\n                    {{sharedSystemName}}\n                  </mat-option>\n                </mat-select>\n              </mat-form-field>\n            </div>\n          </div>\n        </div>\n      </mat-radio-group>\n      <hr>\n      <table style=\"width:100%;\">\n        <tr>\n          <td>Operation Manual(Optional):</td>\n          <td>\n            <button style=\"float:right\" mat-raised-button type=\"button\" color=\"primary\" class=\"Update-btn\" (click)=\"addManual()\">\n              Add Operation Manual\n            </button>\n          </td>\n        </tr>\n        <tr *ngFor=\"let manual of this.callTreeInfo.manuals; let i = index\">\n          <td colspan=2>\n            <mat-form-field>\n              <mat-label>Manual Location</mat-label>\n              <input\n                matInput\n                required\n                type=\"text\"\n                [(ngModel)]=\"manual.manualLocation\"\n                name=\"manualLocation{{i}}\"\n                #manualLocationValidator=\"ngModel\">\n              <mat-error *ngIf=\"manualLocationValidator.hasError('required')\">\n                Manual location is <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n            <mat-form-field>\n              <mat-label>Manual Description</mat-label>\n              <input\n                matInput\n                required\n                type=\"text\"\n                [(ngModel)]=\"manual.description\"\n                name=\"manualDesc{{i}}\"\n                #manualDescValidator=\"ngModel\">\n              <mat-error *ngIf=\"manualDescValidator.hasError('required')\">\n                Manual Description is <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n            <mat-form-field>\n              <mat-label>Last Update Date</mat-label>\n              <input\n                matInput\n                required\n                type=\"text\"\n                [(ngModel)]=\"manual.lastUpdateDate\"\n                name=\"manualLastUpdateDate{{i}}\"\n                #manualLastUpdateDateValidator=\"ngModel\">\n              <mat-error *ngIf=\"manualLastUpdateDateValidator.hasError('required')\">\n                Last Update Date is <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n            &nbsp;&nbsp;&nbsp;&nbsp;\n            <button\n              style=\"font-weight: bold;;font-size: 30px;vertical-align: middle;\"\n              mat-raised-button type=\"button\"\n              color=\"primary\"\n              class=\"Update-btn\"\n              (click)=\"removeManual(i)\">\n                -\n            </button>\n          </td>\n      </table>\n    </div>\n  <mat-dialog-actions>\n    <button mat-raised-button type=\"submit\" color=\"primary\" class=\"Update-btn\">Save</button>\n    <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"closeDialog()\">Close</button>\n  </mat-dialog-actions>\n</form>\n{{this.callTreeInfo|json}}<br>\n");
 
 /***/ }),
 
@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"center\">Call Tree Info Maintenance</div>\n<table style=\"width:90%;margin-left: 30px;\" >\n  <tr>\n    <td>\n      <mat-form-field>\n        <mat-label>\n          Filter\n        </mat-label>\n        <input matInput (keyup)=\"applyFilter($event.target.value)\">\n      </mat-form-field>\n    </td>\n    <td>\n      <button  style=\"float:right\" mat-raised-button color=\"primary\" (click)=\"popupDialog('Add',callTreeInfoTemplate)\">Add New Call Tree</button>\n    </td>\n  </tr>\n  <tr>\n    <td colspan=\"2\">\n      <table mat-table [dataSource]=\"callTreeInfoDataSource\" matSort matSortActive=\"systemName\" matSortDirection=\"asc\" class=\"mat-elevation-z8\">\n        <ng-container matColumnDef=\"division\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Division</th>\n            <td mat-cell style=\"text-align: left !important;\" *matCellDef=\"let element\"> {{element.division}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"systemName\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header=\"systemName\">System</th>\n            <td mat-cell style=\"text-align: left !important;\" *matCellDef=\"let element\"> {{element.systemName}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"location\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>\n            <td mat-cell *matCellDef=\"let element\" [innerHTML]=\"element.location| safeHtml\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"serviceLevel\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Service<br>Level<a href=\"#serviceLevel\">*</a></th>\n            <td mat-cell *matCellDef=\"let element\">{{element.serviceLevel}}</td>\n        </ng-container>\n        <ng-container matColumnDef=\"missionCritical\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mission Critical</th>\n          <td mat-cell *matCellDef=\"let element\">{{element.missionCritical}}</td>\n      </ng-container>\n      <ng-container matColumnDef=\"timeToStartProcedure\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Interval to start established<br>procedures<a href=\"#timeLimit\">#</a></th>\n            <td mat-cell *matCellDef=\"let element\">{{element.timeToStartProcedure}}</td>\n        </ng-container>\n        <ng-container matColumnDef=\"contact\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Call tree</th>\n          <td mat-cell *matCellDef=\"let element\">\n            <a href=\"javascript:openContactEditor(element.callTreeId)\">Edit CallTree</a>\n          </td>\n        </ng-container>\n        <ng-container matColumnDef=\"timeToEscalate\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Interval to <br>escalate<br>if no reply</th>\n            <td mat-cell *matCellDef=\"let element\"> {{element.timeToEscalate}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"logRecipients\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Appreciation<br>Log Recipients</th>\n            <td mat-cell style=\"text-align: left !important;padding-left: 10px;\" *matCellDef=\"let element\" [innerHTML]=\"element.logRecipients| safeHtml\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"manual\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Operation Manual</th>\n          <td mat-cell *matCellDef=\"let element\">\n            <a href=\"javascript:openManualEditor(element.callTreeId)\">Edit Manual Info</a>\n          </td>\n        </ng-container>\n        <ng-container matColumnDef=\"status\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>\n            <td mat-cell *matCellDef=\"let element\" [innerHTML]=\"(element.status === activeCallTreeInfo)?'Active':'Inactive'\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"action\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>\n          <td mat-cell *matCellDef=\"let element\" class=\"action-link\">\n            <a href=\"javascript:void(0)\" (click)=\"popupDialog('Edit',element)\">Edit</a>|<a *ngIf=\"(element.status === activeCallTreeInfo)\" href=\"javascript:void(0)\" (click)=\"popupDialog('Disable',element)\">Disable</a><a *ngIf=\"(element.status === inActiveCallTreeInfo)\" href=\"javascript:void(0)\" (click)=\"popupDialog('Enable',element)\">Enable</a>\n          </td>\n        </ng-container>\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns sticky: true\" class=\"heading\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <br>\n      Remark:\n      <p>\n        If a problematic system reported is under all Branches but not listed in the F5 Operator Call Tree,<br>Operator should let the originator (the one who reported the problematic system) know the system is not covered in the list of systems monitored by F5 Operator <br>and ask the originator to provide the follow-up contacts, and call the relevant officers accordingly.In case the originator does not know who should be contacted,<br>Operator should call SEO(F)51, SO(F)51 or SSO(F)5 for assistance.\n      </p>\n      <ul style=\"margin: 0; padding: 0;list-style: none\">\n        <li>\n          <a name=\"serviceLevel\">*Service Level</a>\n          <ol>\n            <li>system monitoring + problem reporting</li>\n            <li>system monitoring + problem reporting + system reboot</li>\n            <li>system monitoring + problem reporting + system reboot+ routine computer operation</li>\n          </ol>\n          <br>\n        </li>\n        <li>\n          <a name=\"timeLimit\">\n            # Start to count after identified the system\n          </a>\n        </li>\n      </ul>\n    </td>\n  </tr>\n</table>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"center\">Call Tree Info Maintenance</div>\n<table style=\"width:90%;margin-left: 30px;\" >\n  <tr>\n    <td>\n      <mat-form-field>\n        <mat-label>\n          Filter\n        </mat-label>\n        <input matInput (keyup)=\"applyFilter($event.target.value)\">\n      </mat-form-field>\n    </td>\n    <td>\n      <button  style=\"float:right\" mat-raised-button color=\"primary\" (click)=\"popupDialog('Add',callTreeInfoTemplate)\">Add New Call Tree</button>\n    </td>\n  </tr>\n  <tr>\n    <td colspan=\"2\">\n      <table mat-table [dataSource]=\"callTreeInfoDataSource\" matSort matSortActive=\"systemName\" matSortDirection=\"asc\" class=\"mat-elevation-z8\">\n        <ng-container matColumnDef=\"division\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Division</th>\n            <td mat-cell style=\"text-align: left !important;\" *matCellDef=\"let element\"> {{element.division}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"systemName\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header=\"systemName\">System</th>\n            <td mat-cell style=\"text-align: left !important;\" *matCellDef=\"let element\"> {{element.systemName}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"location\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>\n            <td mat-cell *matCellDef=\"let element\" [innerHTML]=\"element.location| safeHtml\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"serviceLevel\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Service<br>Level<a href=\"#serviceLevel\">*</a></th>\n            <td mat-cell *matCellDef=\"let element\">{{element.serviceLevel}}</td>\n        </ng-container>\n        <ng-container matColumnDef=\"missionCritical\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mission Critical</th>\n          <td mat-cell *matCellDef=\"let element\">{{element.missionCritical}}</td>\n      </ng-container>\n      <ng-container matColumnDef=\"timeToStartProcedure\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Interval to start established<br>procedures<a href=\"#timeLimit\">#</a></th>\n            <td mat-cell *matCellDef=\"let element\">{{element.timeToStartProcedure}}</td>\n        </ng-container>\n        <ng-container matColumnDef=\"contact\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Call tree</th>\n          <td mat-cell *matCellDef=\"let element\">\n            <a href=\"javascript:openCallTreeEditor(element.callTree)\">Edit CallTree</a>\n          </td>\n        </ng-container>\n        <ng-container matColumnDef=\"timeToEscalate\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Interval to <br>escalate<br>if no reply</th>\n            <td mat-cell *matCellDef=\"let element\"> {{element.timeToEscalate}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"logRecipients\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Appreciation<br>Log Recipients</th>\n            <td mat-cell style=\"text-align: left !important;padding-left: 10px;\" *matCellDef=\"let element\" [innerHTML]=\"element.logRecipients| safeHtml\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"manual\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Operation Manual</th>\n          <td mat-cell *matCellDef=\"let element\">\n            <a href=\"javascript:openManualEditor(element.manuals)\">Edit Manual Info</a>\n          </td>\n        </ng-container>\n        <ng-container matColumnDef=\"status\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>\n            <td mat-cell *matCellDef=\"let element\" [innerHTML]=\"(element.status === activeCallTreeInfo)?'Active':'Inactive'\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"action\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>\n          <td mat-cell *matCellDef=\"let element\" class=\"action-link\">\n            <a href=\"javascript:void(0)\" (click)=\"popupDialog('Edit',element)\">Edit</a>|<a *ngIf=\"(element.status === activeCallTreeInfo)\" href=\"javascript:void(0)\" (click)=\"popupDialog('Disable',element)\">Disable</a><a *ngIf=\"(element.status === inActiveCallTreeInfo)\" href=\"javascript:void(0)\" (click)=\"popupDialog('Enable',element)\">Enable</a>\n          </td>\n        </ng-container>\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns sticky: true\" class=\"heading\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <br>\n      Remark:\n      <p>\n        If a problematic system reported is under all Branches but not listed in the F5 Operator Call Tree,<br>Operator should let the originator (the one who reported the problematic system) know the system is not covered in the list of systems monitored by F5 Operator <br>and ask the originator to provide the follow-up contacts, and call the relevant officers accordingly.In case the originator does not know who should be contacted,<br>Operator should call SEO(F)51, SO(F)51 or SSO(F)5 for assistance.\n      </p>\n      <ul style=\"margin: 0; padding: 0;list-style: none\">\n        <li>\n          <a name=\"serviceLevel\">*Service Level</a>\n          <ol>\n            <li>system monitoring + problem reporting</li>\n            <li>system monitoring + problem reporting + system reboot</li>\n            <li>system monitoring + problem reporting + system reboot+ routine computer operation</li>\n          </ol>\n          <br>\n        </li>\n        <li>\n          <a name=\"timeLimit\">\n            # Start to count after identified the system\n          </a>\n        </li>\n      </ul>\n    </td>\n  </tr>\n</table>\n");
 
 /***/ }),
 
@@ -72,19 +72,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<mat-dialog-content>\n  {{title}}\n</mat-dialog-content>\n<mat-dialog-actions>\n  <button mat-raised-button type=\"button\" color=\"primary\" class=\"Update-btn\" (click)=\"sayYes()\">Yes</button>\n  <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"sayNo()\">No</button>\n</mat-dialog-actions>\n");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/utility/components/contact-id-selector/contact-id-selector.component.html":
-/*!*****************************************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modules/utility/components/contact-id-selector/contact-id-selector.component.html ***!
-  \*****************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-division-list-input-box\n  name=\"division\"\n  [(ngModel)]=\"division\">\n</app-division-list-input-box>\n");
 
 /***/ }),
 
@@ -589,8 +576,10 @@ let CallTreeInfoEditorComponent = class CallTreeInfoEditorComponent {
         this.data = data;
         this.activeCallTree = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].active;
         this.inActiveCallTree = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].inactive;
+        this.callTreeInfo = null;
         this.callTreeType = 1;
         this.serviceLevelList = ['1', '2', '3'];
+        this.shareCallTreeList = [];
         this.ckeditorConfig = { extraPlugins: 'colorbutton',
             removeButtons: 'BulletedList,PasteFromWord,PasteText',
             toolbarGroups: [
@@ -600,8 +589,35 @@ let CallTreeInfoEditorComponent = class CallTreeInfoEditorComponent {
                 { name: 'paragraph', groups: ['list'] },
             ]
         };
+        const callTreeInfoId = data.callTreeInfoId;
         this.action = data.action;
-        this.callTreeInfo = data.callTreeInfo;
+        if (callTreeInfoId === -1) {
+            this.callTreeInfo = new src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"]();
+        }
+        data.callTreeInfoList.forEach((sharedCallTreeInfo) => {
+            if (!this.shareCallTreeList.hasOwnProperty(sharedCallTreeInfo.division)) {
+                this.shareCallTreeList[sharedCallTreeInfo.division] = [];
+            }
+        });
+        data.callTreeInfoList.forEach((sharedCallTreeInfo) => {
+            this.shareCallTreeList[sharedCallTreeInfo.division][sharedCallTreeInfo.systemName] = sharedCallTreeInfo.callTree;
+        });
+        console.log(this.shareCallTreeList);
+        this.sharedDivisionList = Object.keys(this.shareCallTreeList);
+    }
+    addCallInfo() {
+        let message = '';
+        this.callTreeInfoService.addCallTreeInfo(this.callTreeInfo).subscribe((res) => {
+            if (res) {
+                message += 'Add Call Tree success.';
+                this.dialogRef.close({ addSuccess: res, action: this.action, callTreeInfo: this.callTreeInfo });
+            }
+            else {
+                message += 'Add Call Tree failure.';
+            }
+            alert(message);
+            console.log('action:' + this.action);
+        });
     }
     addManual() {
         const manual = new src_app_classes_Manual__WEBPACK_IMPORTED_MODULE_5__["Manual"]();
@@ -612,6 +628,10 @@ let CallTreeInfoEditorComponent = class CallTreeInfoEditorComponent {
     }
     ngOnInit() {
     }
+    onChange(event) {
+        this.sharedSystemNameList = (this.shareCallTreeList[event]);
+        console.log(this.sharedSystemNameList);
+    }
     onSubmit(form) {
         console.log('form.dirty=' + form.dirty);
         console.log('form.valid=' + form.valid);
@@ -620,31 +640,21 @@ let CallTreeInfoEditorComponent = class CallTreeInfoEditorComponent {
         }
         else {
             if (form.valid) {
-                let message = '';
-                this.callTreeInfoService.saveCallTreeInfo(this.callTreeInfo).subscribe((res) => {
-                    switch (this.action) {
-                        case 'Add':
-                            message = 'Add Call Tree';
-                            break;
-                        case 'Edit':
-                            message = 'Update Call Tree';
-                            break;
-                    }
-                    if (res) {
-                        message += ' success.';
-                    }
-                    else {
-                        message += ' failure.';
-                    }
-                    alert(message);
-                    console.log('action:' + this.action);
-                    this.dialogRef.close({ updateSuccess: res, action: this.action, callTree: this.callTreeInfo });
-                });
+                switch (this.action) {
+                    case 'Add':
+                        this.addCallInfo();
+                        break;
+                    case 'Edit':
+                        this.updateCallInfo();
+                        break;
+                }
             }
         }
     }
     removeManual(index) {
         this.callTreeInfo.manuals.splice(index, 1);
+    }
+    updateCallInfo() {
     }
 };
 CallTreeInfoEditorComponent.ctorParameters = () => [
@@ -696,11 +706,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _call_tree_info_editor_call_tree_info_editor_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./call-tree-info-editor/call-tree-info-editor.component */ "./src/app/modules/edit-call-tree-info/call-tree-info-editor/call-tree-info-editor.component.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _utility_components_confirmation_box_confirmation_box_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utility/components/confirmation-box/confirmation-box.component */ "./src/app/modules/utility/components/confirmation-box/confirmation-box.component.ts");
-/* harmony import */ var src_app_services_division_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/division.service */ "./src/app/services/division.service.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
-/* harmony import */ var _angular_material_sort__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/sort */ "./node_modules/@angular/material/esm2015/sort.js");
-/* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
-
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var _angular_material_sort__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/sort */ "./node_modules/@angular/material/esm2015/sort.js");
+/* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
 
 
 
@@ -711,9 +719,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let EditCallTreeInfoComponent = class EditCallTreeInfoComponent {
-    constructor(callTreeInfoService, divisionService, dialog) {
+    constructor(callTreeInfoService, dialog) {
         this.callTreeInfoService = callTreeInfoService;
-        this.divisionService = divisionService;
         this.dialog = dialog;
         this.activeCallTreeInfo = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].active;
         this.inActiveCallTreeInfo = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].inactive;
@@ -721,12 +728,9 @@ let EditCallTreeInfoComponent = class EditCallTreeInfoComponent {
         this.displayedColumns = ['division', 'systemName', 'location', 'serviceLevel', 'missionCritical',
             'timeToStartProcedure', 'contact', 'timeToEscalate', 'logRecipients',
             'manual', 'status', 'action'];
-        this.divisionService.getActiveDivisionList().subscribe((res) => {
-            this.divisionList = res;
-        });
         this.callTreeInfoService.getAllCallTreeInfo().subscribe((res) => {
             this.callTreeInfoList = res;
-            this.callTreeInfoDataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_9__["MatTableDataSource"](res);
+            this.callTreeInfoDataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__["MatTableDataSource"](res);
             this.callTreeInfoDataSource.sort = this.sort;
             this.callTreeInfoDataSource.filterPredicate = (callTreeInfo, filter) => {
                 let result = false;
@@ -768,37 +772,45 @@ let EditCallTreeInfoComponent = class EditCallTreeInfoComponent {
         }
     }
     popupCallTreeInfoEditor(action, callTreeInfo) {
-        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialogConfig"]();
+        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
         // dialogConfig.disableClose = true;
         // dialogConfig.minHeight = '600px';
         dialogConfig.autoFocus = false; // do not set focus on the first form element
         dialogConfig.width = '900px';
-        dialogConfig.height = '900px';
+        /*
+        if (callTreeInfo.callTreeInfoId === -1) {
+          dialogConfig.height = '900px';
+        } else {
+          dialogConfig.height = '500px';
+        }
+        */
         dialogConfig.data = {
             action,
-            callTreeInfo: JSON.parse(JSON.stringify(callTreeInfo)),
-            divisionList: this.divisionList
+            callTreeInfoId: callTreeInfo.callTreeInfoId,
+            callTreeInfoList: this.callTreeInfoList,
         };
         const dialogRef = this.dialog.open(_call_tree_info_editor_call_tree_info_editor_component__WEBPACK_IMPORTED_MODULE_3__["CallTreeInfoEditorComponent"], dialogConfig);
         dialogRef.afterClosed().subscribe((res) => {
             if (res !== undefined) {
-                if (res.updateSuccess) {
-                    switch (res.action) {
-                        case 'Add':
+                switch (res.action) {
+                    case 'Add':
+                        if (res.addSuccess) {
                             this.callTreeInfoList.push(res.callTreeInfo);
                             this.refreshDataSource();
-                            break;
-                        case 'Edit':
-                            this.updateCallTreeTable(res.callTree);
-                            break;
-                    }
+                        }
+                        break;
+                    case 'Edit':
+                        if (res.updateSuccess) {
+                            this.updateCallTreeInfoTable(res.callTreeInfo);
+                        }
+                        break;
                 }
             }
         });
     }
     popupConfirmationBox(action, callTreeInfo) {
         let message = 'Are you sure to ' + action + ' this call tree info?';
-        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialogConfig"]();
+        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
         // dialogConfig.disableClose = true;
         // dialogConfig.minHeight = '600px';
         dialogConfig.autoFocus = false; // do not set focus on the first form element
@@ -809,35 +821,38 @@ let EditCallTreeInfoComponent = class EditCallTreeInfoComponent {
             if (sayYes) {
                 if (action === 'Enable') {
                     callTreeInfo.status = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].active;
+                    this.callTreeInfoService.enableCallTreeInfo(callTreeInfo.callTreeInfoId).subscribe((res) => {
+                        if (res) {
+                            message = 'The call tree info status is set to active succesfully.';
+                        }
+                        else {
+                            message = 'The call tree info status is fail to set to active.';
+                            callTreeInfo.status = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].inactive;
+                        }
+                    });
                 }
                 else {
                     callTreeInfo.status = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].inactive;
+                    this.callTreeInfoService.disableCallTreeInfo(callTreeInfo.callTreeInfoId).subscribe((res) => {
+                        if (res) {
+                            message = 'The call tree info status is set to inactive succesfully.';
+                        }
+                        else {
+                            message = 'The call tree info status is fail to set to inactive.';
+                            callTreeInfo.status = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].active;
+                        }
+                    });
                 }
-                this.callTreeInfoService.saveCallTreeInfo(callTreeInfo).subscribe((res) => {
-                    switch (action) {
-                        case 'Enable':
-                            message = 'active';
-                            break;
-                        case 'Disable':
-                            message = 'inactive';
-                            break;
-                    }
-                    if (res) {
-                        message = 'The call tree status is set to ' + message + ' succesfully.';
-                    }
-                    else {
-                        message = 'The call tree status is fail to set ' + message + '.';
-                    }
-                });
+                alert(message);
             }
         });
     }
     refreshDataSource() {
         this.callTreeInfoList = this.callTreeInfoDataSource.sortData(this.callTreeInfoList, this.sort);
-        this.callTreeInfoDataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_9__["MatTableDataSource"](this.callTreeInfoList);
+        this.callTreeInfoDataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__["MatTableDataSource"](this.callTreeInfoList);
         this.callTreeInfoDataSource.sort = this.sort;
     }
-    updateCallTreeTable(res) {
+    updateCallTreeInfoTable(res) {
         this.callTreeInfoList.filter((value) => {
             if (value.callTreeInfoId === res.callTreeInfoId) {
                 value.division = res.division;
@@ -858,11 +873,10 @@ let EditCallTreeInfoComponent = class EditCallTreeInfoComponent {
 };
 EditCallTreeInfoComponent.ctorParameters = () => [
     { type: src_app_services_call_tree_info_service__WEBPACK_IMPORTED_MODULE_2__["CallTreeInfoService"] },
-    { type: src_app_services_division_service__WEBPACK_IMPORTED_MODULE_6__["DivisionService"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialog"] }
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ViewChild"])(_angular_material_sort__WEBPACK_IMPORTED_MODULE_8__["MatSort"], { static: true })
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ViewChild"])(_angular_material_sort__WEBPACK_IMPORTED_MODULE_7__["MatSort"], { static: true })
 ], EditCallTreeInfoComponent.prototype, "sort", void 0);
 EditCallTreeInfoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
@@ -1014,76 +1028,6 @@ ConfirmationBoxComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"]))
 ], ConfirmationBoxComponent);
-
-
-
-/***/ }),
-
-/***/ "./src/app/modules/utility/components/contact-id-selector/contact-id-selector.component.css":
-/*!**************************************************************************************************!*\
-  !*** ./src/app/modules/utility/components/contact-id-selector/contact-id-selector.component.css ***!
-  \**************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXRpbGl0eS9jb21wb25lbnRzL2NvbnRhY3QtaWQtc2VsZWN0b3IvY29udGFjdC1pZC1zZWxlY3Rvci5jb21wb25lbnQuY3NzIn0= */");
-
-/***/ }),
-
-/***/ "./src/app/modules/utility/components/contact-id-selector/contact-id-selector.component.ts":
-/*!*************************************************************************************************!*\
-  !*** ./src/app/modules/utility/components/contact-id-selector/contact-id-selector.component.ts ***!
-  \*************************************************************************************************/
-/*! exports provided: ContactIdSelectorComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactIdSelectorComponent", function() { return ContactIdSelectorComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var src_app_services_call_tree_info_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/call-tree-info.service */ "./src/app/services/call-tree-info.service.ts");
-var ContactIdSelectorComponent_1;
-
-
-
-
-let ContactIdSelectorComponent = ContactIdSelectorComponent_1 = class ContactIdSelectorComponent {
-    constructor(callTreeInfoService) {
-        this.callTreeInfoService = callTreeInfoService;
-    }
-    writeValue(obj) {
-        if (obj != null) {
-            this.contactId = obj;
-        }
-    }
-    registerOnChange(fn) {
-        this.onChange = fn;
-    }
-    registerOnTouched(fn) {
-        this.onTouched = fn;
-    }
-};
-ContactIdSelectorComponent.ctorParameters = () => [
-    { type: src_app_services_call_tree_info_service__WEBPACK_IMPORTED_MODULE_3__["CallTreeInfoService"] }
-];
-ContactIdSelectorComponent = ContactIdSelectorComponent_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-contact-id-selector',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./contact-id-selector.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/utility/components/contact-id-selector/contact-id-selector.component.html")).default,
-        providers: [
-            {
-                provide: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NG_VALUE_ACCESSOR"],
-                useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["forwardRef"])(() => ContactIdSelectorComponent_1),
-                multi: true
-            }
-        ],
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./contact-id-selector.component.css */ "./src/app/modules/utility/components/contact-id-selector/contact-id-selector.component.css")).default]
-    })
-], ContactIdSelectorComponent);
 
 
 
@@ -1367,8 +1311,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_sort__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material/sort */ "./node_modules/@angular/material/esm2015/sort.js");
 /* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
 /* harmony import */ var _directives_system_name_validator_directive__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./directives/system-name-validator.directive */ "./src/app/modules/utility/directives/system-name-validator.directive.ts");
-/* harmony import */ var _components_contact_id_selector_contact_id_selector_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/contact-id-selector/contact-id-selector.component */ "./src/app/modules/utility/components/contact-id-selector/contact-id-selector.component.ts");
-
 
 
 
@@ -1398,7 +1340,6 @@ UtilityModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _directives_division_validator_directive__WEBPACK_IMPORTED_MODULE_6__["DivisionValidatorDirective"],
             _directives_log_recipient_validator_directive__WEBPACK_IMPORTED_MODULE_8__["LogRecipientValidatorDirective"],
             _directives_system_name_validator_directive__WEBPACK_IMPORTED_MODULE_18__["SystemNameValidatorDirective"],
-            _components_contact_id_selector_contact_id_selector_component__WEBPACK_IMPORTED_MODULE_19__["ContactIdSelectorComponent"],
         ],
         imports: [
             ckeditor4_angular__WEBPACK_IMPORTED_MODULE_3__["CKEditorModule"],
@@ -1494,11 +1435,29 @@ let CallTreeInfoService = class CallTreeInfoService {
         const serviceURL = this.url + 'getAllCallTreeInfo';
         return this.http.get(serviceURL).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
     }
-    saveCallTreeInfo(callTreeInfo) {
-        const serviceURL = this.url + 'saveCallTreeInfo';
-        let requestParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
-        requestParams = requestParams.append('callTreeInfo', JSON.stringify(callTreeInfo));
+    getSharedCallTree() {
+        const serviceURL = this.url + 'getSharedCallTree';
+        return this.http.get(serviceURL).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
+    }
+    addCallTreeInfo(callTreeInfo) {
+        const serviceURL = this.url + 'addCallTreeInfo';
         return this.http.post(serviceURL, callTreeInfo).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
+    }
+    updateCallTreeInfo(callTreeInfo) {
+        const serviceURL = this.url + 'updateCallTreeInfo';
+        return this.http.post(serviceURL, callTreeInfo).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
+    }
+    enableCallTreeInfo(callTreeInfoId) {
+        const serviceURL = this.url + 'enableCallTreeInfo';
+        let requestParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
+        requestParams = requestParams.append('callTreeInfoId', callTreeInfoId.toString());
+        return this.http.post(serviceURL, requestParams).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
+    }
+    disableCallTreeInfo(callTreeInfoId) {
+        const serviceURL = this.url + 'disableCallTreeInfo';
+        let requestParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
+        requestParams = requestParams.append('callTreeInfoId', callTreeInfoId.toString());
+        return this.http.post(serviceURL, requestParams).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
     }
 };
 CallTreeInfoService.ctorParameters = () => [

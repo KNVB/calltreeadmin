@@ -43,7 +43,7 @@
         <ng-container matColumnDef="contact">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Call tree</th>
           <td mat-cell *matCellDef="let element">
-            <a href="javascript:openContactEditor(element.callTreeId)">Edit CallTree</a>
+            <a href="javascript:openCallTreeEditor(element.callTree)">Edit CallTree</a>
           </td>
         </ng-container>
         <ng-container matColumnDef="timeToEscalate">
@@ -57,7 +57,7 @@
         <ng-container matColumnDef="manual">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Operation Manual</th>
           <td mat-cell *matCellDef="let element">
-            <a href="javascript:openManualEditor(element.callTreeId)">Edit Manual Info</a>
+            <a href="javascript:openManualEditor(element.manuals)">Edit Manual Info</a>
           </td>
         </ng-container>
         <ng-container matColumnDef="status">
