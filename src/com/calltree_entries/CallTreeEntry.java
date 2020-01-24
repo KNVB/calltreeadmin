@@ -1,6 +1,6 @@
-package com.calltreeinfo;
+package com.calltree_entries;
 
-public class CallTreeInfo {
+public class CallTreeEntry {
 	public static final int active=1;
 	public static final int inactive=0;
 	private CallTree callTree=null;
@@ -12,14 +12,14 @@ public class CallTreeInfo {
 	private String timeToStartProcedure=new String();
 	private String timeToEscalate=new String();
 	private String logRecipients=new String();
-	private int status=CallTreeInfo.inactive;	
-	private int callTreeInfoId;
+	private int status=CallTreeEntry.inactive;	
+	private int callTreeEntryId;
 	private float version=0.0f;
 
 	private Manual[] manuals=null;
 	
 
-	public CallTreeInfo() {
+	public CallTreeEntry() {
 		
 	}
 	
@@ -31,12 +31,12 @@ public class CallTreeInfo {
 		this.callTree = callTree;
 	}
 
-	public int getCallTreeInfoId() {
-		return callTreeInfoId;
+	public int getCallTreeEntryId() {
+		return callTreeEntryId;
 	}
 
-	public void setCallTreeInfoId(int callTreeId) {
-		this.callTreeInfoId = callTreeId;
+	public void setCallTreeEntryId(int callTreeEntryId) {
+		this.callTreeEntryId = callTreeEntryId;
 	}
 	public String getDivision() {
 		return division;

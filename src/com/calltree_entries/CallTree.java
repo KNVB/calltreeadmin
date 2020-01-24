@@ -1,4 +1,4 @@
-package com.calltreeinfo;
+package com.calltree_entries;
 
 public class CallTree {
 	private int callTreeId =-1;

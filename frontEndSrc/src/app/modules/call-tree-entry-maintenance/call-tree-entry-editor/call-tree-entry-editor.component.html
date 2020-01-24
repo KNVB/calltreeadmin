@@ -1,41 +1,13 @@
 <h2 mat-dialog-title>{{ action }} a Call Tree Info</h2>
 <form #callTreeInfoEditForm="ngForm" (ngSubmit)="onSubmit(callTreeInfoEditForm)" novalidate>
-    <input type=hidden name="callTreeInfoId" [(ngModel)]="this.callTreeInfo.callTreeInfoId">
+    <input type=hidden name="callTreeInfoId" [(ngModel)]="this.callTreeEntry.callTreeEntryId">
     <app-division-list-input-box
       name="division"
-      [(ngModel)]="this.callTreeInfo.division">
+      [(ngModel)]="this.callTreeEntry.division">
     </app-division-list-input-box>
     <mat-form-field>
-      <mat-label>System</mat-label>
-      <input matInput
-        type="text"
-        required
-        [(ngModel)]="this.callTreeInfo.systemName"
-        name="systemName"
-        #systemName="ngModel">
-      <mat-error [hidden]="systemName.valid || systemName.pristine">
-        System Name is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Location</mat-label>
-      <textarea matInput
-                cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5"
-                required
-                name="location"
-                #location="ngModel"
-                [(ngModel)]="this.callTreeInfo.location">
-      </textarea>
-      <mat-error  [hidden]="location.valid || location.pristine">
-        Location is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
       <mat-label>Service Level</mat-label>
-      <mat-select [(ngModel)]="this.callTreeInfo.serviceLevel" name="serviceLevel" #serviceLevel="ngModel" required>
+      <mat-select [(ngModel)]="this.callTreeEntry.serviceLevel" name="serviceLevel" #serviceLevel="ngModel" required>
         <mat-option *ngFor="let serviceLevel of this.serviceLevelList" [value]=serviceLevel>
           {{serviceLevel}}
         </mat-option>
@@ -44,11 +16,10 @@
         Service Level is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <br>
     <mat-form-field>
       <mat-label>Mission Critical</mat-label>
         <input matInput type="text"
-                [(ngModel)]="this.callTreeInfo.missionCritical"
+                [(ngModel)]="this.callTreeEntry.missionCritical"
                 required
                 name="missionCritical"
                 #missionCritical="ngModel">
@@ -56,32 +27,6 @@
           Missiong Critical is <strong>required</strong>
         </mat-error>
     </mat-form-field>
-    <mat-form-field style="width:350px">
-      <mat-label>
-        Time Interval to start established procedures
-      </mat-label>
-      <input matInput type="text"
-            [(ngModel)]="this.callTreeInfo.timeToStartProcedure"
-            required
-            #timeToStartProcedure="ngModel"
-            name="timeToStartProcedure">
-      <mat-error [hidden]="timeToStartProcedure.valid||timeToStartProcedure.pristine">
-        Time Interval to start established procedures is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field style="width:300px">
-        <mat-label>
-          Time Interval to escalate if no reply
-        </mat-label>
-        <input matInput type="text" [(ngModel)]="this.callTreeInfo.timeToEscalate"
-              required
-              name="timeToEscalate"
-              #timeToEscalate="ngModel">
-        <mat-error [hidden]="timeToEscalate.valid||timeToEscalate.pristine">
-          Time Interval to escalate if no reply is <strong>required</strong>
-        </mat-error>
-    </mat-form-field>
-    <br>
     <mat-form-field style="width:250px">
       <mat-label>Appreciation Log Recipients</mat-label>
         <textarea matInput
@@ -93,7 +38,7 @@
                   appLogRecipientValidator
                   name="logRecipients"
                   #logRecipients="ngModel"
-                  [(ngModel)]="this.callTreeInfo.logRecipients"></textarea>
+                  [(ngModel)]="this.callTreeEntry.logRecipients"></textarea>
       <mat-error *ngIf="logRecipients.hasError('required')">
         Appreciation Log Recipients is <strong>required</strong>
       </mat-error>
@@ -104,14 +49,73 @@
     <mat-form-field>
       <mat-label>Status</mat-label>
       <mat-select
-        [(ngModel)]="this.callTreeInfo.status"
+        [(ngModel)]="this.callTreeEntry.status"
         name="status"
         #status="ngModel">
-        <mat-option [value]="activeCallTree">Active</mat-option>
-        <mat-option [value]="inActiveCallTree">Inactive</mat-option>
+        <mat-option [value]="activeCallTreeEntry">Active</mat-option>
+        <mat-option [value]="inActiveCallTreeEntry">Inactive</mat-option>
       </mat-select>
     </mat-form-field>
-    <div *ngIf="(this.callTreeInfo.callTreeInfoId==-1)">
+    <mat-form-field style="width:350px">
+      <mat-label>
+        Time Interval to start established procedures
+      </mat-label>
+      <input matInput type="text"
+            [(ngModel)]="this.callTreeEntry.timeToStartProcedure"
+            required
+            #timeToStartProcedure="ngModel"
+            name="timeToStartProcedure">
+      <mat-error [hidden]="timeToStartProcedure.valid||timeToStartProcedure.pristine">
+        Time Interval to start established procedures is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field style="width:300px">
+        <mat-label>
+          Time Interval to escalate if no reply
+        </mat-label>
+        <input matInput type="text" [(ngModel)]="this.callTreeEntry.timeToEscalate"
+              required
+              name="timeToEscalate"
+              #timeToEscalate="ngModel">
+        <mat-error [hidden]="timeToEscalate.valid||timeToEscalate.pristine">
+          Time Interval to escalate if no reply is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field style="width:100%;">
+      <mat-label>System</mat-label>
+      <textarea matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"
+        required
+        name="systemName"
+        #systemName="ngModel"
+        [(ngModel)]="this.callTreeEntry.systemName">
+      </textarea>
+      <mat-error [hidden]="systemName.valid || systemName.pristine">
+        System Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+	  <br>
+    <mat-form-field style="width:100%;">
+      <mat-label>Location</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                required
+                name="location"
+                #location="ngModel"
+                [(ngModel)]="this.callTreeEntry.location">
+      </textarea>
+      <mat-error  [hidden]="location.valid || location.pristine">
+        Location is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div *ngIf="(this.callTreeEntry.callTreeEntryId==-1)">
       <hr>
       Call Tree:
       <mat-radio-group
@@ -126,9 +130,9 @@
               <ckeditor
                 required
                 name="callTreeDetail"
-                [config]="ckeditorConfig"
+                [config]="callTreeDetailEditorConfig"
                 #callTreeDetail1="ngModel"
-                [(ngModel)]="this.callTreeInfo.callTree.callTreeDetail">
+                [(ngModel)]="this.callTreeEntry.callTree.callTreeDetail">
               </ckeditor>
               <mat-error *ngIf="(callTreeDetail1.touched || callTreeInfoEditForm.submitted)  && callTreeDetail1.hasError('required')">
                 Call tree contact is <strong>required</strong>
@@ -159,7 +163,7 @@
                 <mat-select
                   required
                   name="sharedCallTreeId"
-                  [(ngModel)]="this.callTreeInfo.callTree.callTreeId"
+                  [(ngModel)]="this.callTreeEntry.callTree.callTreeId"
                   (selectionChange)="updateCallTreeDetail($event)"
                   #sharedSystemValidator="ngModel">
                   <mat-option
@@ -187,7 +191,7 @@
             </button>
           </td>
         </tr>
-        <tr *ngFor="let manual of this.callTreeInfo.manuals; let i = index">
+        <tr *ngFor="let manual of this.callTreeEntry.manuals; let i = index">
           <td colspan=2>
             <mat-form-field>
               <mat-label>Manual Location</mat-label>

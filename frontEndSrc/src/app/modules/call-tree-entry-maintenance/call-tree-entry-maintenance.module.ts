@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {CallTreeEditorComponent} from './call-tree-editor/call-tree-editor.component';
-import { CallTreeInfoEditorComponent } from './call-tree-info-editor/call-tree-info-editor.component';
-import { CallTreeInfoMaintenanceComponent } from './call-tree-info-maintenance.component';
+import { CallTreeEntryEditorComponent } from './call-tree-entry-editor/call-tree-entry-editor.component';
+import { CallTreeEntryMaintenanceComponent } from './call-tree-entry-maintenance.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { CommonModule , DatePipe} from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +15,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import { SafeHtml } from 'src/app/pipes/safe-html.pipe';
+import {TextFieldModule} from '@angular/cdk/text-field';
 import {UtilityModule } from '../utility/utility.module';
 
 
@@ -22,8 +23,8 @@ import {UtilityModule } from '../utility/utility.module';
 @NgModule({
   declarations: [
                 CallTreeEditorComponent,
-                CallTreeInfoEditorComponent,
-                CallTreeInfoMaintenanceComponent,
+                CallTreeEntryEditorComponent,
+                CallTreeEntryMaintenanceComponent,
                 SafeHtml,
                ],
   imports: [
@@ -39,11 +40,12 @@ import {UtilityModule } from '../utility/utility.module';
             MatSelectModule,
             MatSortModule,
             MatTableModule,
+            TextFieldModule,
             UtilityModule,
            ],
-  exports: [CallTreeInfoMaintenanceComponent],
+  exports: [CallTreeEntryMaintenanceComponent],
   entryComponents: [CallTreeEditorComponent,
-                    CallTreeInfoEditorComponent],
+                    CallTreeEntryEditorComponent],
   providers: [DatePipe]
 })
-export class CallTreeInfoMaintenanceModule { }
+export class CallTreeEntryMaintenanceModule { }

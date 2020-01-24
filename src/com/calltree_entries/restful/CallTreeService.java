@@ -1,4 +1,4 @@
-package com.calltreeinfo.restful;
+package com.calltree_entries.restful;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -10,20 +10,20 @@ import javax.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.calltreeinfo.CallTreeInfo;
-import com.calltreeinfo.util.DbOp;
+import com.calltree_entries.CallTreeEntry;
+import com.calltree_entries.util.DbOp;
 
 @Path("/CallTree")
 public class CallTreeService {
 	private static final Logger logger = LogManager.getLogger(Class.class.getSimpleName());
 	
-	@Path("getCallTreeInfoByCallTreeId")
+	@Path("/getCallTreeEntryByCallTreeId")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCallTreeInfoByCallTreeId(@FormParam("callTreeId") int callTreeId) throws Exception {
-		logger.debug("getCallTreeInfoByCallTreeId is called,callTreeId="+callTreeId);
+	public Response getCallTreeEntryByCallTreeId(@FormParam("callTreeId") int callTreeId) throws Exception {
+		logger.debug("getCallTreeEntryByCallTreeId is called,callTreeId="+callTreeId);
 		DbOp dbo=new DbOp();
-		CallTreeInfo[] result= dbo.getCallTreeInfoByCallTreeId(callTreeId);
+		CallTreeEntry[] result= dbo.getCallTreeEntryByCallTreeId(callTreeId);
 		dbo.close();
 		return Response.ok(result).build();
 	}

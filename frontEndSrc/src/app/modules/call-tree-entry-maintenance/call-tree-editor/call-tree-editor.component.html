@@ -1,5 +1,17 @@
 <h2 mat-dialog-title>Edit a Call Tree</h2>
 <form #callTreeEditForm="ngForm" (ngSubmit)="onSubmit(callTreeEditForm)" novalidate>
+  This call tree is owned by the following system(s):
+  <table>
+    <tr>
+      <td>Division:</td><td>System:</td>
+    </tr>
+    <tr *ngFor="let callTreeInfo of callTreeInfoList">
+      <td>{{callTreeInfo.division}}</td>
+      <td>{{callTreeInfo.systemName}}</td>
+    </tr>
+  </table>
+
+
   Call Tree Detail:
   <ckeditor
     required

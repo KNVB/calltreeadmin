@@ -1,8 +1,8 @@
-package com.calltreeinfo.restful;
+package com.calltree_entries.restful;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import java.util.Map;
+
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -14,65 +14,65 @@ import javax.ws.rs.POST;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.calltreeinfo.CallTree;
-import com.calltreeinfo.CallTreeInfo;
-import com.calltreeinfo.util.DbOp;
+
+import com.calltree_entries.CallTreeEntry;
+import com.calltree_entries.util.DbOp;
 
 @Path("/CallTreeInfo")
 public class CallTreeInfoService {
 	private static final Logger logger = LogManager.getLogger(Class.class.getSimpleName());
 	
-	@Path("/getAllCallTreeInfo")
+	@Path("/getAllCallTreeEntry")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllCallTreeInfo() throws Exception {
-		logger.debug("getAllCallTree is called");
+	public Response getAllCallTreeEntry() throws Exception {
+		logger.debug("getAllCallTreeEntry is called");
 		DbOp dbo=new DbOp();
-		CallTreeInfo[] result= dbo.getAllCallTreeInfo();
+		CallTreeEntry[] result= dbo.getAllCallTreeEntry();
 		dbo.close();
 		return Response.ok(result).build();
 	}
 	
-	@Path("/addCallTreeInfo")
+	@Path("/addCallTreeEntry")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addCallTreeInfo (CallTreeInfo callTreeInfo) throws Exception {
+	public Response addCallTreeEntry (CallTreeEntry callTreeEntry) throws Exception {
 		logger.debug("addCallTreeInfo is called");
 		DbOp dbo=new DbOp();
-		boolean updateResult=dbo.addCallTreeInfo(callTreeInfo);
+		int callTreeInfoId=dbo.addCallTreeEntry(callTreeEntry);
 		dbo.close();
-		return Response.ok(updateResult).build();
+		return Response.ok(callTreeInfoId).build();
 	}
 	@Path("/updateCallTreeInfo")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateCallTreeInfo (CallTreeInfo callTreeInfo) throws Exception {
+	public Response updateCallTreeInfo (CallTreeEntry callTreeEntry) throws Exception {
 		logger.debug("updateCallTreeInfo is called");
 		DbOp dbo=new DbOp();
-		boolean updateResult=dbo.updateCallTreeInfo(callTreeInfo);
+		boolean updateResult=dbo.updateCallTreeEntry(callTreeEntry);
 		dbo.close();
 		return Response.ok(updateResult).build();
 	}
 	
-	@Path("/enableCallTreeInfo")
+	@Path("/enableCallTreeEntry")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response enableCallTreeInfo (@FormParam("callTreeInfoId") int callTreeInfoId) throws Exception {
+	public Response enableCallTreeEntry (@FormParam("callTreeEntryId") int callTreeEntryId) throws Exception {
 		logger.debug("enableCallTreeInfo is called");
 		DbOp dbo=new DbOp();
-		boolean updateResult=dbo.enableCallTreeInfo(callTreeInfoId);
+		boolean updateResult=dbo.enableCallTreeEntry(callTreeEntryId);
 		dbo.close();
 		return Response.ok(updateResult).build();
 	}
-	@Path("/disableCallTreeInfo")
+	@Path("/disableCallTreeEntry")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response disableCallTreeInfo(@FormParam("callTreeInfoId") int callTreeInfoId) throws Exception {
+	public Response disableCallTreeEntry(@FormParam("callTreeEntryId") int callTreeEntryId) throws Exception {
 		logger.debug("disableCallTreeInfo is called");
 		DbOp dbo=new DbOp();
-		boolean updateResult=dbo.disableCallTreeInfo(callTreeInfoId);
+		boolean updateResult=dbo.disableCallTreeEntry(callTreeEntryId);
 		dbo.close();
 		return Response.ok(updateResult).build();
 	}

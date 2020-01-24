@@ -1,4 +1,4 @@
-package com.calltreeinfo;
+package com.calltree_entries;
 
 public class Division {
 	public static final int active=1;

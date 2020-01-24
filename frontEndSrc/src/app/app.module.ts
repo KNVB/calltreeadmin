@@ -2,7 +2,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CallTreeInfoMaintenanceModule } from './modules/call-tree-info-maintenance/call-tree-info-maintenance.module';
+import { CallTreeEntryMaintenanceModule } from './modules/call-tree-entry-maintenance/call-tree-entry-maintenance.module';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -18,7 +18,7 @@ import { UtilityModule } from './modules/utility/utility.module';
     BrowserModule,
     BrowserAnimationsModule,
     CKEditorModule,
-    CallTreeInfoMaintenanceModule,
+    CallTreeEntryMaintenanceModule,
     FormsModule,
     HttpClientModule,
     UtilityModule,

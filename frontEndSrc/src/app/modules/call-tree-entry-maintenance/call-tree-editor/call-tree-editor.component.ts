@@ -1,9 +1,10 @@
 import { CallTree } from 'src/app/classes/CallTree';
+import { CallTreeEntry } from 'src/app/classes/CallTreeEntry';
 import { CallTreeService } from 'src/app/services/call-tree.service';
 import { Component, Inject} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
-import { CallTreeInfo } from 'src/app/classes/CallTreeInfo';
+
 
 
 @Component({
@@ -13,9 +14,9 @@ import { CallTreeInfo } from 'src/app/classes/CallTreeInfo';
 })
 export class CallTreeEditorComponent {
   callTree: CallTree;
-  callTreeInfoList: CallTreeInfo[];
+  callTreeInfoList: CallTreeEntry[];
   ckeditorConfig = {extraPlugins: 'colorbutton',
-                    removeButtons: 'BulletedList,PasteFromWord,PasteText',
+                    removeButtons: 'BGColor,BulletedList,PasteFromWord,PasteText',
                     toolbarGroups: [
                         { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
                         { name: 'colors', groups: [ 'colors' ] },
@@ -28,7 +29,7 @@ export class CallTreeEditorComponent {
               private dialogRef: MatDialogRef<CallTreeEditorComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
                 this.callTree = data.callTree;
-                this.callTreeService.getCallTreeInfoByCallTreeId(this.callTree.callTreeId).subscribe((res: CallTreeInfo[]) => {
+                this.callTreeService.getCallTreeEntryByCallTreeId(this.callTree.callTreeId).subscribe((res: CallTreeEntry[]) => {
                   this.callTreeInfoList = res;
                 });
               }

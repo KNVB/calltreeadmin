@@ -1,4 +1,4 @@
-package com.calltreeinfo.restful;
+package com.calltree_entries.restful;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.calltreeinfo.util.DbOp;
+import com.calltree_entries.util.DbOp;
 @Path("/DivisionService")
 public class DivisionService {
 	private static final Logger logger = LogManager.getLogger(Class.class.getSimpleName());

@@ -1,5 +1,5 @@
 <div class="center">Call Tree Info Maintenance</div>
-<table style="width:90%;margin-left: 30px;" >
+<table style="margin-left: 30px;margin-right: 30px;" >
   <tr>
     <td>
       <mat-form-field>
@@ -22,7 +22,7 @@
         </ng-container>
         <ng-container matColumnDef="systemName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="systemName">System</th>
-            <td mat-cell style="padding-left:3px;text-align: left !important;" *matCellDef="let element"> {{element.systemName}} </td>
+            <td mat-cell style="text-align: left !important;" *matCellDef="let element"> {{element.systemName}} </td>
         </ng-container>
         <ng-container matColumnDef="location">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
@@ -52,7 +52,7 @@
         </ng-container>
         <ng-container matColumnDef="logRecipients">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Appreciation<br>Log Recipients</th>
-            <td mat-cell style="text-align: left !important;padding-left: 10px;" *matCellDef="let element" [innerHTML]="element.logRecipients| safeHtml"></td>
+            <td mat-cell style="text-align: left !important;" *matCellDef="let element" [innerHTML]="element.logRecipients| safeHtml"></td>
         </ng-container>
         <ng-container matColumnDef="manual">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Operation Manual</th>

@@ -36,42 +36,42 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-info-maintenance/call-tree-editor/call-tree-editor.component.html":
-/*!*******************************************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-info-maintenance/call-tree-editor/call-tree-editor.component.html ***!
-  \*******************************************************************************************************************************************/
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-entry-maintenance/call-tree-editor/call-tree-editor.component.html":
+/*!********************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-entry-maintenance/call-tree-editor/call-tree-editor.component.html ***!
+  \********************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>Edit a Call Tree</h2>\n<form #callTreeEditForm=\"ngForm\" (ngSubmit)=\"onSubmit(callTreeEditForm)\" novalidate>\n  Call Tree Detail:\n  <ckeditor\n    required\n    name=\"callTreeDetail\"\n    [config]=\"ckeditorConfig\"\n    #callTreeDetail1=\"ngModel\"\n    [(ngModel)]=\"this.callTree.callTreeDetail\">\n  </ckeditor>\n  <mat-dialog-actions>\n    <button mat-raised-button type=\"submit\" color=\"primary\" class=\"Update-btn\">Save</button>\n    <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"closeDialog()\">Close</button>\n  </mat-dialog-actions>\n</form>\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>Edit a Call Tree</h2>\n<form #callTreeEditForm=\"ngForm\" (ngSubmit)=\"onSubmit(callTreeEditForm)\" novalidate>\n  This call tree is owned by the following system(s):\n  <table>\n    <tr>\n      <td>Division:</td><td>System:</td>\n    </tr>\n    <tr *ngFor=\"let callTreeInfo of callTreeInfoList\">\n      <td>{{callTreeInfo.division}}</td>\n      <td>{{callTreeInfo.systemName}}</td>\n    </tr>\n  </table>\n\n\n  Call Tree Detail:\n  <ckeditor\n    required\n    name=\"callTreeDetail\"\n    [config]=\"ckeditorConfig\"\n    #callTreeDetail1=\"ngModel\"\n    [(ngModel)]=\"this.callTree.callTreeDetail\">\n  </ckeditor>\n  <mat-dialog-actions>\n    <button mat-raised-button type=\"submit\" color=\"primary\" class=\"Update-btn\">Save</button>\n    <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"closeDialog()\">Close</button>\n  </mat-dialog-actions>\n</form>\n\n");
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-info-maintenance/call-tree-info-editor/call-tree-info-editor.component.html":
-/*!*****************************************************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-info-maintenance/call-tree-info-editor/call-tree-info-editor.component.html ***!
-  \*****************************************************************************************************************************************************/
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-entry-maintenance/call-tree-entry-editor/call-tree-entry-editor.component.html":
+/*!********************************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-entry-maintenance/call-tree-entry-editor/call-tree-entry-editor.component.html ***!
+  \********************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>{{ action }} a Call Tree Info</h2>\n<form #callTreeInfoEditForm=\"ngForm\" (ngSubmit)=\"onSubmit(callTreeInfoEditForm)\" novalidate>\n    <input type=hidden name=\"callTreeInfoId\" [(ngModel)]=\"this.callTreeInfo.callTreeInfoId\">\n    <app-division-list-input-box\n      name=\"division\"\n      [(ngModel)]=\"this.callTreeInfo.division\">\n    </app-division-list-input-box>\n    <mat-form-field>\n      <mat-label>System</mat-label>\n      <input matInput\n        type=\"text\"\n        required\n        [(ngModel)]=\"this.callTreeInfo.systemName\"\n        name=\"systemName\"\n        #systemName=\"ngModel\">\n      <mat-error [hidden]=\"systemName.valid || systemName.pristine\">\n        System Name is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Location</mat-label>\n      <textarea matInput\n                cdkTextareaAutosize\n                #autosize=\"cdkTextareaAutosize\"\n                cdkAutosizeMinRows=\"1\"\n                cdkAutosizeMaxRows=\"5\"\n                required\n                name=\"location\"\n                #location=\"ngModel\"\n                [(ngModel)]=\"this.callTreeInfo.location\">\n      </textarea>\n      <mat-error  [hidden]=\"location.valid || location.pristine\">\n        Location is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Service Level</mat-label>\n      <mat-select [(ngModel)]=\"this.callTreeInfo.serviceLevel\" name=\"serviceLevel\" #serviceLevel=\"ngModel\" required>\n        <mat-option *ngFor=\"let serviceLevel of this.serviceLevelList\" [value]=serviceLevel>\n          {{serviceLevel}}\n        </mat-option>\n      </mat-select>\n      <mat-error  [hidden]=\"serviceLevel.valid || serviceLevel.pristine\">\n        Service Level is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <br>\n    <mat-form-field>\n      <mat-label>Mission Critical</mat-label>\n        <input matInput type=\"text\"\n                [(ngModel)]=\"this.callTreeInfo.missionCritical\"\n                required\n                name=\"missionCritical\"\n                #missionCritical=\"ngModel\">\n        <mat-error [hidden]=\"missionCritical.valid || missionCritical.pristine\">\n          Missiong Critical is <strong>required</strong>\n        </mat-error>\n    </mat-form-field>\n    <mat-form-field style=\"width:350px\">\n      <mat-label>\n        Time Interval to start established procedures\n      </mat-label>\n      <input matInput type=\"text\"\n            [(ngModel)]=\"this.callTreeInfo.timeToStartProcedure\"\n            required\n            #timeToStartProcedure=\"ngModel\"\n            name=\"timeToStartProcedure\">\n      <mat-error [hidden]=\"timeToStartProcedure.valid||timeToStartProcedure.pristine\">\n        Time Interval to start established procedures is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field style=\"width:300px\">\n        <mat-label>\n          Time Interval to escalate if no reply\n        </mat-label>\n        <input matInput type=\"text\" [(ngModel)]=\"this.callTreeInfo.timeToEscalate\"\n              required\n              name=\"timeToEscalate\"\n              #timeToEscalate=\"ngModel\">\n        <mat-error [hidden]=\"timeToEscalate.valid||timeToEscalate.pristine\">\n          Time Interval to escalate if no reply is <strong>required</strong>\n        </mat-error>\n    </mat-form-field>\n    <br>\n    <mat-form-field style=\"width:250px\">\n      <mat-label>Appreciation Log Recipients</mat-label>\n        <textarea matInput\n                  cdkTextareaAutosize\n                  #autosize=\"cdkTextareaAutosize\"\n                  cdkAutosizeMinRows=\"1\"\n                  cdkAutosizeMaxRows=\"5\"\n                  required\n                  appLogRecipientValidator\n                  name=\"logRecipients\"\n                  #logRecipients=\"ngModel\"\n                  [(ngModel)]=\"this.callTreeInfo.logRecipients\"></textarea>\n      <mat-error *ngIf=\"logRecipients.hasError('required')\">\n        Appreciation Log Recipients is <strong>required</strong>\n      </mat-error>\n      <mat-error *ngIf=\"logRecipients.hasError('email')\">\n        {{logRecipients.errors['email']}} is not a valid email address.\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Status</mat-label>\n      <mat-select\n        [(ngModel)]=\"this.callTreeInfo.status\"\n        name=\"status\"\n        #status=\"ngModel\">\n        <mat-option [value]=\"activeCallTree\">Active</mat-option>\n        <mat-option [value]=\"inActiveCallTree\">Inactive</mat-option>\n      </mat-select>\n    </mat-form-field>\n    <div *ngIf=\"(this.callTreeInfo.callTreeInfoId==-1)\">\n      <hr>\n      Call Tree:\n      <mat-radio-group\n        name=\"callTreeType\"\n        (ngModelChange)=onCallTreeTypeChange($event)\n        [(ngModel)]=\"callTreeType\">\n        <div style=\"display:flex;flex-direction: column;padding-top: 5px;\">\n          <div style=\"display:flex;flex-direction: column;\">\n            <mat-radio-button style=\"padding-bottom: 5px;\" [value]=\"1\">Create an individual CallTree</mat-radio-button>\n            <div tyle=\"display:flex;\" *ngIf=\"(callTreeType==1)\">\n              Call Tree Detail:\n              <ckeditor\n                required\n                name=\"callTreeDetail\"\n                [config]=\"ckeditorConfig\"\n                #callTreeDetail1=\"ngModel\"\n                [(ngModel)]=\"this.callTreeInfo.callTree.callTreeDetail\">\n              </ckeditor>\n              <mat-error *ngIf=\"(callTreeDetail1.touched || callTreeInfoEditForm.submitted)  && callTreeDetail1.hasError('required')\">\n                Call tree contact is <strong>required</strong>\n              </mat-error>\n            </div>\n          </div>\n          <div style=\"display:flex;flex-direction: column;padding-top: 5px;\">\n            <mat-radio-button [value]=\"2\">Share CallTree with the following system:</mat-radio-button>\n            <div tyle=\"display:flex;padding-top:5px;\" *ngIf=\"(callTreeType==2)\">\n              <mat-form-field>\n                <mat-label>Division</mat-label>\n                <mat-select\n                  required\n                  name=\"sharedDivision\"\n                  [(ngModel)]=\"sharedDivision\"\n                  (ngModelChange)=onSharedDivisionChange($event)\n                  #sharedDivisionValidator=\"ngModel\">\n                  <mat-option *ngFor=\"let division of this.sharedDivisionList\" [value]=\"division\">\n                    {{division}}\n                  </mat-option>\n                </mat-select>\n                <mat-error *ngIf=\"sharedDivisionValidator.hasError('required')\">\n                  Division is <strong>required</strong>\n                </mat-error>\n              </mat-form-field>\n              <mat-form-field>\n                <mat-label>System</mat-label>\n                <mat-select\n                  required\n                  name=\"sharedCallTreeId\"\n                  [(ngModel)]=\"this.callTreeInfo.callTree.callTreeId\"\n                  (selectionChange)=\"updateCallTreeDetail($event)\"\n                  #sharedSystemValidator=\"ngModel\">\n                  <mat-option\n                    *ngFor=\"let sharedSystemName of this.sharedSystemNameList\" [value]=\"this.systemToCalltree[sharedSystemName].callTreeId\">\n                    {{sharedSystemName}}\n                  </mat-option>\n                </mat-select>\n                <mat-error *ngIf=\"sharedSystemValidator.hasError('required')\">\n                  System is <strong>required</strong>\n                </mat-error>\n              </mat-form-field><br>\n              Call Tree Detail:\n              <div [innerHTML]=\"this.sharedCallTreeDetail|safeHtml\"></div>\n            </div>\n          </div>\n        </div>\n      </mat-radio-group>\n      <hr>\n      <table style=\"width:100%;\">\n        <tr>\n          <td>Operation Manual(Optional):</td>\n          <td>\n            <button style=\"float:right\" mat-raised-button type=\"button\" color=\"primary\" class=\"Update-btn\" (click)=\"addManual()\">\n              Add Operation Manual\n            </button>\n          </td>\n        </tr>\n        <tr *ngFor=\"let manual of this.callTreeInfo.manuals; let i = index\">\n          <td colspan=2>\n            <mat-form-field>\n              <mat-label>Manual Location</mat-label>\n              <input\n                matInput\n                required\n                type=\"text\"\n                [(ngModel)]=\"manual.manualLocation\"\n                name=\"manualLocation{{i}}\"\n                #manualLocationValidator=\"ngModel\">\n              <mat-error *ngIf=\"manualLocationValidator.hasError('required')\">\n                Manual location is <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n            <mat-form-field>\n              <mat-label>Manual Description</mat-label>\n              <input\n                matInput\n                required\n                type=\"text\"\n                [(ngModel)]=\"manual.description\"\n                name=\"manualDesc{{i}}\"\n                #manualDescValidator=\"ngModel\">\n              <mat-error *ngIf=\"manualDescValidator.hasError('required')\">\n                Manual Description is <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n            <mat-form-field>\n              <mat-label>Last Update Date</mat-label>\n              <input\n                matInput\n                required\n                type=\"text\"\n                [(ngModel)]=\"manual.lastUpdateDate\"\n                name=\"manualLastUpdateDate{{i}}\"\n                #manualLastUpdateDateValidator=\"ngModel\">\n              <mat-error *ngIf=\"manualLastUpdateDateValidator.hasError('required')\">\n                Last Update Date is <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n            &nbsp;&nbsp;&nbsp;&nbsp;\n            <button\n              style=\"font-weight: bold;;font-size: 30px;vertical-align: middle;\"\n              mat-raised-button type=\"button\"\n              color=\"primary\"\n              class=\"Update-btn\"\n              (click)=\"removeManual(i)\">\n                -\n            </button>\n          </td>\n      </table>\n    </div>\n  <mat-dialog-actions>\n    <button mat-raised-button type=\"submit\" color=\"primary\" class=\"Update-btn\">Save</button>\n    <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"closeDialog()\">Close</button>\n  </mat-dialog-actions>\n</form>\n<!--\n{{this.callTreeInfo|json}}\n-->\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>{{ action }} a Call Tree Info</h2>\n<form #callTreeInfoEditForm=\"ngForm\" (ngSubmit)=\"onSubmit(callTreeInfoEditForm)\" novalidate>\n    <input type=hidden name=\"callTreeInfoId\" [(ngModel)]=\"this.callTreeEntry.callTreeEntryId\">\n    <app-division-list-input-box\n      name=\"division\"\n      [(ngModel)]=\"this.callTreeEntry.division\">\n    </app-division-list-input-box>\n    <mat-form-field>\n      <mat-label>Service Level</mat-label>\n      <mat-select [(ngModel)]=\"this.callTreeEntry.serviceLevel\" name=\"serviceLevel\" #serviceLevel=\"ngModel\" required>\n        <mat-option *ngFor=\"let serviceLevel of this.serviceLevelList\" [value]=serviceLevel>\n          {{serviceLevel}}\n        </mat-option>\n      </mat-select>\n      <mat-error  [hidden]=\"serviceLevel.valid || serviceLevel.pristine\">\n        Service Level is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Mission Critical</mat-label>\n        <input matInput type=\"text\"\n                [(ngModel)]=\"this.callTreeEntry.missionCritical\"\n                required\n                name=\"missionCritical\"\n                #missionCritical=\"ngModel\">\n        <mat-error [hidden]=\"missionCritical.valid || missionCritical.pristine\">\n          Missiong Critical is <strong>required</strong>\n        </mat-error>\n    </mat-form-field>\n    <mat-form-field style=\"width:250px\">\n      <mat-label>Appreciation Log Recipients</mat-label>\n        <textarea matInput\n                  cdkTextareaAutosize\n                  #autosize=\"cdkTextareaAutosize\"\n                  cdkAutosizeMinRows=\"1\"\n                  cdkAutosizeMaxRows=\"5\"\n                  required\n                  appLogRecipientValidator\n                  name=\"logRecipients\"\n                  #logRecipients=\"ngModel\"\n                  [(ngModel)]=\"this.callTreeEntry.logRecipients\"></textarea>\n      <mat-error *ngIf=\"logRecipients.hasError('required')\">\n        Appreciation Log Recipients is <strong>required</strong>\n      </mat-error>\n      <mat-error *ngIf=\"logRecipients.hasError('email')\">\n        {{logRecipients.errors['email']}} is not a valid email address.\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-label>Status</mat-label>\n      <mat-select\n        [(ngModel)]=\"this.callTreeEntry.status\"\n        name=\"status\"\n        #status=\"ngModel\">\n        <mat-option [value]=\"activeCallTreeEntry\">Active</mat-option>\n        <mat-option [value]=\"inActiveCallTreeEntry\">Inactive</mat-option>\n      </mat-select>\n    </mat-form-field>\n    <mat-form-field style=\"width:350px\">\n      <mat-label>\n        Time Interval to start established procedures\n      </mat-label>\n      <input matInput type=\"text\"\n            [(ngModel)]=\"this.callTreeEntry.timeToStartProcedure\"\n            required\n            #timeToStartProcedure=\"ngModel\"\n            name=\"timeToStartProcedure\">\n      <mat-error [hidden]=\"timeToStartProcedure.valid||timeToStartProcedure.pristine\">\n        Time Interval to start established procedures is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <mat-form-field style=\"width:300px\">\n        <mat-label>\n          Time Interval to escalate if no reply\n        </mat-label>\n        <input matInput type=\"text\" [(ngModel)]=\"this.callTreeEntry.timeToEscalate\"\n              required\n              name=\"timeToEscalate\"\n              #timeToEscalate=\"ngModel\">\n        <mat-error [hidden]=\"timeToEscalate.valid||timeToEscalate.pristine\">\n          Time Interval to escalate if no reply is <strong>required</strong>\n        </mat-error>\n    </mat-form-field>\n    <br>\n    <mat-form-field style=\"width:100%;\">\n      <mat-label>System</mat-label>\n      <textarea matInput\n        cdkTextareaAutosize\n        #autosize=\"cdkTextareaAutosize\"\n        cdkAutosizeMinRows=\"1\"\n        cdkAutosizeMaxRows=\"5\"\n        required\n        name=\"systemName\"\n        #systemName=\"ngModel\"\n        [(ngModel)]=\"this.callTreeEntry.systemName\">\n      </textarea>\n      <mat-error [hidden]=\"systemName.valid || systemName.pristine\">\n        System Name is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n\t  <br>\n    <mat-form-field style=\"width:100%;\">\n      <mat-label>Location</mat-label>\n      <textarea matInput\n                cdkTextareaAutosize\n                #autosize=\"cdkTextareaAutosize\"\n                cdkAutosizeMinRows=\"1\"\n                cdkAutosizeMaxRows=\"5\"\n                required\n                name=\"location\"\n                #location=\"ngModel\"\n                [(ngModel)]=\"this.callTreeEntry.location\">\n      </textarea>\n      <mat-error  [hidden]=\"location.valid || location.pristine\">\n        Location is <strong>required</strong>\n      </mat-error>\n    </mat-form-field>\n    <div *ngIf=\"(this.callTreeEntry.callTreeEntryId==-1)\">\n      <hr>\n      Call Tree:\n      <mat-radio-group\n        name=\"callTreeType\"\n        (ngModelChange)=onCallTreeTypeChange($event)\n        [(ngModel)]=\"callTreeType\">\n        <div style=\"display:flex;flex-direction: column;padding-top: 5px;\">\n          <div style=\"display:flex;flex-direction: column;\">\n            <mat-radio-button style=\"padding-bottom: 5px;\" [value]=\"1\">Create an individual CallTree</mat-radio-button>\n            <div tyle=\"display:flex;\" *ngIf=\"(callTreeType==1)\">\n              Call Tree Detail:\n              <ckeditor\n                required\n                name=\"callTreeDetail\"\n                [config]=\"callTreeDetailEditorConfig\"\n                #callTreeDetail1=\"ngModel\"\n                [(ngModel)]=\"this.callTreeEntry.callTree.callTreeDetail\">\n              </ckeditor>\n              <mat-error *ngIf=\"(callTreeDetail1.touched || callTreeInfoEditForm.submitted)  && callTreeDetail1.hasError('required')\">\n                Call tree contact is <strong>required</strong>\n              </mat-error>\n            </div>\n          </div>\n          <div style=\"display:flex;flex-direction: column;padding-top: 5px;\">\n            <mat-radio-button [value]=\"2\">Share CallTree with the following system:</mat-radio-button>\n            <div tyle=\"display:flex;padding-top:5px;\" *ngIf=\"(callTreeType==2)\">\n              <mat-form-field>\n                <mat-label>Division</mat-label>\n                <mat-select\n                  required\n                  name=\"sharedDivision\"\n                  [(ngModel)]=\"sharedDivision\"\n                  (ngModelChange)=onSharedDivisionChange($event)\n                  #sharedDivisionValidator=\"ngModel\">\n                  <mat-option *ngFor=\"let division of this.sharedDivisionList\" [value]=\"division\">\n                    {{division}}\n                  </mat-option>\n                </mat-select>\n                <mat-error *ngIf=\"sharedDivisionValidator.hasError('required')\">\n                  Division is <strong>required</strong>\n                </mat-error>\n              </mat-form-field>\n              <mat-form-field>\n                <mat-label>System</mat-label>\n                <mat-select\n                  required\n                  name=\"sharedCallTreeId\"\n                  [(ngModel)]=\"this.callTreeEntry.callTree.callTreeId\"\n                  (selectionChange)=\"updateCallTreeDetail($event)\"\n                  #sharedSystemValidator=\"ngModel\">\n                  <mat-option\n                    *ngFor=\"let sharedSystemName of this.sharedSystemNameList\" [value]=\"this.systemToCalltree[sharedSystemName].callTreeId\">\n                    {{sharedSystemName}}\n                  </mat-option>\n                </mat-select>\n                <mat-error *ngIf=\"sharedSystemValidator.hasError('required')\">\n                  System is <strong>required</strong>\n                </mat-error>\n              </mat-form-field><br>\n              Call Tree Detail:\n              <div [innerHTML]=\"this.sharedCallTreeDetail|safeHtml\"></div>\n            </div>\n          </div>\n        </div>\n      </mat-radio-group>\n      <hr>\n      <table style=\"width:100%;\">\n        <tr>\n          <td>Operation Manual(Optional):</td>\n          <td>\n            <button style=\"float:right\" mat-raised-button type=\"button\" color=\"primary\" class=\"Update-btn\" (click)=\"addManual()\">\n              Add Operation Manual\n            </button>\n          </td>\n        </tr>\n        <tr *ngFor=\"let manual of this.callTreeEntry.manuals; let i = index\">\n          <td colspan=2>\n            <mat-form-field>\n              <mat-label>Manual Location</mat-label>\n              <input\n                matInput\n                required\n                type=\"text\"\n                [(ngModel)]=\"manual.manualLocation\"\n                name=\"manualLocation{{i}}\"\n                #manualLocationValidator=\"ngModel\">\n              <mat-error *ngIf=\"manualLocationValidator.hasError('required')\">\n                Manual location is <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n            <mat-form-field>\n              <mat-label>Manual Description</mat-label>\n              <input\n                matInput\n                required\n                type=\"text\"\n                [(ngModel)]=\"manual.description\"\n                name=\"manualDesc{{i}}\"\n                #manualDescValidator=\"ngModel\">\n              <mat-error *ngIf=\"manualDescValidator.hasError('required')\">\n                Manual Description is <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n            <mat-form-field>\n              <mat-label>Last Update Date</mat-label>\n              <input\n                matInput\n                required\n                type=\"text\"\n                [(ngModel)]=\"manual.lastUpdateDate\"\n                name=\"manualLastUpdateDate{{i}}\"\n                #manualLastUpdateDateValidator=\"ngModel\">\n              <mat-error *ngIf=\"manualLastUpdateDateValidator.hasError('required')\">\n                Last Update Date is <strong>required</strong>\n              </mat-error>\n            </mat-form-field>\n            &nbsp;&nbsp;&nbsp;&nbsp;\n            <button\n              style=\"font-weight: bold;;font-size: 30px;vertical-align: middle;\"\n              mat-raised-button type=\"button\"\n              color=\"primary\"\n              class=\"Update-btn\"\n              (click)=\"removeManual(i)\">\n                -\n            </button>\n          </td>\n      </table>\n    </div>\n  <mat-dialog-actions>\n    <button mat-raised-button type=\"submit\" color=\"primary\" class=\"Update-btn\">Save</button>\n    <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"closeDialog()\">Close</button>\n  </mat-dialog-actions>\n</form>\n<!--\n{{this.callTreeInfo|json}}\n-->\n");
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.component.html":
-/*!************************************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.component.html ***!
-  \************************************************************************************************************************************/
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.component.html":
+/*!**************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.component.html ***!
+  \**************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"center\">Call Tree Info Maintenance</div>\n<table style=\"width:90%;margin-left: 30px;\" >\n  <tr>\n    <td>\n      <mat-form-field>\n        <mat-label>\n          Filter\n        </mat-label>\n        <input matInput (keyup)=\"applyFilter($event.target.value)\">\n      </mat-form-field>\n    </td>\n    <td>\n      <button  style=\"float:right\" mat-raised-button color=\"primary\" (click)=\"popupDialog('Add',callTreeInfoTemplate)\">Add New Call Tree</button>\n    </td>\n  </tr>\n  <tr>\n    <td colspan=\"2\">\n      <table mat-table [dataSource]=\"callTreeInfoDataSource\" matSort matSortActive=\"systemName\" matSortDirection=\"asc\" class=\"mat-elevation-z8\">\n        <ng-container matColumnDef=\"division\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Division</th>\n            <td mat-cell style=\"text-align: left !important;\" *matCellDef=\"let element\"> {{element.division}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"systemName\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header=\"systemName\">System</th>\n            <td mat-cell style=\"padding-left:3px;text-align: left !important;\" *matCellDef=\"let element\"> {{element.systemName}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"location\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>\n            <td mat-cell *matCellDef=\"let element\" [innerHTML]=\"element.location| safeHtml\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"serviceLevel\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Service<br>Level<a href=\"#serviceLevel\">*</a></th>\n            <td mat-cell *matCellDef=\"let element\">{{element.serviceLevel}}</td>\n        </ng-container>\n        <ng-container matColumnDef=\"missionCritical\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mission Critical</th>\n          <td mat-cell *matCellDef=\"let element\">{{element.missionCritical}}</td>\n      </ng-container>\n      <ng-container matColumnDef=\"timeToStartProcedure\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Interval to start established<br>procedures<a href=\"#timeLimit\">#</a></th>\n            <td mat-cell *matCellDef=\"let element\">{{element.timeToStartProcedure}}</td>\n        </ng-container>\n        <ng-container matColumnDef=\"contact\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Call tree</th>\n          <td mat-cell *matCellDef=\"let element\">\n            <a href=\"javascript:void(0)\" (click)=\"popupDialog('EditCallTree',element)\">Edit CallTree</a>\n          </td>\n        </ng-container>\n        <ng-container matColumnDef=\"timeToEscalate\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Interval to <br>escalate<br>if no reply</th>\n            <td mat-cell *matCellDef=\"let element\"> {{element.timeToEscalate}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"logRecipients\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Appreciation<br>Log Recipients</th>\n            <td mat-cell style=\"text-align: left !important;padding-left: 10px;\" *matCellDef=\"let element\" [innerHTML]=\"element.logRecipients| safeHtml\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"manual\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Operation Manual</th>\n          <td mat-cell *matCellDef=\"let element\">\n            <a href=\"javascript:void(0)\" (click)=\"popupDialog('EditManual',element)\">Edit Manual Info</a>\n          </td>\n        </ng-container>\n        <ng-container matColumnDef=\"status\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>\n            <td mat-cell *matCellDef=\"let element\" [innerHTML]=\"(element.status === activeCallTreeInfo)?'Active':'Inactive'\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"action\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>\n          <td mat-cell *matCellDef=\"let element\" class=\"action-link\">\n            <a href=\"javascript:void(0)\" (click)=\"popupDialog('Edit',element)\">Edit</a>|<a *ngIf=\"(element.status === activeCallTreeInfo)\" href=\"javascript:void(0)\" (click)=\"popupDialog('Disable',element)\">Disable</a><a *ngIf=\"(element.status === inActiveCallTreeInfo)\" href=\"javascript:void(0)\" (click)=\"popupDialog('Enable',element)\">Enable</a>\n          </td>\n        </ng-container>\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns sticky: true\" class=\"heading\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <br>\n      Remark:\n      <p>\n        If a problematic system reported is under all Branches but not listed in the F5 Operator Call Tree,<br>Operator should let the originator (the one who reported the problematic system) know the system is not covered in the list of systems monitored by F5 Operator <br>and ask the originator to provide the follow-up contacts, and call the relevant officers accordingly.In case the originator does not know who should be contacted,<br>Operator should call SEO(F)51, SO(F)51 or SSO(F)5 for assistance.\n      </p>\n      <ul style=\"margin: 0; padding: 0;list-style: none\">\n        <li>\n          <a name=\"serviceLevel\">*Service Level</a>\n          <ol>\n            <li>system monitoring + problem reporting</li>\n            <li>system monitoring + problem reporting + system reboot</li>\n            <li>system monitoring + problem reporting + system reboot+ routine computer operation</li>\n          </ol>\n          <br>\n        </li>\n        <li>\n          <a name=\"timeLimit\">\n            # Start to count after identified the system\n          </a>\n        </li>\n      </ul>\n    </td>\n  </tr>\n</table>\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"center\">Call Tree Info Maintenance</div>\n<table style=\"margin-left: 30px;margin-right: 30px;\" >\n  <tr>\n    <td>\n      <mat-form-field>\n        <mat-label>\n          Filter\n        </mat-label>\n        <input matInput (keyup)=\"applyFilter($event.target.value)\">\n      </mat-form-field>\n    </td>\n    <td>\n      <button  style=\"float:right\" mat-raised-button color=\"primary\" (click)=\"popupDialog('Add',callTreeInfoTemplate)\">Add New Call Tree</button>\n    </td>\n  </tr>\n  <tr>\n    <td colspan=\"2\">\n      <table mat-table [dataSource]=\"callTreeInfoDataSource\" matSort matSortActive=\"systemName\" matSortDirection=\"asc\" class=\"mat-elevation-z8\">\n        <ng-container matColumnDef=\"division\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Division</th>\n            <td mat-cell style=\"text-align: left !important;\" *matCellDef=\"let element\"> {{element.division}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"systemName\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header=\"systemName\">System</th>\n            <td mat-cell style=\"text-align: left !important;\" *matCellDef=\"let element\"> {{element.systemName}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"location\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>\n            <td mat-cell *matCellDef=\"let element\" [innerHTML]=\"element.location| safeHtml\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"serviceLevel\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Service<br>Level<a href=\"#serviceLevel\">*</a></th>\n            <td mat-cell *matCellDef=\"let element\">{{element.serviceLevel}}</td>\n        </ng-container>\n        <ng-container matColumnDef=\"missionCritical\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mission Critical</th>\n          <td mat-cell *matCellDef=\"let element\">{{element.missionCritical}}</td>\n      </ng-container>\n      <ng-container matColumnDef=\"timeToStartProcedure\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Interval to start established<br>procedures<a href=\"#timeLimit\">#</a></th>\n            <td mat-cell *matCellDef=\"let element\">{{element.timeToStartProcedure}}</td>\n        </ng-container>\n        <ng-container matColumnDef=\"contact\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Call tree</th>\n          <td mat-cell *matCellDef=\"let element\">\n            <a href=\"javascript:void(0)\" (click)=\"popupDialog('EditCallTree',element)\">Edit CallTree</a>\n          </td>\n        </ng-container>\n        <ng-container matColumnDef=\"timeToEscalate\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Interval to <br>escalate<br>if no reply</th>\n            <td mat-cell *matCellDef=\"let element\"> {{element.timeToEscalate}} </td>\n        </ng-container>\n        <ng-container matColumnDef=\"logRecipients\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Appreciation<br>Log Recipients</th>\n            <td mat-cell style=\"text-align: left !important;\" *matCellDef=\"let element\" [innerHTML]=\"element.logRecipients| safeHtml\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"manual\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Operation Manual</th>\n          <td mat-cell *matCellDef=\"let element\">\n            <a href=\"javascript:void(0)\" (click)=\"popupDialog('EditManual',element)\">Edit Manual Info</a>\n          </td>\n        </ng-container>\n        <ng-container matColumnDef=\"status\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>\n            <td mat-cell *matCellDef=\"let element\" [innerHTML]=\"(element.status === activeCallTreeInfo)?'Active':'Inactive'\"></td>\n        </ng-container>\n        <ng-container matColumnDef=\"action\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>\n          <td mat-cell *matCellDef=\"let element\" class=\"action-link\">\n            <a href=\"javascript:void(0)\" (click)=\"popupDialog('Edit',element)\">Edit</a>|<a *ngIf=\"(element.status === activeCallTreeInfo)\" href=\"javascript:void(0)\" (click)=\"popupDialog('Disable',element)\">Disable</a><a *ngIf=\"(element.status === inActiveCallTreeInfo)\" href=\"javascript:void(0)\" (click)=\"popupDialog('Enable',element)\">Enable</a>\n          </td>\n        </ng-container>\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns sticky: true\" class=\"heading\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <br>\n      Remark:\n      <p>\n        If a problematic system reported is under all Branches but not listed in the F5 Operator Call Tree,<br>Operator should let the originator (the one who reported the problematic system) know the system is not covered in the list of systems monitored by F5 Operator <br>and ask the originator to provide the follow-up contacts, and call the relevant officers accordingly.In case the originator does not know who should be contacted,<br>Operator should call SEO(F)51, SO(F)51 or SSO(F)5 for assistance.\n      </p>\n      <ul style=\"margin: 0; padding: 0;list-style: none\">\n        <li>\n          <a name=\"serviceLevel\">*Service Level</a>\n          <ol>\n            <li>system monitoring + problem reporting</li>\n            <li>system monitoring + problem reporting + system reboot</li>\n            <li>system monitoring + problem reporting + system reboot+ routine computer operation</li>\n          </ol>\n          <br>\n        </li>\n        <li>\n          <a name=\"timeLimit\">\n            # Start to count after identified the system\n          </a>\n        </li>\n      </ul>\n    </td>\n  </tr>\n</table>\n\n");
 
 /***/ }),
 
@@ -419,7 +419,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
-/* harmony import */ var _modules_call_tree_info_maintenance_call_tree_info_maintenance_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/call-tree-info-maintenance/call-tree-info-maintenance.module */ "./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.module.ts");
+/* harmony import */ var _modules_call_tree_entry_maintenance_call_tree_entry_maintenance_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/call-tree-entry-maintenance/call-tree-entry-maintenance.module */ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.module.ts");
 /* harmony import */ var ckeditor4_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ckeditor4-angular */ "./node_modules/ckeditor4-angular/fesm2015/ckeditor4-angular.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
@@ -448,7 +448,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["BrowserModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
             ckeditor4_angular__WEBPACK_IMPORTED_MODULE_6__["CKEditorModule"],
-            _modules_call_tree_info_maintenance_call_tree_info_maintenance_module__WEBPACK_IMPORTED_MODULE_5__["CallTreeInfoMaintenanceModule"],
+            _modules_call_tree_entry_maintenance_call_tree_entry_maintenance_module__WEBPACK_IMPORTED_MODULE_5__["CallTreeEntryMaintenanceModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"],
             _modules_utility_utility_module__WEBPACK_IMPORTED_MODULE_10__["UtilityModule"],
@@ -484,23 +484,23 @@ class CallTree {
 
 /***/ }),
 
-/***/ "./src/app/classes/CallTreeInfo.ts":
-/*!*****************************************!*\
-  !*** ./src/app/classes/CallTreeInfo.ts ***!
-  \*****************************************/
-/*! exports provided: CallTreeInfo */
+/***/ "./src/app/classes/CallTreeEntry.ts":
+/*!******************************************!*\
+  !*** ./src/app/classes/CallTreeEntry.ts ***!
+  \******************************************/
+/*! exports provided: CallTreeEntry */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallTreeInfo", function() { return CallTreeInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallTreeEntry", function() { return CallTreeEntry; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _CallTree__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CallTree */ "./src/app/classes/CallTree.ts");
 
 
-class CallTreeInfo {
+class CallTreeEntry {
     constructor() {
-        this.callTreeInfoId = -1;
+        this.callTreeEntryId = -1;
         this.callTree = new _CallTree__WEBPACK_IMPORTED_MODULE_1__["CallTree"]();
         this.division = '';
         this.location = '';
@@ -508,13 +508,13 @@ class CallTreeInfo {
         this.manuals = [];
         this.missionCritical = '';
         this.systemName = '';
-        this.status = CallTreeInfo.inactive;
+        this.status = CallTreeEntry.inactive;
         this.timeToStartProcedure = '';
         this.timeToEscalate = '';
     }
 }
-CallTreeInfo.active = 1;
-CallTreeInfo.inactive = 0;
+CallTreeEntry.active = 1;
+CallTreeEntry.inactive = 0;
 
 
 /***/ }),
@@ -543,23 +543,23 @@ class Manual {
 
 /***/ }),
 
-/***/ "./src/app/modules/call-tree-info-maintenance/call-tree-editor/call-tree-editor.component.css":
-/*!****************************************************************************************************!*\
-  !*** ./src/app/modules/call-tree-info-maintenance/call-tree-editor/call-tree-editor.component.css ***!
-  \****************************************************************************************************/
+/***/ "./src/app/modules/call-tree-entry-maintenance/call-tree-editor/call-tree-editor.component.css":
+/*!*****************************************************************************************************!*\
+  !*** ./src/app/modules/call-tree-entry-maintenance/call-tree-editor/call-tree-editor.component.css ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvY2FsbC10cmVlLWluZm8tbWFpbnRlbmFuY2UvY2FsbC10cmVlLWVkaXRvci9jYWxsLXRyZWUtZWRpdG9yLmNvbXBvbmVudC5jc3MifQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("table\r\n{\r\n  border-collapse: collapse;\r\n}\r\ntable, td, th\r\n{\r\n  border: 1px solid black;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cnktbWFpbnRlbmFuY2UvY2FsbC10cmVlLWVkaXRvci9jYWxsLXRyZWUtZWRpdG9yLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0VBRUUseUJBQXlCO0FBQzNCO0FBQ0E7O0VBRUUsdUJBQXVCO0FBQ3pCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cnktbWFpbnRlbmFuY2UvY2FsbC10cmVlLWVkaXRvci9jYWxsLXRyZWUtZWRpdG9yLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZVxyXG57XHJcbiAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcclxufVxyXG50YWJsZSwgdGQsIHRoXHJcbntcclxuICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcclxufVxyXG4iXX0= */");
 
 /***/ }),
 
-/***/ "./src/app/modules/call-tree-info-maintenance/call-tree-editor/call-tree-editor.component.ts":
-/*!***************************************************************************************************!*\
-  !*** ./src/app/modules/call-tree-info-maintenance/call-tree-editor/call-tree-editor.component.ts ***!
-  \***************************************************************************************************/
+/***/ "./src/app/modules/call-tree-entry-maintenance/call-tree-editor/call-tree-editor.component.ts":
+/*!****************************************************************************************************!*\
+  !*** ./src/app/modules/call-tree-entry-maintenance/call-tree-editor/call-tree-editor.component.ts ***!
+  \****************************************************************************************************/
 /*! exports provided: CallTreeEditorComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -581,7 +581,7 @@ let CallTreeEditorComponent = class CallTreeEditorComponent {
         this.dialogRef = dialogRef;
         this.data = data;
         this.ckeditorConfig = { extraPlugins: 'colorbutton',
-            removeButtons: 'BulletedList,PasteFromWord,PasteText',
+            removeButtons: 'BGColor,BulletedList,PasteFromWord,PasteText',
             toolbarGroups: [
                 { name: 'clipboard', groups: ['clipboard', 'undo'] },
                 { name: 'colors', groups: ['colors'] },
@@ -590,7 +590,7 @@ let CallTreeEditorComponent = class CallTreeEditorComponent {
             ]
         };
         this.callTree = data.callTree;
-        this.callTreeService.getCallTreeInfoByCallTreeId(this.callTree.callTreeId).subscribe((res) => {
+        this.callTreeService.getCallTreeEntryByCallTreeId(this.callTree.callTreeId).subscribe((res) => {
             this.callTreeInfoList = res;
         });
     }
@@ -607,8 +607,8 @@ CallTreeEditorComponent.ctorParameters = () => [
 CallTreeEditorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         selector: 'app-call-tree-editor',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./call-tree-editor.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-info-maintenance/call-tree-editor/call-tree-editor.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./call-tree-editor.component.css */ "./src/app/modules/call-tree-info-maintenance/call-tree-editor/call-tree-editor.component.css")).default]
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./call-tree-editor.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-entry-maintenance/call-tree-editor/call-tree-editor.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./call-tree-editor.component.css */ "./src/app/modules/call-tree-entry-maintenance/call-tree-editor/call-tree-editor.component.css")).default]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](3, Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_3__["MAT_DIALOG_DATA"]))
 ], CallTreeEditorComponent);
@@ -617,32 +617,32 @@ CallTreeEditorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/modules/call-tree-info-maintenance/call-tree-info-editor/call-tree-info-editor.component.css":
-/*!**************************************************************************************************************!*\
-  !*** ./src/app/modules/call-tree-info-maintenance/call-tree-info-editor/call-tree-info-editor.component.css ***!
-  \**************************************************************************************************************/
+/***/ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-editor/call-tree-entry-editor.component.css":
+/*!*****************************************************************************************************************!*\
+  !*** ./src/app/modules/call-tree-entry-maintenance/call-tree-entry-editor/call-tree-entry-editor.component.css ***!
+  \*****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvY2FsbC10cmVlLWluZm8tbWFpbnRlbmFuY2UvY2FsbC10cmVlLWluZm8tZWRpdG9yL2NhbGwtdHJlZS1pbmZvLWVkaXRvci5jb21wb25lbnQuY3NzIn0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvY2FsbC10cmVlLWVudHJ5LW1haW50ZW5hbmNlL2NhbGwtdHJlZS1lbnRyeS1lZGl0b3IvY2FsbC10cmVlLWVudHJ5LWVkaXRvci5jb21wb25lbnQuY3NzIn0= */");
 
 /***/ }),
 
-/***/ "./src/app/modules/call-tree-info-maintenance/call-tree-info-editor/call-tree-info-editor.component.ts":
-/*!*************************************************************************************************************!*\
-  !*** ./src/app/modules/call-tree-info-maintenance/call-tree-info-editor/call-tree-info-editor.component.ts ***!
-  \*************************************************************************************************************/
-/*! exports provided: CallTreeInfoEditorComponent */
+/***/ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-editor/call-tree-entry-editor.component.ts":
+/*!****************************************************************************************************************!*\
+  !*** ./src/app/modules/call-tree-entry-maintenance/call-tree-entry-editor/call-tree-entry-editor.component.ts ***!
+  \****************************************************************************************************************/
+/*! exports provided: CallTreeEntryEditorComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallTreeInfoEditorComponent", function() { return CallTreeInfoEditorComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallTreeEntryEditorComponent", function() { return CallTreeEntryEditorComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/classes/CallTreeInfo */ "./src/app/classes/CallTreeInfo.ts");
-/* harmony import */ var src_app_services_call_tree_info_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/call-tree-info.service */ "./src/app/services/call-tree-info.service.ts");
+/* harmony import */ var src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/classes/CallTreeEntry */ "./src/app/classes/CallTreeEntry.ts");
+/* harmony import */ var src_app_services_call_tree_entry_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/call-tree-entry.service */ "./src/app/services/call-tree-entry.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_classes_Manual__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/classes/Manual */ "./src/app/classes/Manual.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
@@ -652,21 +652,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let CallTreeInfoEditorComponent = class CallTreeInfoEditorComponent {
+let CallTreeEntryEditorComponent = class CallTreeEntryEditorComponent {
     constructor(callTreeInfoService, dialog, dialogRef, data) {
         this.callTreeInfoService = callTreeInfoService;
         this.dialog = dialog;
         this.dialogRef = dialogRef;
         this.data = data;
-        this.activeCallTree = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].active;
-        this.inActiveCallTree = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].inactive;
-        this.callTreeInfo = null;
+        this.activeCallTreeEntry = src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"].active;
+        this.inActiveCallTreeEntry = src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"].inactive;
+        this.callTreeEntry = null;
         this.callTreeType = 1;
         this.divisionToSystem = [];
         this.systemToCalltree = [];
         this.serviceLevelList = ['1', '2', '3'];
-        this.ckeditorConfig = { extraPlugins: 'colorbutton',
-            removeButtons: 'BulletedList,PasteFromWord,PasteText',
+        this.callTreeDetailEditorConfig = { extraPlugins: 'colorbutton',
+            removeButtons: 'BGColor,BulletedList,PasteFromWord,PasteText',
             toolbarGroups: [
                 { name: 'clipboard', groups: ['clipboard', 'undo'] },
                 { name: 'colors', groups: ['colors'] },
@@ -674,39 +674,40 @@ let CallTreeInfoEditorComponent = class CallTreeInfoEditorComponent {
                 { name: 'paragraph', groups: ['list'] },
             ]
         };
-        const callTreeInfoId = data.callTreeInfoId;
+        const callTreeEntryId = data.callTreeEntryId;
         this.action = data.action;
-        if (callTreeInfoId === -1) {
-            this.callTreeInfo = new src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"]();
+        if (callTreeEntryId === -1) {
+            this.callTreeEntry = new src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"]();
         }
-        data.callTreeInfoList.forEach((sharedCallTreeInfo) => {
-            if (callTreeInfoId > -1) {
-                if (sharedCallTreeInfo.callTreeInfoId === callTreeInfoId) {
-                    this.callTreeInfo = sharedCallTreeInfo;
+        data.callTreeInfoList.forEach((sharedCallTreeEntry) => {
+            if (callTreeEntryId > -1) {
+                if (sharedCallTreeEntry.callTreeEntryId === callTreeEntryId) {
+                    this.callTreeEntry = sharedCallTreeEntry;
                 }
             }
-            if (!this.divisionToSystem.hasOwnProperty(sharedCallTreeInfo.division)) {
-                this.divisionToSystem[sharedCallTreeInfo.division] = [];
+            if (!this.divisionToSystem.hasOwnProperty(sharedCallTreeEntry.division)) {
+                this.divisionToSystem[sharedCallTreeEntry.division] = [];
             }
-            this.divisionToSystem[sharedCallTreeInfo.division].push(sharedCallTreeInfo.systemName);
-            if (!this.systemToCalltree.hasOwnProperty(sharedCallTreeInfo.systemName)) {
-                this.systemToCalltree[sharedCallTreeInfo.systemName] = [];
+            this.divisionToSystem[sharedCallTreeEntry.division].push(sharedCallTreeEntry.systemName);
+            if (!this.systemToCalltree.hasOwnProperty(sharedCallTreeEntry.systemName)) {
+                this.systemToCalltree[sharedCallTreeEntry.systemName] = [];
             }
-            this.systemToCalltree[sharedCallTreeInfo.systemName] = sharedCallTreeInfo.callTree;
+            this.systemToCalltree[sharedCallTreeEntry.systemName] = sharedCallTreeEntry.callTree;
         });
         this.sharedDivisionList = Object.keys(this.divisionToSystem);
         console.log(this.systemToCalltree);
         console.log(this.divisionToSystem);
     }
-    addCallInfo() {
+    addCallTreeEntry() {
         let message = '';
-        this.callTreeInfoService.addCallTreeInfo(this.callTreeInfo).subscribe((res) => {
-            if (res) {
-                message += 'Add Call Tree success.';
-                this.dialogRef.close({ addSuccess: res, action: this.action, callTreeInfo: this.callTreeInfo });
+        this.callTreeInfoService.addCallTreeInfo(this.callTreeEntry).subscribe((res) => {
+            if (res > -1) {
+                message += 'Add Call Tree Entry success.';
+                this.callTreeEntry.callTreeEntryId = res;
+                this.dialogRef.close({ addSuccess: res, action: this.action, callTreeInfo: this.callTreeEntry });
             }
             else {
-                message += 'Add Call Tree failure.';
+                message += 'Add Call Tree Entry failure.';
             }
             alert(message);
             console.log('action:' + this.action);
@@ -714,7 +715,7 @@ let CallTreeInfoEditorComponent = class CallTreeInfoEditorComponent {
     }
     addManual() {
         const manual = new src_app_classes_Manual__WEBPACK_IMPORTED_MODULE_4__["Manual"]();
-        this.callTreeInfo.manuals.push(manual);
+        this.callTreeEntry.manuals.push(manual);
     }
     closeDialog() {
         this.dialog.closeAll();
@@ -723,7 +724,7 @@ let CallTreeInfoEditorComponent = class CallTreeInfoEditorComponent {
     }
     onCallTreeTypeChange(callTreeType) {
         if (callTreeType === 1) { // new a individual call tree
-            this.callTreeInfo.callTree.callTreeId = -1;
+            this.callTreeEntry.callTree.callTreeId = -1;
             this.sharedCallTreeDetail = '';
         }
     }
@@ -740,17 +741,17 @@ let CallTreeInfoEditorComponent = class CallTreeInfoEditorComponent {
             if (form.valid) {
                 switch (this.action) {
                     case 'Add':
-                        this.addCallInfo();
+                        this.addCallTreeEntry();
                         break;
                     case 'Edit':
-                        this.updateCallInfo();
+                        this.updateCallTreeEntry();
                         break;
                 }
             }
         }
     }
     removeManual(index) {
-        this.callTreeInfo.manuals.splice(index, 1);
+        this.callTreeEntry.manuals.splice(index, 1);
     }
     updateCallTreeDetail(event) {
         const target = event.source.selected._element.nativeElement;
@@ -758,68 +759,68 @@ let CallTreeInfoEditorComponent = class CallTreeInfoEditorComponent {
         this.sharedCallTreeDetail = this.systemToCalltree[systemName].callTreeDetail;
         this.sharedCallTreeDetail = this.sharedCallTreeDetail.replace(/<br \/>/g, '');
     }
-    updateCallInfo() {
+    updateCallTreeEntry() {
         let message = '';
-        this.callTreeInfoService.updateCallTreeInfo(this.callTreeInfo).subscribe((res) => {
+        this.callTreeInfoService.updateCallTreeInfo(this.callTreeEntry).subscribe((res) => {
             if (res) {
-                message += 'Update Call Tree success.';
-                this.dialogRef.close({ addSuccess: res, action: this.action, callTreeInfo: this.callTreeInfo });
+                message += 'Update Call Tree Entry success.';
+                this.dialogRef.close({ addSuccess: res, action: this.action, callTreeInfo: this.callTreeEntry });
             }
             else {
-                message += 'Update Call Tree failure.';
+                message += 'Update Call Tree Entry failure.';
             }
             alert(message);
             console.log('action:' + this.action);
         });
     }
 };
-CallTreeInfoEditorComponent.ctorParameters = () => [
-    { type: src_app_services_call_tree_info_service__WEBPACK_IMPORTED_MODULE_2__["CallTreeInfoService"] },
+CallTreeEntryEditorComponent.ctorParameters = () => [
+    { type: src_app_services_call_tree_entry_service__WEBPACK_IMPORTED_MODULE_2__["CallTreeEntryService"] },
     { type: _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialog"] },
     { type: _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialogRef"] },
     { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"], args: [_angular_material__WEBPACK_IMPORTED_MODULE_5__["MAT_DIALOG_DATA"],] }] }
 ];
-CallTreeInfoEditorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+CallTreeEntryEditorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-call-tree-info-editor',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./call-tree-info-editor.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-info-maintenance/call-tree-info-editor/call-tree-info-editor.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./call-tree-info-editor.component.css */ "./src/app/modules/call-tree-info-maintenance/call-tree-info-editor/call-tree-info-editor.component.css")).default]
+        selector: 'app-call-tree-entry-editor',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./call-tree-entry-editor.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-entry-maintenance/call-tree-entry-editor/call-tree-entry-editor.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./call-tree-entry-editor.component.css */ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-editor/call-tree-entry-editor.component.css")).default]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](3, Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_5__["MAT_DIALOG_DATA"]))
-], CallTreeInfoEditorComponent);
+], CallTreeEntryEditorComponent);
 
 
 
 /***/ }),
 
-/***/ "./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.component.css":
-/*!*********************************************************************************************!*\
-  !*** ./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.component.css ***!
-  \*********************************************************************************************/
+/***/ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.component.css":
+/*!***********************************************************************************************!*\
+  !*** ./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.component.css ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvY2FsbC10cmVlLWluZm8tbWFpbnRlbmFuY2UvY2FsbC10cmVlLWluZm8tbWFpbnRlbmFuY2UuY29tcG9uZW50LmNzcyJ9 */");
+/* harmony default export */ __webpack_exports__["default"] = (".heading\r\n{\r\n  background-color:#ccffcc;\r\n  text-align: center;\r\n  font:bold 14px Calibri;\r\n}\r\n.center\r\n{\r\n  display: table;\r\n  margin: 0 auto;\r\n  text-align: center ;\r\n  font:bold 20px arial;\r\n  font-weight:bold;\r\n}\r\n.container\r\n{\r\n  /*\r\n  border:1px solid #709394;\r\n  */\r\n  margin: 30px;\r\n  overflow: hidden;\r\n  position: absolute;\r\n}\r\n.mat-table\r\n{\r\n  width: 100%;\r\n  border-collapse: collapse;\r\n  padding: 0px;\r\n  table-layout: fixed;\r\n  font-family:arial;\r\n  position: relative;\r\n  max-height:70%;\r\n}\r\n.mat-table th\r\n{\r\n  border: 1px solid black;\r\n  padding:0px;\r\n  margin:0px;\r\n  font:bold 14px Calibri;\r\n}\r\n.mat-table td\r\n{\r\n  border: 1px solid #999;\r\n  padding: 3px;\r\n  margin: 0px;\r\n  position: relative;\r\n}\r\n.mat-row:hover {\r\n  background-color: rgb(243, 243, 243);\r\n}\r\n.mat-cell\r\n{\r\n  font:12px Calibri;\r\n  text-align: center;\r\n  padding-left:3px;\r\n}\r\n.mat-header-cell {\r\n  text-align: center;\r\n}\r\n.normal\r\n{\r\n  font:12px Calibri;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cnktbWFpbnRlbmFuY2UvY2FsbC10cmVlLWVudHJ5LW1haW50ZW5hbmNlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0VBRUUsd0JBQXdCO0VBQ3hCLGtCQUFrQjtFQUNsQixzQkFBc0I7QUFDeEI7QUFDQTs7RUFFRSxjQUFjO0VBQ2QsY0FBYztFQUNkLG1CQUFtQjtFQUNuQixvQkFBb0I7RUFDcEIsZ0JBQWdCO0FBQ2xCO0FBQ0E7O0VBRUU7O0dBRUM7RUFDRCxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjtBQUVBOztFQUVFLFdBQVc7RUFDWCx5QkFBeUI7RUFDekIsWUFBWTtFQUNaLG1CQUFtQjtFQUNuQixpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLGNBQWM7QUFDaEI7QUFDQTs7RUFFRSx1QkFBdUI7RUFDdkIsV0FBVztFQUNYLFVBQVU7RUFDVixzQkFBc0I7QUFDeEI7QUFDQTs7RUFFRSxzQkFBc0I7RUFDdEIsWUFBWTtFQUNaLFdBQVc7RUFDWCxrQkFBa0I7QUFDcEI7QUFDQTtFQUNFLG9DQUFvQztBQUN0QztBQUNBOztFQUVFLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsZ0JBQWdCO0FBQ2xCO0FBQ0E7RUFDRSxrQkFBa0I7QUFDcEI7QUFDQTs7RUFFRSxpQkFBaUI7QUFDbkIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGVzL2NhbGwtdHJlZS1lbnRyeS1tYWludGVuYW5jZS9jYWxsLXRyZWUtZW50cnktbWFpbnRlbmFuY2UuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5oZWFkaW5nXHJcbntcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiNjY2ZmY2M7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGZvbnQ6Ym9sZCAxNHB4IENhbGlicmk7XHJcbn1cclxuLmNlbnRlclxyXG57XHJcbiAgZGlzcGxheTogdGFibGU7XHJcbiAgbWFyZ2luOiAwIGF1dG87XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyIDtcclxuICBmb250OmJvbGQgMjBweCBhcmlhbDtcclxuICBmb250LXdlaWdodDpib2xkO1xyXG59XHJcbi5jb250YWluZXJcclxue1xyXG4gIC8qXHJcbiAgYm9yZGVyOjFweCBzb2xpZCAjNzA5Mzk0O1xyXG4gICovXHJcbiAgbWFyZ2luOiAzMHB4O1xyXG4gIG92ZXJmbG93OiBoaWRkZW47XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG59XHJcblxyXG4ubWF0LXRhYmxlXHJcbntcclxuICB3aWR0aDogMTAwJTtcclxuICBib3JkZXItY29sbGFwc2U6IGNvbGxhcHNlO1xyXG4gIHBhZGRpbmc6IDBweDtcclxuICB0YWJsZS1sYXlvdXQ6IGZpeGVkO1xyXG4gIGZvbnQtZmFtaWx5OmFyaWFsO1xyXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICBtYXgtaGVpZ2h0OjcwJTtcclxufVxyXG4ubWF0LXRhYmxlIHRoXHJcbntcclxuICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcclxuICBwYWRkaW5nOjBweDtcclxuICBtYXJnaW46MHB4O1xyXG4gIGZvbnQ6Ym9sZCAxNHB4IENhbGlicmk7XHJcbn1cclxuLm1hdC10YWJsZSB0ZFxyXG57XHJcbiAgYm9yZGVyOiAxcHggc29saWQgIzk5OTtcclxuICBwYWRkaW5nOiAzcHg7XHJcbiAgbWFyZ2luOiAwcHg7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG59XHJcbi5tYXQtcm93OmhvdmVyIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjQzLCAyNDMsIDI0Myk7XHJcbn1cclxuLm1hdC1jZWxsXHJcbntcclxuICBmb250OjEycHggQ2FsaWJyaTtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgcGFkZGluZy1sZWZ0OjNweDtcclxufVxyXG4ubWF0LWhlYWRlci1jZWxsIHtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuLm5vcm1hbFxyXG57XHJcbiAgZm9udDoxMnB4IENhbGlicmk7XHJcbn1cclxuIl19 */");
 
 /***/ }),
 
-/***/ "./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.component.ts":
-/*!********************************************************************************************!*\
-  !*** ./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.component.ts ***!
-  \********************************************************************************************/
-/*! exports provided: CallTreeInfoMaintenanceComponent */
+/***/ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.component.ts":
+/*!**********************************************************************************************!*\
+  !*** ./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.component.ts ***!
+  \**********************************************************************************************/
+/*! exports provided: CallTreeEntryMaintenanceComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallTreeInfoMaintenanceComponent", function() { return CallTreeInfoMaintenanceComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallTreeEntryMaintenanceComponent", function() { return CallTreeEntryMaintenanceComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/classes/CallTreeInfo */ "./src/app/classes/CallTreeInfo.ts");
-/* harmony import */ var src_app_services_call_tree_info_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/call-tree-info.service */ "./src/app/services/call-tree-info.service.ts");
-/* harmony import */ var _call_tree_editor_call_tree_editor_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./call-tree-editor/call-tree-editor.component */ "./src/app/modules/call-tree-info-maintenance/call-tree-editor/call-tree-editor.component.ts");
-/* harmony import */ var _call_tree_info_editor_call_tree_info_editor_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./call-tree-info-editor/call-tree-info-editor.component */ "./src/app/modules/call-tree-info-maintenance/call-tree-info-editor/call-tree-info-editor.component.ts");
+/* harmony import */ var src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/classes/CallTreeEntry */ "./src/app/classes/CallTreeEntry.ts");
+/* harmony import */ var src_app_services_call_tree_entry_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/call-tree-entry.service */ "./src/app/services/call-tree-entry.service.ts");
+/* harmony import */ var _call_tree_editor_call_tree_editor_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./call-tree-editor/call-tree-editor.component */ "./src/app/modules/call-tree-entry-maintenance/call-tree-editor/call-tree-editor.component.ts");
+/* harmony import */ var _call_tree_entry_editor_call_tree_entry_editor_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./call-tree-entry-editor/call-tree-entry-editor.component */ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-editor/call-tree-entry-editor.component.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _utility_components_confirmation_box_confirmation_box_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utility/components/confirmation-box/confirmation-box.component */ "./src/app/modules/utility/components/confirmation-box/confirmation-box.component.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
@@ -835,21 +836,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let CallTreeInfoMaintenanceComponent = class CallTreeInfoMaintenanceComponent {
+let CallTreeEntryMaintenanceComponent = class CallTreeEntryMaintenanceComponent {
     constructor(callTreeInfoService, dialog) {
         this.callTreeInfoService = callTreeInfoService;
         this.dialog = dialog;
-        this.activeCallTreeInfo = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].active;
-        this.inActiveCallTreeInfo = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].inactive;
-        this.callTreeInfoTemplate = new src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"]();
+        this.activeCallTreeEntry = src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"].active;
+        this.inActiveCallTreeEntry = src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"].inactive;
+        this.callTreeInfoTemplate = new src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"]();
         this.displayedColumns = ['division', 'systemName', 'location', 'serviceLevel', 'missionCritical',
             'timeToStartProcedure', 'contact', 'timeToEscalate', 'logRecipients',
             'manual', 'status', 'action'];
         this.callTreeInfoService.getAllCallTreeInfo().subscribe((res) => {
-            this.callTreeInfoList = res;
-            this.callTreeInfoDataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_9__["MatTableDataSource"](res);
-            this.callTreeInfoDataSource.sort = this.sort;
-            this.callTreeInfoDataSource.filterPredicate = (callTreeInfo, filter) => {
+            this.callTreeEntryList = res;
+            this.callTreeEntryDataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_9__["MatTableDataSource"](res);
+            this.callTreeEntryDataSource.sort = this.sort;
+            this.callTreeEntryDataSource.filterPredicate = (callTreeInfo, filter) => {
                 let result = false;
                 result = result || (callTreeInfo.division.trim().toLowerCase().indexOf(filter) !== -1);
                 result = result || (callTreeInfo.systemName.trim().toLowerCase().indexOf(filter) !== -1);
@@ -857,7 +858,7 @@ let CallTreeInfoMaintenanceComponent = class CallTreeInfoMaintenanceComponent {
                 result = result || (callTreeInfo.logRecipients.trim().toLowerCase().indexOf(filter) !== -1);
                 result = result || (callTreeInfo.missionCritical.trim().toLowerCase().indexOf(filter) !== -1);
                 result = result || (callTreeInfo.serviceLevel.toString().trim().toLowerCase().indexOf(filter) !== -1);
-                if (callTreeInfo.status === src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].active) {
+                if (callTreeInfo.status === src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"].active) {
                     result = result || ('active'.indexOf(filter) !== -1);
                 }
                 else {
@@ -872,7 +873,7 @@ let CallTreeInfoMaintenanceComponent = class CallTreeInfoMaintenanceComponent {
     applyFilter(filterValue) {
         filterValue = filterValue.trim(); // Remove whitespace
         filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-        this.callTreeInfoDataSource.filter = filterValue;
+        this.callTreeEntryDataSource.filter = filterValue;
     }
     popupDialog(action, callTreeInfo) {
         switch (action) {
@@ -903,7 +904,7 @@ let CallTreeInfoMaintenanceComponent = class CallTreeInfoMaintenanceComponent {
         };
         const dialogRef = this.dialog.open(_call_tree_editor_call_tree_editor_component__WEBPACK_IMPORTED_MODULE_3__["CallTreeEditorComponent"], dialogConfig);
     }
-    popupCallTreeInfoEditor(action, callTreeInfo) {
+    popupCallTreeInfoEditor(action, callTreeEntry) {
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialogConfig"]();
         // dialogConfig.disableClose = true;
         // dialogConfig.minHeight = '600px';
@@ -911,16 +912,16 @@ let CallTreeInfoMaintenanceComponent = class CallTreeInfoMaintenanceComponent {
         dialogConfig.width = '900px';
         dialogConfig.data = {
             action,
-            callTreeInfoId: callTreeInfo.callTreeInfoId,
-            callTreeInfoList: this.callTreeInfoList,
+            callTreeEntryId: callTreeEntry.callTreeEntryId,
+            callTreeEntryList: this.callTreeEntryList,
         };
-        const dialogRef = this.dialog.open(_call_tree_info_editor_call_tree_info_editor_component__WEBPACK_IMPORTED_MODULE_4__["CallTreeInfoEditorComponent"], dialogConfig);
+        const dialogRef = this.dialog.open(_call_tree_entry_editor_call_tree_entry_editor_component__WEBPACK_IMPORTED_MODULE_4__["CallTreeEntryEditorComponent"], dialogConfig);
         dialogRef.afterClosed().subscribe((res) => {
             if (res !== undefined) {
                 switch (res.action) {
                     case 'Add':
                         if (res.addSuccess) {
-                            this.callTreeInfoList.push(res.callTreeInfo);
+                            this.callTreeEntryList.push(res.callTreeInfo);
                             this.refreshDataSource();
                         }
                         break;
@@ -945,27 +946,27 @@ let CallTreeInfoMaintenanceComponent = class CallTreeInfoMaintenanceComponent {
         dialogRef.afterClosed().subscribe((sayYes) => {
             if (sayYes) {
                 if (action === 'Enable') {
-                    callTreeInfo.status = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].active;
-                    this.callTreeInfoService.enableCallTreeInfo(callTreeInfo.callTreeInfoId).subscribe((res) => {
+                    callTreeInfo.status = src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"].active;
+                    this.callTreeInfoService.enableCallTreeInfo(callTreeInfo.callTreeEntryId).subscribe((res) => {
                         if (res) {
                             message = 'The call tree info status is set to active succesfully.';
                         }
                         else {
                             message = 'The call tree info status is fail to set to active.';
-                            callTreeInfo.status = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].inactive;
+                            callTreeInfo.status = src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"].inactive;
                         }
                         alert(message);
                     });
                 }
                 else {
-                    callTreeInfo.status = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].inactive;
-                    this.callTreeInfoService.disableCallTreeInfo(callTreeInfo.callTreeInfoId).subscribe((res) => {
+                    callTreeInfo.status = src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"].inactive;
+                    this.callTreeInfoService.disableCallTreeInfo(callTreeInfo.callTreeEntryId).subscribe((res) => {
                         if (res) {
                             message = 'The call tree info status is set to inactive succesfully.';
                         }
                         else {
                             message = 'The call tree info status is fail to set to inactive.';
-                            callTreeInfo.status = src_app_classes_CallTreeInfo__WEBPACK_IMPORTED_MODULE_1__["CallTreeInfo"].active;
+                            callTreeInfo.status = src_app_classes_CallTreeEntry__WEBPACK_IMPORTED_MODULE_1__["CallTreeEntry"].active;
                         }
                         alert(message);
                     });
@@ -976,13 +977,13 @@ let CallTreeInfoMaintenanceComponent = class CallTreeInfoMaintenanceComponent {
     popupManualEditor(callTreeInfo) {
     }
     refreshDataSource() {
-        this.callTreeInfoList = this.callTreeInfoDataSource.sortData(this.callTreeInfoList, this.sort);
-        this.callTreeInfoDataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_9__["MatTableDataSource"](this.callTreeInfoList);
-        this.callTreeInfoDataSource.sort = this.sort;
+        this.callTreeEntryList = this.callTreeEntryDataSource.sortData(this.callTreeEntryList, this.sort);
+        this.callTreeEntryDataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_9__["MatTableDataSource"](this.callTreeEntryList);
+        this.callTreeEntryDataSource.sort = this.sort;
     }
     updateCallTreeInfoTable(res) {
-        this.callTreeInfoList.filter((value) => {
-            if (value.callTreeInfoId === res.callTreeInfoId) {
+        this.callTreeEntryList.filter((value) => {
+            if (value.callTreeEntryId === res.callTreeEntryId) {
                 value.division = res.division;
                 value.systemName = res.systemName;
                 value.location = res.location;
@@ -999,40 +1000,40 @@ let CallTreeInfoMaintenanceComponent = class CallTreeInfoMaintenanceComponent {
         });
     }
 };
-CallTreeInfoMaintenanceComponent.ctorParameters = () => [
-    { type: src_app_services_call_tree_info_service__WEBPACK_IMPORTED_MODULE_2__["CallTreeInfoService"] },
+CallTreeEntryMaintenanceComponent.ctorParameters = () => [
+    { type: src_app_services_call_tree_entry_service__WEBPACK_IMPORTED_MODULE_2__["CallTreeEntryService"] },
     { type: _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialog"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ViewChild"])(_angular_material_sort__WEBPACK_IMPORTED_MODULE_8__["MatSort"], { static: true })
-], CallTreeInfoMaintenanceComponent.prototype, "sort", void 0);
-CallTreeInfoMaintenanceComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+], CallTreeEntryMaintenanceComponent.prototype, "sort", void 0);
+CallTreeEntryMaintenanceComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Component"])({
-        selector: 'app-call-tree-info-maintenance',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./call-tree-info-maintenance.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./call-tree-info-maintenance.component.css */ "./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.component.css")).default]
+        selector: 'app-call-tree-entry-maintenance',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./call-tree-entry-maintenance.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./call-tree-entry-maintenance.component.css */ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.component.css")).default]
     })
-], CallTreeInfoMaintenanceComponent);
+], CallTreeEntryMaintenanceComponent);
 
 
 
 /***/ }),
 
-/***/ "./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.module.ts":
-/*!*****************************************************************************************!*\
-  !*** ./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.module.ts ***!
-  \*****************************************************************************************/
-/*! exports provided: CallTreeInfoMaintenanceModule */
+/***/ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.module.ts":
+/*!*******************************************************************************************!*\
+  !*** ./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.module.ts ***!
+  \*******************************************************************************************/
+/*! exports provided: CallTreeEntryMaintenanceModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallTreeInfoMaintenanceModule", function() { return CallTreeInfoMaintenanceModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallTreeEntryMaintenanceModule", function() { return CallTreeEntryMaintenanceModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _call_tree_editor_call_tree_editor_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./call-tree-editor/call-tree-editor.component */ "./src/app/modules/call-tree-info-maintenance/call-tree-editor/call-tree-editor.component.ts");
-/* harmony import */ var _call_tree_info_editor_call_tree_info_editor_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./call-tree-info-editor/call-tree-info-editor.component */ "./src/app/modules/call-tree-info-maintenance/call-tree-info-editor/call-tree-info-editor.component.ts");
-/* harmony import */ var _call_tree_info_maintenance_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./call-tree-info-maintenance.component */ "./src/app/modules/call-tree-info-maintenance/call-tree-info-maintenance.component.ts");
+/* harmony import */ var _call_tree_editor_call_tree_editor_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./call-tree-editor/call-tree-editor.component */ "./src/app/modules/call-tree-entry-maintenance/call-tree-editor/call-tree-editor.component.ts");
+/* harmony import */ var _call_tree_entry_editor_call_tree_entry_editor_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./call-tree-entry-editor/call-tree-entry-editor.component */ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-editor/call-tree-entry-editor.component.ts");
+/* harmony import */ var _call_tree_entry_maintenance_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./call-tree-entry-maintenance.component */ "./src/app/modules/call-tree-entry-maintenance/call-tree-entry-maintenance.component.ts");
 /* harmony import */ var ckeditor4_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ckeditor4-angular */ "./node_modules/ckeditor4-angular/fesm2015/ckeditor4-angular.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
@@ -1046,7 +1047,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_sort__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material/sort */ "./node_modules/@angular/material/esm2015/sort.js");
 /* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
 /* harmony import */ var src_app_pipes_safe_html_pipe__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! src/app/pipes/safe-html.pipe */ "./src/app/pipes/safe-html.pipe.ts");
-/* harmony import */ var _utility_utility_module__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../utility/utility.module */ "./src/app/modules/utility/utility.module.ts");
+/* harmony import */ var _angular_cdk_text_field__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/cdk/text-field */ "./node_modules/@angular/cdk/esm2015/text-field.js");
+/* harmony import */ var _utility_utility_module__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../utility/utility.module */ "./src/app/modules/utility/utility.module.ts");
 
 
 
@@ -1066,14 +1068,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let CallTreeInfoMaintenanceModule = class CallTreeInfoMaintenanceModule {
+
+let CallTreeEntryMaintenanceModule = class CallTreeEntryMaintenanceModule {
 };
-CallTreeInfoMaintenanceModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+CallTreeEntryMaintenanceModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         declarations: [
             _call_tree_editor_call_tree_editor_component__WEBPACK_IMPORTED_MODULE_2__["CallTreeEditorComponent"],
-            _call_tree_info_editor_call_tree_info_editor_component__WEBPACK_IMPORTED_MODULE_3__["CallTreeInfoEditorComponent"],
-            _call_tree_info_maintenance_component__WEBPACK_IMPORTED_MODULE_4__["CallTreeInfoMaintenanceComponent"],
+            _call_tree_entry_editor_call_tree_entry_editor_component__WEBPACK_IMPORTED_MODULE_3__["CallTreeEntryEditorComponent"],
+            _call_tree_entry_maintenance_component__WEBPACK_IMPORTED_MODULE_4__["CallTreeEntryMaintenanceComponent"],
             src_app_pipes_safe_html_pipe__WEBPACK_IMPORTED_MODULE_17__["SafeHtml"],
         ],
         imports: [
@@ -1089,14 +1092,15 @@ CallTreeInfoMaintenanceModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]
             _angular_material_select__WEBPACK_IMPORTED_MODULE_14__["MatSelectModule"],
             _angular_material_sort__WEBPACK_IMPORTED_MODULE_15__["MatSortModule"],
             _angular_material_table__WEBPACK_IMPORTED_MODULE_16__["MatTableModule"],
-            _utility_utility_module__WEBPACK_IMPORTED_MODULE_18__["UtilityModule"],
+            _angular_cdk_text_field__WEBPACK_IMPORTED_MODULE_18__["TextFieldModule"],
+            _utility_utility_module__WEBPACK_IMPORTED_MODULE_19__["UtilityModule"],
         ],
-        exports: [_call_tree_info_maintenance_component__WEBPACK_IMPORTED_MODULE_4__["CallTreeInfoMaintenanceComponent"]],
+        exports: [_call_tree_entry_maintenance_component__WEBPACK_IMPORTED_MODULE_4__["CallTreeEntryMaintenanceComponent"]],
         entryComponents: [_call_tree_editor_call_tree_editor_component__WEBPACK_IMPORTED_MODULE_2__["CallTreeEditorComponent"],
-            _call_tree_info_editor_call_tree_info_editor_component__WEBPACK_IMPORTED_MODULE_3__["CallTreeInfoEditorComponent"]],
+            _call_tree_entry_editor_call_tree_entry_editor_component__WEBPACK_IMPORTED_MODULE_3__["CallTreeEntryEditorComponent"]],
         providers: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"]]
     })
-], CallTreeInfoMaintenanceModule);
+], CallTreeEntryMaintenanceModule);
 
 
 
@@ -1540,16 +1544,16 @@ SafeHtml = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/services/call-tree-info.service.ts":
-/*!****************************************************!*\
-  !*** ./src/app/services/call-tree-info.service.ts ***!
-  \****************************************************/
-/*! exports provided: CallTreeInfoService */
+/***/ "./src/app/services/call-tree-entry.service.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/services/call-tree-entry.service.ts ***!
+  \*****************************************************/
+/*! exports provided: CallTreeEntryService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallTreeInfoService", function() { return CallTreeInfoService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallTreeEntryService", function() { return CallTreeEntryService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
@@ -1558,7 +1562,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let CallTreeInfoService = class CallTreeInfoService {
+let CallTreeEntryService = class CallTreeEntryService {
     constructor(http) {
         this.http = http;
         this.url = '../RestfulServices/CallTreeInfo/';
@@ -1571,31 +1575,31 @@ let CallTreeInfoService = class CallTreeInfoService {
         const serviceURL = this.url + 'getAllCallTreeInfo';
         return this.http.get(serviceURL).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
     }
-    updateCallTreeInfo(callTreeInfo) {
-        const serviceURL = this.url + 'updateCallTreeInfo';
-        return this.http.post(serviceURL, callTreeInfo).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
+    updateCallTreeInfo(callTreeEntry) {
+        const serviceURL = this.url + 'updateCallTreeEntry';
+        return this.http.post(serviceURL, callTreeEntry).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
     }
-    enableCallTreeInfo(callTreeInfoId) {
-        const serviceURL = this.url + 'enableCallTreeInfo';
+    enableCallTreeInfo(callTreeEntryId) {
+        const serviceURL = this.url + 'enableCallTreeEntry';
         let requestParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
-        requestParams = requestParams.append('callTreeInfoId', callTreeInfoId.toString());
+        requestParams = requestParams.append('callTreeInfoId', callTreeEntryId.toString());
         return this.http.post(serviceURL, requestParams).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
     }
-    disableCallTreeInfo(callTreeInfoId) {
-        const serviceURL = this.url + 'disableCallTreeInfo';
+    disableCallTreeInfo(callTreeEntryId) {
+        const serviceURL = this.url + 'disableCallTreeEntry';
         let requestParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
-        requestParams = requestParams.append('callTreeInfoId', callTreeInfoId.toString());
+        requestParams = requestParams.append('callTreeInfoId', callTreeEntryId.toString());
         return this.http.post(serviceURL, requestParams).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
     }
 };
-CallTreeInfoService.ctorParameters = () => [
+CallTreeEntryService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
 ];
-CallTreeInfoService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+CallTreeEntryService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
         providedIn: 'root'
     })
-], CallTreeInfoService);
+], CallTreeEntryService);
 
 
 
@@ -1624,8 +1628,8 @@ let CallTreeService = class CallTreeService {
         this.http = http;
         this.url = '../RestfulServices/CallTree/';
     }
-    getCallTreeInfoByCallTreeId(callTreeId) {
-        const serviceURL = this.url + 'getCallTreeInfoByCallTreeId';
+    getCallTreeEntryByCallTreeId(callTreeId) {
+        const serviceURL = this.url + 'getCallTreeEntryByCallTreeId';
         let requestParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
         requestParams = requestParams.append('callTreeId', callTreeId.toString());
         return this.http.post(serviceURL, requestParams).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
