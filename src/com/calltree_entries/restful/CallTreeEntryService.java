@@ -18,8 +18,8 @@ import org.apache.logging.log4j.Logger;
 import com.calltree_entries.CallTreeEntry;
 import com.calltree_entries.util.DbOp;
 
-@Path("/CallTreeInfo")
-public class CallTreeInfoService {
+@Path("/CallTreeEntry")
+public class CallTreeEntryService {
 	private static final Logger logger = LogManager.getLogger(Class.class.getSimpleName());
 	
 	@Path("/getAllCallTreeEntry")
@@ -38,18 +38,18 @@ public class CallTreeInfoService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addCallTreeEntry (CallTreeEntry callTreeEntry) throws Exception {
-		logger.debug("addCallTreeInfo is called");
+		logger.debug("addCallTreeEntry is called");
 		DbOp dbo=new DbOp();
-		int callTreeInfoId=dbo.addCallTreeEntry(callTreeEntry);
+		int callTreeEntryId=dbo.addCallTreeEntry(callTreeEntry);
 		dbo.close();
-		return Response.ok(callTreeInfoId).build();
+		return Response.ok(callTreeEntryId).build();
 	}
-	@Path("/updateCallTreeInfo")
+	@Path("/updateCallTreeEntry")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateCallTreeInfo (CallTreeEntry callTreeEntry) throws Exception {
-		logger.debug("updateCallTreeInfo is called");
+	public Response updateCallTreeEntry (CallTreeEntry callTreeEntry) throws Exception {
+		logger.debug("updateCallTreeEntry is called");
 		DbOp dbo=new DbOp();
 		boolean updateResult=dbo.updateCallTreeEntry(callTreeEntry);
 		dbo.close();
@@ -60,7 +60,7 @@ public class CallTreeInfoService {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response enableCallTreeEntry (@FormParam("callTreeEntryId") int callTreeEntryId) throws Exception {
-		logger.debug("enableCallTreeInfo is called");
+		logger.debug("enableCallTreeEntry is called");
 		DbOp dbo=new DbOp();
 		boolean updateResult=dbo.enableCallTreeEntry(callTreeEntryId);
 		dbo.close();
@@ -70,7 +70,7 @@ public class CallTreeInfoService {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response disableCallTreeEntry(@FormParam("callTreeEntryId") int callTreeEntryId) throws Exception {
-		logger.debug("disableCallTreeInfo is called");
+		logger.debug("disableCallTreeEntry is called");
 		DbOp dbo=new DbOp();
 		boolean updateResult=dbo.disableCallTreeEntry(callTreeEntryId);
 		dbo.close();
