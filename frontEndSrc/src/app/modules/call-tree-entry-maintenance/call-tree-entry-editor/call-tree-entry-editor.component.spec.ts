@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CallTreeInfoEditorComponent } from './call-tree-info-editor.component';
+import { CallTreeEntryEditorComponent } from './call-tree-entry-editor.component';
 
-describe('CallTreeInfoEditorComponent', () => {
-  let component: CallTreeInfoEditorComponent;
-  let fixture: ComponentFixture<CallTreeInfoEditorComponent>;
+describe('CallTreeEntryEditorComponent', () => {
+  let component: CallTreeEntryEditorComponent;
+  let fixture: ComponentFixture<CallTreeEntryEditorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CallTreeInfoEditorComponent ]
+      declarations: [ CallTreeEntryEditorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CallTreeInfoEditorComponent);
+    fixture = TestBed.createComponent(CallTreeEntryEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

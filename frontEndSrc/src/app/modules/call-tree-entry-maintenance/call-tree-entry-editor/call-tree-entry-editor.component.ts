@@ -35,7 +35,7 @@ export class CallTreeEntryEditorComponent implements OnInit {
                         { name: 'paragraph', groups: [ 'list' ] },
                       ]
                     };
-  constructor(private callTreeInfoService: CallTreeEntryService,
+  constructor(private callTreeEntryService: CallTreeEntryService,
               public dialog: MatDialog,
               private dialogRef: MatDialogRef<CallTreeEntryEditorComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -44,7 +44,7 @@ export class CallTreeEntryEditorComponent implements OnInit {
                 if ( callTreeEntryId === -1) {
                   this.callTreeEntry = new CallTreeEntry();
                 }
-                data.callTreeInfoList.forEach((sharedCallTreeEntry: CallTreeEntry) => {
+                data.callTreeEntryList.forEach((sharedCallTreeEntry: CallTreeEntry) => {
                   if ( callTreeEntryId > -1) {
                     if (sharedCallTreeEntry.callTreeEntryId === callTreeEntryId) {
                       this.callTreeEntry = sharedCallTreeEntry;
@@ -66,11 +66,11 @@ export class CallTreeEntryEditorComponent implements OnInit {
               }
   addCallTreeEntry() {
     let message = '';
-    this.callTreeInfoService.addCallTreeInfo(this.callTreeEntry).subscribe((res: number) => {
+    this.callTreeEntryService.addCallTreeEntry(this.callTreeEntry).subscribe((res: number) => {
       if (res > -1) {
         message += 'Add Call Tree Entry success.';
         this.callTreeEntry.callTreeEntryId = res;
-        this.dialogRef.close({addSuccess: res, action: this.action, callTreeInfo: this.callTreeEntry});
+        this.dialogRef.close({addSuccess: res, action: this.action, callTreeEntry: this.callTreeEntry});
       } else {
         message += 'Add Call Tree Entry failure.';
       }
@@ -124,10 +124,10 @@ export class CallTreeEntryEditorComponent implements OnInit {
   }
   updateCallTreeEntry() {
     let message = '';
-    this.callTreeInfoService.updateCallTreeInfo(this.callTreeEntry).subscribe((res: boolean) => {
+    this.callTreeEntryService.updateCallTreeEntry(this.callTreeEntry).subscribe((res: boolean) => {
       if (res) {
         message += 'Update Call Tree Entry success.';
-        this.dialogRef.close({addSuccess: res, action: this.action, callTreeInfo: this.callTreeEntry});
+        this.dialogRef.close({addSuccess: res, action: this.action, callTreeEntry: this.callTreeEntry});
       } else {
         message += 'Update Call Tree Entry failure.';
       }

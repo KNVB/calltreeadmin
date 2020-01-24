@@ -14,7 +14,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CallTreeEditorComponent {
   callTree: CallTree;
-  callTreeInfoList: CallTreeEntry[];
+  callTreeEntryList: CallTreeEntry[];
   ckeditorConfig = {extraPlugins: 'colorbutton',
                     removeButtons: 'BGColor,BulletedList,PasteFromWord,PasteText',
                     toolbarGroups: [
@@ -30,7 +30,7 @@ export class CallTreeEditorComponent {
               @Inject(MAT_DIALOG_DATA) public data: any) {
                 this.callTree = data.callTree;
                 this.callTreeService.getCallTreeEntryByCallTreeId(this.callTree.callTreeId).subscribe((res: CallTreeEntry[]) => {
-                  this.callTreeInfoList = res;
+                  this.callTreeEntryList = res;
                 });
               }
   closeDialog() {

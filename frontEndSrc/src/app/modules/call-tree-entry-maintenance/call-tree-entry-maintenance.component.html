@@ -1,4 +1,4 @@
-<div class="center">Call Tree Info Maintenance</div>
+<div class="center">Call Tree Entry Maintenance</div>
 <table style="margin-left: 30px;margin-right: 30px;" >
   <tr>
     <td>
@@ -10,12 +10,12 @@
       </mat-form-field>
     </td>
     <td>
-      <button  style="float:right" mat-raised-button color="primary" (click)="popupDialog('Add',callTreeInfoTemplate)">Add New Call Tree</button>
+      <button  style="float:right" mat-raised-button color="primary" (click)="popupDialog('Add',callTreeEntryTemplate)">Add New Call Tree</button>
     </td>
   </tr>
   <tr>
     <td colspan="2">
-      <table mat-table [dataSource]="callTreeInfoDataSource" matSort matSortActive="systemName" matSortDirection="asc" class="mat-elevation-z8">
+      <table mat-table [dataSource]="callTreeEntryDataSource" matSort matSortActive="systemName" matSortDirection="asc" class="mat-elevation-z8">
         <ng-container matColumnDef="division">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Division</th>
             <td mat-cell style="text-align: left !important;" *matCellDef="let element"> {{element.division}} </td>
@@ -62,12 +62,12 @@
         </ng-container>
         <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-            <td mat-cell *matCellDef="let element" [innerHTML]="(element.status === activeCallTreeInfo)?'Active':'Inactive'"></td>
+            <td mat-cell *matCellDef="let element" [innerHTML]="(element.status === activeCallTreeEntry)?'Active':'Inactive'"></td>
         </ng-container>
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
           <td mat-cell *matCellDef="let element" class="action-link">
-            <a href="javascript:void(0)" (click)="popupDialog('Edit',element)">Edit</a>|<a *ngIf="(element.status === activeCallTreeInfo)" href="javascript:void(0)" (click)="popupDialog('Disable',element)">Disable</a><a *ngIf="(element.status === inActiveCallTreeInfo)" href="javascript:void(0)" (click)="popupDialog('Enable',element)">Enable</a>
+            <a href="javascript:void(0)" (click)="popupDialog('Edit',element)">Edit</a>|<a *ngIf="(element.status === activeCallTreeEntry)" href="javascript:void(0)" (click)="popupDialog('Disable',element)">Disable</a><a *ngIf="(element.status === inActiveCallTreeEntry)" href="javascript:void(0)" (click)="popupDialog('Enable',element)">Enable</a>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true" class="heading"></tr>

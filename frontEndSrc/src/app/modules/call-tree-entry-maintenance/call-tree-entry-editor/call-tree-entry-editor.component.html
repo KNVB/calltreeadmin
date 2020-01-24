@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ action }} a Call Tree Info</h2>
-<form #callTreeInfoEditForm="ngForm" (ngSubmit)="onSubmit(callTreeInfoEditForm)" novalidate>
-    <input type=hidden name="callTreeInfoId" [(ngModel)]="this.callTreeEntry.callTreeEntryId">
+<form #callTreeEntryEditForm="ngForm" (ngSubmit)="onSubmit(callTreeEntryEditForm)" novalidate>
+    <input type=hidden name="callTreeEntryId" [(ngModel)]="this.callTreeEntry.callTreeEntryId">
     <app-division-list-input-box
       name="division"
       [(ngModel)]="this.callTreeEntry.division">
@@ -134,7 +134,7 @@
                 #callTreeDetail1="ngModel"
                 [(ngModel)]="this.callTreeEntry.callTree.callTreeDetail">
               </ckeditor>
-              <mat-error *ngIf="(callTreeDetail1.touched || callTreeInfoEditForm.submitted)  && callTreeDetail1.hasError('required')">
+              <mat-error *ngIf="(callTreeDetail1.touched || callTreeEntryEditForm.submitted)  && callTreeDetail1.hasError('required')">
                 Call tree contact is <strong>required</strong>
               </mat-error>
             </div>
@@ -250,5 +250,5 @@
   </mat-dialog-actions>
 </form>
 <!--
-{{this.callTreeInfo|json}}
+{{this.callTreeEntry|json}}
 -->
