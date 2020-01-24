@@ -5,8 +5,6 @@ import { Component, Inject} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-call-tree-editor',
   templateUrl: './call-tree-editor.component.html',
@@ -35,5 +33,8 @@ export class CallTreeEditorComponent {
               }
   closeDialog() {
     this.dialog.closeAll();
+  }
+  onSubmit(form: NgForm){
+
   }
 }

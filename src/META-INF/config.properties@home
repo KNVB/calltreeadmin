@@ -1,7 +1,7 @@
 DataStoreImplementationClassName = com.rosterWeb.util.DbOp
 dbServerName=server
 dbms=mysql
-dbName=call_tree_info
+dbName=calltree
 dbUserName=cstsang
 dbUserPwd=30Dec2010
 jdbcDriver = com.mysql.jdbc.Driver

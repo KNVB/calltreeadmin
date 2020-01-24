@@ -32,7 +32,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-call-tree-info-maintenance></app-call-tree-info-maintenance>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-call-tree-entry-maintenance></app-call-tree-entry-maintenance>\r\n");
 
 /***/ }),
 
@@ -45,7 +45,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>Edit a Call Tree</h2>\n<form #callTreeEditForm=\"ngForm\" (ngSubmit)=\"onSubmit(callTreeEditForm)\" novalidate>\n  This call tree is owned by the following system(s):\n  <table>\n    <tr>\n      <td>Division:</td><td>System:</td>\n    </tr>\n    <tr *ngFor=\"let callTreeEntry of callTreeEntryList\">\n      <td>{{callTreeEntry.division}}</td>\n      <td>{{callTreeEntry.systemName}}</td>\n    </tr>\n  </table>\n\n\n  Call Tree Detail:\n  <ckeditor\n    required\n    name=\"callTreeDetail\"\n    [config]=\"ckeditorConfig\"\n    #callTreeDetail1=\"ngModel\"\n    [(ngModel)]=\"this.callTree.callTreeDetail\">\n  </ckeditor>\n  <mat-dialog-actions>\n    <button mat-raised-button type=\"submit\" color=\"primary\" class=\"Update-btn\">Save</button>\n    <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"closeDialog()\">Close</button>\n  </mat-dialog-actions>\n</form>\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>Edit a Call Tree</h2>\n<form #callTreeEditForm=\"ngForm\" (ngSubmit)=\"onSubmit(callTreeEditForm)\" novalidate>\n  Modify this call tree is/are affected the following system(s):\n  <table>\n    <tr>\n      <td>Division:</td><td>System:</td>\n    </tr>\n    <tr *ngFor=\"let callTreeEntry of callTreeEntryList\">\n      <td style=\"text-align: center;\">{{callTreeEntry.division}}</td>\n      <td [innerHtml]=\"callTreeEntry.systemName|safeHtml\"></td>\n    </tr>\n  </table>\n  Call Tree Detail:\n  <ckeditor\n    required\n    name=\"callTreeDetail\"\n    [config]=\"ckeditorConfig\"\n    #callTreeDetail1=\"ngModel\"\n    [(ngModel)]=\"this.callTree.callTreeDetail\">\n  </ckeditor>\n  <mat-dialog-actions>\n    <button mat-raised-button type=\"submit\" color=\"primary\" class=\"Update-btn\">Save</button>\n    <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"closeDialog()\">Close</button>\n  </mat-dialog-actions>\n</form>\n\n");
 
 /***/ }),
 
@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-dialog-content>\n  {{title}}\n</mat-dialog-content>\n<mat-dialog-actions>\n  <button mat-raised-button type=\"button\" color=\"primary\" class=\"Update-btn\" (click)=\"sayYes()\">Yes</button>\n  <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"sayNo()\">No</button>\n</mat-dialog-actions>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-dialog-content>\r\n  {{title}}\r\n</mat-dialog-content>\r\n<mat-dialog-actions>\r\n  <button mat-raised-button type=\"button\" color=\"primary\" class=\"Update-btn\" (click)=\"sayYes()\">Yes</button>\r\n  <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"sayNo()\">No</button>\r\n</mat-dialog-actions>\r\n");
 
 /***/ }),
 
@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-form-field>\n  <mat-label>Division</mat-label>\n    <input matInput type=\"text\"\n      [(ngModel)]=\"division\"\n      required\n      [matAutocomplete]=\"divisions\"\n      name=\"division2\"\n      [divisionValidator]=\"this.divisionList\"\n      (ngModelChange)=\"autoCompleteFilter($event)\"\n      #division2=\"ngModel\">\n      <mat-error *ngIf=\"division2.hasError('invalidDivisionName')\">\n        {{division2.errors['invalidDivisionName']}} is not a valid divison name.\n      </mat-error>\n      <mat-error *ngIf=\"division2.hasError('required')\">\n        Division Name is <strong>required</strong>\n      </mat-error>\n      <mat-autocomplete  #divisions=\"matAutocomplete\">\n        <mat-option *ngFor=\"let division of this.filteredDivisionList\" [value]=\"division\">\n          {{ division }}\n        </mat-option>\n      </mat-autocomplete>\n</mat-form-field>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-form-field>\r\n  <mat-label>Division</mat-label>\r\n    <input matInput type=\"text\"\r\n      [(ngModel)]=\"division\"\r\n      required\r\n      [matAutocomplete]=\"divisions\"\r\n      name=\"division2\"\r\n      [divisionValidator]=\"this.divisionList\"\r\n      (ngModelChange)=\"autoCompleteFilter($event)\"\r\n      #division2=\"ngModel\">\r\n      <mat-error *ngIf=\"division2.hasError('invalidDivisionName')\">\r\n        {{division2.errors['invalidDivisionName']}} is not a valid divison name.\r\n      </mat-error>\r\n      <mat-error *ngIf=\"division2.hasError('required')\">\r\n        Division Name is <strong>required</strong>\r\n      </mat-error>\r\n      <mat-autocomplete  #divisions=\"matAutocomplete\">\r\n        <mat-option *ngFor=\"let division of this.filteredDivisionList\" [value]=\"division\">\r\n          {{ division }}\r\n        </mat-option>\r\n      </mat-autocomplete>\r\n</mat-form-field>\r\n");
 
 /***/ }),
 
@@ -552,7 +552,7 @@ class Manual {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("table\r\n{\r\n  border-collapse: collapse;\r\n}\r\ntable, td, th\r\n{\r\n  border: 1px solid black;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cnktbWFpbnRlbmFuY2UvY2FsbC10cmVlLWVkaXRvci9jYWxsLXRyZWUtZWRpdG9yLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0VBRUUseUJBQXlCO0FBQzNCO0FBQ0E7O0VBRUUsdUJBQXVCO0FBQ3pCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cnktbWFpbnRlbmFuY2UvY2FsbC10cmVlLWVkaXRvci9jYWxsLXRyZWUtZWRpdG9yLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZVxyXG57XHJcbiAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcclxufVxyXG50YWJsZSwgdGQsIHRoXHJcbntcclxuICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcclxufVxyXG4iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("table\r\n{\r\n  border-collapse: collapse;\r\n}\r\ntable, td, th\r\n{\r\n  border: 1px solid black;\r\n}\r\ntr:nth-child(even) \r\n{\r\n  background-color: #f2f2f2;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cnktbWFpbnRlbmFuY2UvY2FsbC10cmVlLWVkaXRvci9jYWxsLXRyZWUtZWRpdG9yLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0VBRUUseUJBQXlCO0FBQzNCO0FBQ0E7O0VBRUUsdUJBQXVCO0FBQ3pCO0FBQ0E7O0VBRUUseUJBQXlCO0FBQzNCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cnktbWFpbnRlbmFuY2UvY2FsbC10cmVlLWVkaXRvci9jYWxsLXRyZWUtZWRpdG9yLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZVxyXG57XHJcbiAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcclxufVxyXG50YWJsZSwgdGQsIHRoXHJcbntcclxuICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcclxufVxyXG50cjpudGgtY2hpbGQoZXZlbikgXHJcbntcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjJmMmYyO1xyXG59XHJcbiJdfQ== */");
 
 /***/ }),
 
@@ -596,6 +596,8 @@ let CallTreeEditorComponent = class CallTreeEditorComponent {
     }
     closeDialog() {
         this.dialog.closeAll();
+    }
+    onSubmit(form) {
     }
 };
 CallTreeEditorComponent.ctorParameters = () => [
@@ -1757,7 +1759,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_3__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\Users\cstsang\workspace\CallTreeAdmin\frontEndSrc\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Users\Roy\workspace\calltreeadmin\frontEndSrc\src\main.ts */"./src/main.ts");
 
 
 /***/ })
