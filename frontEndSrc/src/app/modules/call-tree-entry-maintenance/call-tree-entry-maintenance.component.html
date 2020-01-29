@@ -10,12 +10,24 @@
       </mat-form-field>
     </td>
     <td>
-      <button  style="float:right" mat-raised-button color="primary" (click)="popupDialog('Add',callTreeEntryTemplate)">Add New Call Tree</button>
+      <button 
+        style="float:right" 
+        mat-raised-button 
+        color="primary" 
+        (click)="popupDialog('Add',callTreeEntryTemplate)">
+          Add New Call Tree Entry
+      </button>
     </td>
   </tr>
   <tr>
     <td colspan="2">
-      <table mat-table [dataSource]="callTreeEntryDataSource" matSort matSortActive="systemName" matSortDirection="asc" class="mat-elevation-z8">
+      <table 
+        mat-table 
+        [dataSource]="callTreeEntryDataSource" 
+        matSort 
+        matSortActive="systemName" 
+        matSortDirection="asc" 
+        class="mat-elevation-z8">
         <ng-container matColumnDef="division">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Division</th>
             <td mat-cell style="text-align: left !important;" *matCellDef="let element"> {{element.division}} </td>

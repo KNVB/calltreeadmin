@@ -1,10 +1,45 @@
-<h2 mat-dialog-title>{{ action }} a Call Tree Info</h2>
+<h2 mat-dialog-title>{{ action }} A Call Tree Entry</h2>
 <form #callTreeEntryEditForm="ngForm" (ngSubmit)="onSubmit(callTreeEntryEditForm)" novalidate>
     <input type=hidden name="callTreeEntryId" [(ngModel)]="this.callTreeEntry.callTreeEntryId">
     <app-division-list-input-box
       name="division"
+      style="width:40%"
       [(ngModel)]="this.callTreeEntry.division">
     </app-division-list-input-box>
+    <mat-form-field style="width:60%;">
+      <mat-label>System</mat-label>
+      <textarea matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"
+        required
+        name="systemName"
+        #systemName="ngModel"
+        [(ngModel)]="this.callTreeEntry.systemName">
+      </textarea>
+      <mat-error [hidden]="systemName.valid || systemName.pristine">
+        System Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field style="width:90%;">
+      <mat-label>Location</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                required
+                name="location"
+                #location="ngModel"
+                [(ngModel)]="this.callTreeEntry.location">
+      </textarea>
+      <mat-error  [hidden]="location.valid || location.pristine">
+        Location is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <br>
     <mat-form-field>
       <mat-label>Service Level</mat-label>
       <mat-select [(ngModel)]="this.callTreeEntry.serviceLevel" name="serviceLevel" #serviceLevel="ngModel" required>
@@ -82,40 +117,7 @@
         </mat-error>
     </mat-form-field>
     <br>
-    <mat-form-field style="width:100%;">
-      <mat-label>System</mat-label>
-      <textarea matInput
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="1"
-        cdkAutosizeMaxRows="5"
-        required
-        name="systemName"
-        #systemName="ngModel"
-        [(ngModel)]="this.callTreeEntry.systemName">
-      </textarea>
-      <mat-error [hidden]="systemName.valid || systemName.pristine">
-        System Name is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-	  <br>
-    <mat-form-field style="width:100%;">
-      <mat-label>Location</mat-label>
-      <textarea matInput
-                cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5"
-                required
-                name="location"
-                #location="ngModel"
-                [(ngModel)]="this.callTreeEntry.location">
-      </textarea>
-      <mat-error  [hidden]="location.valid || location.pristine">
-        Location is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <div *ngIf="(this.callTreeEntry.callTreeEntryId==-1)">
+	  <div *ngIf="(this.callTreeEntry.callTreeEntryId==-1)">
       <hr>
       Call Tree:
       <mat-radio-group
