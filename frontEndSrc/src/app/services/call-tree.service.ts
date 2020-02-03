@@ -1,3 +1,4 @@
+import { CallTree } from '../classes/CallTree';
 import { CallTreeEntry } from '../classes/CallTreeEntry';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,5 +16,9 @@ export class CallTreeService {
     let requestParams = new HttpParams();
     requestParams = requestParams.append('callTreeId', callTreeId.toString());
     return this.http.post(serviceURL, requestParams).pipe(map((res: CallTreeEntry[]) => res));
+  }
+  updateCallTree(callTree: CallTree): Observable<boolean> {
+    const serviceURL = this.url + 'updateCallTree';
+    return this.http.post(serviceURL , callTree).pipe(map((res: boolean) => res));
   }
 }

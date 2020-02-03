@@ -4,6 +4,7 @@ import { CallTreeEditorComponent } from './call-tree-editor/call-tree-editor.com
 import { CallTreeEntryEditorComponent } from './call-tree-entry-editor/call-tree-entry-editor.component';
 import { Component, ViewChild } from '@angular/core';
 import { ConfirmationBoxComponent } from '../utility/components/confirmation-box/confirmation-box.component';
+import {ManualEditorComponent} from './manual-editor/manual-editor.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -151,7 +152,16 @@ export class CallTreeEntryMaintenanceComponent  {
     });
   }
   popupManualEditor(callTreeEntry: CallTreeEntry) {
-
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = true;
+    // dialogConfig.minHeight = '600px';
+    dialogConfig.autoFocus = false; // do not set focus on the first form element
+    dialogConfig.width = '900px';
+    dialogConfig.data = {
+      callTreeEntryId: callTreeEntry.callTreeEntryId,
+      systemName: callTreeEntry.systemName
+    };
+    const dialogRef = this.dialog.open(ManualEditorComponent, dialogConfig);
   }
   refreshDataSource() {
     this.callTreeEntryList = this.callTreeEntryDataSource.sortData(this.callTreeEntryList, this.sort);

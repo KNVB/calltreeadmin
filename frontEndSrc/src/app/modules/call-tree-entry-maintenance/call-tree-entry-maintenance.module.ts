@@ -5,6 +5,7 @@ import { CallTreeEntryMaintenanceComponent } from './call-tree-entry-maintenance
 import { CKEditorModule } from 'ckeditor4-angular';
 import { CommonModule , DatePipe} from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ManualEditorComponent } from './manual-editor/manual-editor.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -20,12 +21,14 @@ import {UtilityModule } from '../utility/utility.module';
 
 
 
+
 @NgModule({
   declarations: [
                 CallTreeEditorComponent,
                 CallTreeEntryEditorComponent,
                 CallTreeEntryMaintenanceComponent,
                 SafeHtml,
+                ManualEditorComponent,
                ],
   imports: [
             CommonModule,
@@ -45,7 +48,8 @@ import {UtilityModule } from '../utility/utility.module';
            ],
   exports: [CallTreeEntryMaintenanceComponent],
   entryComponents: [CallTreeEditorComponent,
-                    CallTreeEntryEditorComponent],
+                    CallTreeEntryEditorComponent,
+                    ManualEditorComponent],
   providers: [DatePipe]
 })
 export class CallTreeEntryMaintenanceModule { }

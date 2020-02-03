@@ -18,6 +18,10 @@
     #callTreeDetail1="ngModel"
     [(ngModel)]="this.callTree.callTreeDetail">
   </ckeditor>
+  <mat-error *ngIf="(callTreeDetail1.touched || callTreeEditForm.submitted)  && callTreeDetail1.hasError('required')">
+    Call tree is <strong>required</strong>
+  </mat-error>
+
   <mat-dialog-actions>
     <button mat-raised-button type="submit" color="primary" class="Update-btn">Save</button>
     <button mat-raised-button type="button" class="Discard-btn" (click)="closeDialog()">Close</button>

@@ -51,7 +51,7 @@ public class DbOp implements DataStore {
 		sqlString ="select a.*,c.* from ";  
 		sqlString+="callTreeEntry a inner join callTreeEntry_calltree b ";
 		sqlString+="on a.callTreeEntry_id = b.callTreeEntry_id ";
-		sqlString+="left outer join calltree c ";
+		sqlString+="inner join calltree c ";
 		sqlString+="on b.calltree_id= c.calltree_id ";
 		sqlString+="order by a.division,system_name,a.callTreeEntry_id";
 		try
@@ -158,6 +158,39 @@ public class DbOp implements DataStore {
 		return result.toArray(new CallTreeEntry[0]);
 	}
 	@Override
+	public Manual[] getManualsByCallTreeEntryId(int callTreeEntryId)throws Exception {
+		ArrayList<Manual> result=new ArrayList<Manual>();
+		Manual manual;
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		try
+		{
+			sqlString ="select a.* from ";
+			sqlString+="manual a inner join callTreeEntry_manual b ";
+			sqlString+="on b.calltreeentry_id=? and a.manual_id=b.manual_id";
+			stmt=dbConn.prepareStatement(sqlString);
+			stmt.setInt(1, callTreeEntryId);
+			rs=stmt.executeQuery();
+			while (rs.next()) {
+				manual=new Manual();
+				manual.setDescription(rs.getString("manual_location"));
+				manual.setLastUpdateDate(rs.getString("manual_last_update_date"));
+				manual.setManualId(rs.getInt("manual_id"));
+				manual.setManualLocation(rs.getString("manual_location"));
+				result.add(manual);
+			}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			releaseResource(rs, stmt);
+		}
+		return result.toArray(new Manual[0]);
+	}
+	@Override
 	public int addCallTreeEntry(CallTreeEntry callTreeEntry) throws Exception {
 		int callTreeId,callTreeEntryId=-1,manualId;
 		ResultSet rs = null;
@@ -258,6 +291,33 @@ public class DbOp implements DataStore {
 		return callTreeEntryId;
 	}
 	@Override
+	public boolean updateCallTree(CallTree callTree) throws Exception {
+		boolean updateSuccess=false;
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		try
+		{
+			sqlString ="update calltree ";
+			sqlString+="set calltree_detail=? where calltree_id = ?";
+			logger.debug("update a call tree.");
+			logger.debug(objectMapper.writeValueAsString(callTree));
+			stmt=dbConn.prepareStatement(sqlString);
+			stmt.setString(1,callTree.getCallTreeDetail());
+			stmt.setInt(2,callTree.getCallTreeId());
+			stmt.executeUpdate();
+			updateSuccess=true;
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			releaseResource(rs, stmt);
+		}
+		return updateSuccess;
+	}
+	@Override
 	public boolean updateCallTreeEntry(CallTreeEntry callTreeEntry) throws Exception {
 		boolean updateSuccess=false;
 		ResultSet rs = null;
@@ -269,7 +329,7 @@ public class DbOp implements DataStore {
 			sqlString+="time_to_escalate=?,log_recipients=?,status=?,version=?,location=? ";
 			sqlString+="where callTreeEntry_id=?";
 			
-			logger.debug("update a new call tree info.");
+			logger.debug("update a call tree entry.");
 			logger.debug(objectMapper.writeValueAsString(callTreeEntry));
 			stmt=dbConn.prepareStatement(sqlString);
 			stmt.setString(1,callTreeEntry.getDivision());
@@ -296,7 +356,16 @@ public class DbOp implements DataStore {
 		}
 		return updateSuccess;
 	}
-	
+	public boolean updateManuals(int callTreeEntryId, Manual[] manuals) {
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		boolean updateSuccess=false;
+		logger.debug("update operation manual for call entry Id.="+callTreeEntryId);
+		for (Manual manual : manuals) {
+			logger.debug(manual.getDescription());
+		}
+		return updateSuccess;
+	}
 	public boolean enableCallTreeEntry(int callTreeEntryId) throws Exception {
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
@@ -384,5 +453,6 @@ public class DbOp implements DataStore {
 	{
 		dbConn.close();
 		dbConn = null;
-	}	
+	}
+		
 }

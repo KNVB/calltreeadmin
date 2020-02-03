@@ -137,7 +137,7 @@
                 [(ngModel)]="this.callTreeEntry.callTree.callTreeDetail">
               </ckeditor>
               <mat-error *ngIf="(callTreeDetail1.touched || callTreeEntryEditForm.submitted)  && callTreeDetail1.hasError('required')">
-                Call tree contact is <strong>required</strong>
+                Call tree is <strong>required</strong>
               </mat-error>
             </div>
           </div>
@@ -244,6 +244,7 @@
                 -
             </button>
           </td>
+        </tr>
       </table>
     </div>
   <mat-dialog-actions>
