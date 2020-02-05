@@ -1,5 +1,12 @@
 <h2 mat-dialog-title>Edit a Operation Manual</h2>
 <form #manualEditForm="ngForm" (ngSubmit)="onSubmit(manualEditForm)" novalidate>
+  <app-manual-list  
+    name="manuals" 
+    [message]="this.message"
+    [(ngModel)]="this.manuals"
+    [callTreeEntryId]="this.callTreeEntryId">
+  </app-manual-list>
+<!--
   <table style="width:100%;">
     <tr>
       <td>{{systemName}} has {{((this.manuals==null)?"0":this.manuals.length)}} operation manual(s)</td>
@@ -11,7 +18,7 @@
     </tr>
     <tr *ngFor="let manual of this.manuals; let i = index">
       <td colspan=2>
-        <mat-form-field>
+        <mat-form-field style="width:25%">
           <mat-label>Manual Location</mat-label>
           <input
             matInput
@@ -24,7 +31,7 @@
             Manual location is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field style="width:25%">
           <mat-label>Manual Description</mat-label>
           <input
             matInput
@@ -37,7 +44,7 @@
             Manual Description is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field style="width:25%">
           <mat-label>Last Update Date</mat-label>
           <input
             matInput
@@ -52,7 +59,7 @@
         </mat-form-field>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <button
-          style="font-weight: bold;;font-size: 30px;vertical-align: middle;"
+          style="width:5%;font-weight: bold;font-size: 30px;vertical-align: middle;"
           mat-raised-button type="button"
           color="primary"
           class="Update-btn"
@@ -62,6 +69,7 @@
       </td>
     </tr>
   </table>
+-->
   <mat-dialog-actions>
     <button mat-raised-button type="submit" color="primary" class="Update-btn">Save</button>
     <button mat-raised-button type="button" class="Discard-btn" (click)="closeDialog()">Close</button>

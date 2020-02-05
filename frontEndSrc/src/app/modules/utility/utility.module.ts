@@ -6,6 +6,7 @@ import { DivisionListInputBoxComponent } from './components/division-list-input-
 import { DivisionValidatorDirective } from './directives/division-validator.directive';
 import { FormsModule } from '@angular/forms';
 import { LogRecipientValidatorDirective } from './directives/log-recipient-validator.directive';
+import {ManualListComponent} from './components/manual-list/manual-list.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -17,13 +18,13 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {SystemNameValidatorDirective} from './directives/system-name-validator.directive';
 
-
 @NgModule({
   declarations: [
                   ConfirmationBoxComponent,
                   DivisionListInputBoxComponent,
                   DivisionValidatorDirective,
                   LogRecipientValidatorDirective,
+                  ManualListComponent,
                   SystemNameValidatorDirective,
                 ],
   imports: [
@@ -46,6 +47,7 @@ import {SystemNameValidatorDirective} from './directives/system-name-validator.d
             DivisionListInputBoxComponent,
             DivisionValidatorDirective,
             LogRecipientValidatorDirective,
+            ManualListComponent,
             SystemNameValidatorDirective,
           ]
 })

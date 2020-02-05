@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import com.calltree_entries.CallTree;
 import com.calltree_entries.Manual;
 import com.calltree_entries.util.DbOp;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/ManualService")
 public class ManualService {
@@ -33,13 +34,36 @@ public class ManualService {
 	@Path("/updateManuals")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateManuals (@FormParam("callTreeEntryId") int callTreeEntryId,@FormParam("manuals") Manual[] manuals) throws Exception {
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response updateManuals (@FormParam("callTreeEntryId") int callTreeEntryId,@FormParam("manuals") String manuals) throws Exception {
 		logger.debug("updateManuals is called");
+		 ObjectMapper mapper = new ObjectMapper();
+		Manual[] manualList=mapper.readValue(manuals, Manual[].class);
 		DbOp dbo=new DbOp();
-		boolean updateResult=dbo.updateManuals(callTreeEntryId,manuals);
+		boolean updateResult=dbo.updateManuals(callTreeEntryId,manualList);
 		dbo.close();
 		return Response.ok(updateResult).build();
 	}
 	
+	/*
+	 * To the following code working, a lot of work need to do.
+	 * Please refer the following web page for detail:
+	 * 
+	 * https://stackoverflow.com/questions/39635108/java-jersey-creating-own-injection-resolver-with-paraminjectionresolver-stra/39636141#39636141
+	 * https://stackoverflow.com/questions/45625925/what-exactly-is-the-resourceconfig-class-in-jersey-2
+	 */
+	/*
+	@Path("/updateManuals")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateManuals (@FormParam("callTreeEntryId") int callTreeEntryId,@FormParam("manuals") Manual manuals) throws Exception {
+		boolean updateResult=false;
+		logger.debug("updateManuals is called");
+		DbOp dbo=new DbOp();
+		//boolean updateResult=dbo.updateManuals(callTreeEntryId,manuals);
+		dbo.close();
+		return Response.ok(updateResult).build();
+	}
+	*/
 }

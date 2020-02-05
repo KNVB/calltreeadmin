@@ -19,9 +19,21 @@ export class ManualService {
 
   updateManuals(callTreeEntryId: number, manuals: Manual[]): Observable<boolean> {
     const serviceURL = this.url + 'updateManuals';
+    
     let requestParams = new HttpParams();
     requestParams = requestParams.append('callTreeEntryId', callTreeEntryId.toString());
     requestParams = requestParams.append('manuals', JSON.stringify(manuals));
+    
+   /*
+    To the following code working, a lot of work in server side need to do.
+    Please refer the following web page for detail:
+    https://stackoverflow.com/questions/39635108/java-jersey-creating-own-injection-resolver-with-paraminjectionresolver-stra/39636141#39636141
+    */
+   /*
+    let requestParams = {};
+    requestParams['callTreeEntryId']=callTreeEntryId;
+    requestParams ['manuals']=manuals;
+    */
     return this.http.post(serviceURL, requestParams).pipe(map((res: boolean) => res));
   }
 }
