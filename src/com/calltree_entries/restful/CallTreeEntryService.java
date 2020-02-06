@@ -36,9 +36,9 @@ public class CallTreeEntryService {
 	public Response addCallTreeEntry (CallTreeEntry callTreeEntry) throws Exception {
 		logger.debug("addCallTreeEntry is called");
 		DbOp dbo=new DbOp();
-		int callTreeEntryId=dbo.addCallTreeEntry(callTreeEntry);
+		CallTreeEntry resultCallTreeEntry=dbo.addCallTreeEntry(callTreeEntry);
 		dbo.close();
-		return Response.ok(callTreeEntryId).build();
+		return Response.ok(resultCallTreeEntry).build();
 	}
 	@Path("/updateCallTreeEntry")
 	@POST

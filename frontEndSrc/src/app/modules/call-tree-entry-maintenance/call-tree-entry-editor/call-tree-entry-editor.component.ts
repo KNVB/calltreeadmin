@@ -69,10 +69,10 @@ export class CallTreeEntryEditorComponent implements OnInit {
               }
   addCallTreeEntry() {
     let message = '';
-    this.callTreeEntryService.addCallTreeEntry(this.callTreeEntry).subscribe((res: number) => {
-      if (res > -1) {
+    this.callTreeEntryService.addCallTreeEntry(this.callTreeEntry).subscribe((res: CallTreeEntry) => {
+      if (res !== null) {
         message += 'Add Call Tree Entry success.';
-        this.callTreeEntry.callTreeEntryId = res;
+        this.callTreeEntry = res;
         this.dialogRef.close({addSuccess: res, action: this.action, callTreeEntry: this.callTreeEntry});
       } else {
         message += 'Add Call Tree Entry failure.';
@@ -106,7 +106,6 @@ export class CallTreeEntryEditorComponent implements OnInit {
       this.closeDialog();
     } else {
       if (form.valid) {
-
         switch (this.action) {
           case 'Add': this.addCallTreeEntry();
                       break;

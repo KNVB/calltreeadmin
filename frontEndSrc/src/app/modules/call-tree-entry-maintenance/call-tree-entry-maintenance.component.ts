@@ -78,7 +78,7 @@ export class CallTreeEntryMaintenanceComponent  {
     dialogConfig.autoFocus = false; // do not set focus on the first form element
     dialogConfig.width = '900px';
     dialogConfig.data = {
-      callTree: callTreeEntry.callTree
+      callTree: callTreeEntry.callTree,
     };
     const dialogRef = this.dialog.open(CallTreeEditorComponent, dialogConfig);
   }

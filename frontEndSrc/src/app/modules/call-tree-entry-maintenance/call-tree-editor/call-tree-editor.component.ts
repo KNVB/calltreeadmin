@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CallTreeEditorComponent {
   callTree: CallTree;
+  callTreeEntryId: number;
   callTreeEntryList: CallTreeEntry[];
   ckeditorConfig = {extraPlugins: 'colorbutton',
                     removeButtons: 'BGColor,BulletedList,PasteFromWord,PasteText',

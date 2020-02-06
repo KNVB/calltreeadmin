@@ -13,9 +13,9 @@ export class CallTreeEntryService {
   url = '../RestfulServices/CallTreeEntry/';
   constructor(private http: HttpClient) { }
 
-  addCallTreeEntry(callTreeEntry: CallTreeEntry): Observable<number> {
+  addCallTreeEntry(callTreeEntry: CallTreeEntry): Observable<CallTreeEntry> {
     const serviceURL = this.url + 'addCallTreeEntry';
-    return this.http.post(serviceURL , callTreeEntry).pipe(map((res: number) => res));
+    return this.http.post(serviceURL , callTreeEntry).pipe(map((res:CallTreeEntry) => res));
   }
   getAllCallTreeEntry(): Observable<CallTreeEntry[]> {
     const serviceURL = this.url + 'getAllCallTreeEntry';

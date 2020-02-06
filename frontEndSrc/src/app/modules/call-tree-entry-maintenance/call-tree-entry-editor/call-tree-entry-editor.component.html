@@ -96,11 +96,16 @@
       <mat-label>
         Time Interval to start established procedures
       </mat-label>
-      <input matInput type="text"
-            [(ngModel)]="this.callTreeEntry.timeToStartProcedure"
-            required
-            #timeToStartProcedure="ngModel"
-            name="timeToStartProcedure">
+      <textarea matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          required
+          name="timeToStartProcedure"
+          #timeToStartProcedure="ngModel"
+          [(ngModel)]="this.callTreeEntry.timeToStartProcedure">
+      </textarea>
       <mat-error [hidden]="timeToStartProcedure.valid||timeToStartProcedure.pristine">
         Time Interval to start established procedures is <strong>required</strong>
       </mat-error>
@@ -109,10 +114,16 @@
         <mat-label>
           Time Interval to escalate if no reply
         </mat-label>
-        <input matInput type="text" [(ngModel)]="this.callTreeEntry.timeToEscalate"
-              required
-              name="timeToEscalate"
-              #timeToEscalate="ngModel">
+        <textarea matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          required
+          name="timeToEscalate"
+          #timeToEscalate="ngModel"
+          [(ngModel)]="this.callTreeEntry.timeToEscalate">
+        </textarea>	
         <mat-error [hidden]="timeToEscalate.valid||timeToEscalate.pristine">
           Time Interval to escalate if no reply is <strong>required</strong>
         </mat-error>

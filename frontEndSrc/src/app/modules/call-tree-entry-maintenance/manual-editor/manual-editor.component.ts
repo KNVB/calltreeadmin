@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Manual } from 'src/app/classes/Manual';
 import { ManualService } from 'src/app/services/manual.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './manual-editor.component.html',
   styleUrls: ['./manual-editor.component.css']
 })
-export class ManualEditorComponent implements OnInit {
+export class ManualEditorComponent {
   callTreeEntryId: number;
   manuals: Manual[];
   message: string;
@@ -30,9 +30,10 @@ export class ManualEditorComponent implements OnInit {
   closeDialog() {
     this.dialog.closeAll();
   }
-  ngOnInit() {
-  }
+  
   onSubmit(form: NgForm){
+    console.log('form.dirty=' + form.dirty);
+    console.log('form.valid=' + form.valid);
     if (form.pristine && form.valid) {
       this.closeDialog();
     } else {
