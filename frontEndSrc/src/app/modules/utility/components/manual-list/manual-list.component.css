@@ -3,6 +3,9 @@
   width:100%;
   display:flex;
   flex-direction:column;
+  /*
+  border:1px solid red;
+  */
 }
 .headerRow
 {
@@ -11,6 +14,9 @@
   flex-direction:row;
   justify-content:space-between;
   padding-bottom: 10px;
+  /*
+  border:1px solid blue;
+  */
 }
 .manualRow
 {
@@ -18,4 +24,24 @@
   display:flex;
   flex-direction:row;
   justify-content:space-evenly;
+  /*
+  border:1px solid green;
+  */
 }
+.manualRow > div
+{
+  /*
+  border:1px solid brown;
+  */
+  flex: 1 1 auto;
+}
+.manualRow > div >mat-form-field
+{
+  width:95%
+}
+.removeButton
+{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+} 

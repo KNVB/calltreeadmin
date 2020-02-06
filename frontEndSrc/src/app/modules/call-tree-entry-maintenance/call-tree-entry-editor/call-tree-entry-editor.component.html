@@ -1,5 +1,6 @@
 <h2 mat-dialog-title>{{ action }} A Call Tree Entry</h2>
 <form #callTreeEntryEditForm="ngForm" (ngSubmit)="onSubmit(callTreeEntryEditForm)" novalidate>
+  <div mat-dialog-content>
     <input type=hidden name="callTreeEntryId" [(ngModel)]="this.callTreeEntry.callTreeEntryId">
     <app-division-list-input-box
       name="division"
@@ -184,6 +185,12 @@
         </div>
       </mat-radio-group>
       <hr>
+      <app-manual-list  
+        name="manuals" 
+        [message]="this.manualMessage"
+        [(ngModel)]="this.callTreeEntry.manuals">
+      </app-manual-list>
+<!--      
       <table style="width:100%;">
         <tr>
           <td>Operation Manual(Optional):</td>
@@ -246,7 +253,10 @@
           </td>
         </tr>
       </table>
+-->      
     </div>
+  </div>
+  
   <mat-dialog-actions>
     <button mat-raised-button type="submit" color="primary" class="Update-btn">Save</button>
     <button mat-raised-button type="button" class="Discard-btn" (click)="closeDialog()">Close</button>

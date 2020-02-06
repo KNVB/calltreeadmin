@@ -16,7 +16,6 @@ import { Manual } from 'src/app/classes/Manual';
 export class ManualListComponent implements ControlValueAccessor {
   manuals: Manual[];
   @Input ('message') message: string;
-  @Input ('callTreeEntryId') callTreeEntryId:number;
   constructor() { 
 
   }
@@ -34,5 +33,16 @@ export class ManualListComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: any) {
     this.onTouched = fn;
+  }
+
+  addManual() {
+    const manual = new Manual();
+    if (this.manuals === null) {
+      this.manuals=[];
+    }
+    this.manuals.push(manual);
+  }
+  removeManual(index: number) {
+    this.manuals.splice(index, 1);
   }
 }

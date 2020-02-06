@@ -13,6 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CallTreeEntryEditorComponent implements OnInit {
   action: string;
+  manualMessage = 'Operation Manual(Optional):';
   activeCallTreeEntry = CallTreeEntry.active;
   inActiveCallTreeEntry = CallTreeEntry.inactive;
   callTreeEntry: CallTreeEntry = null;
@@ -61,8 +62,10 @@ export class CallTreeEntryEditorComponent implements OnInit {
                   this.systemToCalltree[sharedCallTreeEntry.systemName] = sharedCallTreeEntry.callTree;
                 });
                 this.sharedDivisionList = Object.keys(this.divisionToSystem);
+                /*
                 console.log(this.systemToCalltree);
                 console.log(this.divisionToSystem);
+                */
               }
   addCallTreeEntry() {
     let message = '';

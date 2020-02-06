@@ -1,1 +1,75 @@
 
+<div class="container">
+    <div class="headerRow">
+      <div>
+      {{message}}
+      </div>
+      <div>
+        <button 
+          mat-raised-button 
+          type="button" 
+          color="primary" 
+          class="Update-btn" 
+          (click)="addManual()">
+              Add Operation Manual
+            </button>
+      </div>
+    </div>
+    <div *ngFor="let manual of this.manuals; let i = index" class="manualRow" >
+      <div>
+        <mat-form-field>
+        <mat-label>Manual Location</mat-label>
+            <input
+              matInput
+              required
+              type="text"
+              [(ngModel)]="manual.manualLocation"
+              name="manualLocation{{i}}"
+              #manualLocationValidator="ngModel">
+            <mat-error *ngIf="manualLocationValidator.hasError('required')">
+              Manual location is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>  
+      </div>
+      <div>
+        <mat-form-field>
+            <mat-label>Manual Description</mat-label>
+            <input
+              matInput
+              required
+              type="text"
+              [(ngModel)]="manual.description"
+              name="manualDesc{{i}}"
+              #manualDescValidator="ngModel">
+            <mat-error *ngIf="manualDescValidator.hasError('required')">
+              Manual Description is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field style="width:100%">
+            <mat-label>Last Update Date</mat-label>
+            <input
+              matInput
+              required
+              type="text"
+              [(ngModel)]="manual.lastUpdateDate"
+              name="manualLastUpdateDate{{i}}"
+              #manualLastUpdateDateValidator="ngModel">
+            <mat-error *ngIf="manualLastUpdateDateValidator.hasError('required')">
+              Last Update Date is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="removeButton">
+         <button
+            style="font-weight: bold;font-size: 30px;vertical-align: middle;"
+            mat-raised-button type="button"
+            color="primary"
+            class="Update-btn"
+            (click)="removeManual(i)">
+              -
+          </button>
+      </div>
+    </div>
+  </div>

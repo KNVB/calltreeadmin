@@ -1,75 +1,11 @@
 <h2 mat-dialog-title>Edit a Operation Manual</h2>
 <form #manualEditForm="ngForm" (ngSubmit)="onSubmit(manualEditForm)" novalidate>
+  <input type=hidden name="callTreeEntryId" [(ngModel)]="this.callTreeEntryId">
   <app-manual-list  
     name="manuals" 
     [message]="this.message"
-    [(ngModel)]="this.manuals"
-    [callTreeEntryId]="this.callTreeEntryId">
+    [(ngModel)]="this.manuals">
   </app-manual-list>
-<!--
-  <table style="width:100%;">
-    <tr>
-      <td>{{systemName}} has {{((this.manuals==null)?"0":this.manuals.length)}} operation manual(s)</td>
-      <td>
-        <button style="float:right" mat-raised-button type="button" color="primary" class="Update-btn" (click)="addManual()">
-          Add Operation Manual
-        </button>
-      </td>
-    </tr>
-    <tr *ngFor="let manual of this.manuals; let i = index">
-      <td colspan=2>
-        <mat-form-field style="width:25%">
-          <mat-label>Manual Location</mat-label>
-          <input
-            matInput
-            required
-            type="text"
-            [(ngModel)]="manual.manualLocation"
-            name="manualLocation{{i}}"
-            #manualLocationValidator="ngModel">
-          <mat-error *ngIf="manualLocationValidator.hasError('required')">
-            Manual location is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field style="width:25%">
-          <mat-label>Manual Description</mat-label>
-          <input
-            matInput
-            required
-            type="text"
-            [(ngModel)]="manual.description"
-            name="manualDesc{{i}}"
-            #manualDescValidator="ngModel">
-          <mat-error *ngIf="manualDescValidator.hasError('required')">
-            Manual Description is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field style="width:25%">
-          <mat-label>Last Update Date</mat-label>
-          <input
-            matInput
-            required
-            type="text"
-            [(ngModel)]="manual.lastUpdateDate"
-            name="manualLastUpdateDate{{i}}"
-            #manualLastUpdateDateValidator="ngModel">
-          <mat-error *ngIf="manualLastUpdateDateValidator.hasError('required')">
-            Last Update Date is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <button
-          style="width:5%;font-weight: bold;font-size: 30px;vertical-align: middle;"
-          mat-raised-button type="button"
-          color="primary"
-          class="Update-btn"
-          (click)="removeManual(i)">
-            -
-        </button>
-      </td>
-    </tr>
-  </table>
--->
   <mat-dialog-actions>
     <button mat-raised-button type="submit" color="primary" class="Update-btn">Save</button>
     <button mat-raised-button type="button" class="Discard-btn" (click)="closeDialog()">Close</button>

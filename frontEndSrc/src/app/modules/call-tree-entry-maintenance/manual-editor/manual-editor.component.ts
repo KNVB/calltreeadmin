@@ -4,7 +4,6 @@ import { ManualService } from 'src/app/services/manual.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
 
-
 @Component({
   selector: 'app-manual-editor',
   templateUrl: './manual-editor.component.html',
@@ -25,18 +24,9 @@ export class ManualEditorComponent implements OnInit {
                   this.manuals = res;
                   this.message = this.systemName + ' has ' +((this.manuals==null)?"0":this.manuals.length);
                   this.message +=' operation manual(s)';
-                  
-                  console.log(this.callTreeEntryId);
-                  console.log(this.manuals);
                 });
               }
-  addManual() {
-    const manual = new Manual();
-    if (this.manuals === null) {
-      this.manuals=[];
-    }
-    this.manuals.push(manual);
-  }
+  
   closeDialog() {
     this.dialog.closeAll();
   }
@@ -52,9 +42,7 @@ export class ManualEditorComponent implements OnInit {
       }
     }
   }
-  removeManual(index: number) {
-    this.manuals.splice(index, 1);
-  }
+  
   updateManual() {
     this.manualService.updateManuals(this.callTreeEntryId,this.manuals).subscribe((res: boolean) => {
       console.log("Go");
