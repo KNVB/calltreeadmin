@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.calltree_entries.CallTree;
+import com.calltree_entries.CallTreeEntry;
 import com.calltree_entries.Manual;
 import com.calltree_entries.util.DbOp;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,14 +35,24 @@ public class ManualService {
 	@Path("/updateManuals")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response updateManuals (@FormParam("callTreeEntryId") int callTreeEntryId,@FormParam("manuals") String manuals) throws Exception {
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateManuals (CallTreeEntry callTreeEntry) throws Exception {
 		logger.debug("updateManuals is called");
-		 ObjectMapper mapper = new ObjectMapper();
-		Manual[] manualList=mapper.readValue(manuals, Manual[].class);
-		DbOp dbo=new DbOp();
-		boolean updateResult=dbo.updateManuals(callTreeEntryId,manualList);
-		dbo.close();
+		 boolean updateResult=false;
+		 DbOp dbo=null;
+		 try 
+		 {
+			dbo=new DbOp();
+			updateResult=dbo.updateManuals(callTreeEntry);
+		 }	
+		 catch (Exception err)
+		 {
+			 err.printStackTrace();
+		 }
+		 finally
+		 {
+			 dbo.close();
+		 }
 		return Response.ok(updateResult).build();
 	}
 	

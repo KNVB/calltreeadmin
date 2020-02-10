@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -99,7 +101,7 @@ public class DbOp implements DataStore {
 			stmt.setInt(1,callTreeEntryId);
 			stmt.setInt(2,callTreeId);
 			stmt.executeUpdate();
-			if (callTreeEntry.getManuals().length>0) {
+			if (callTreeEntry.getManuals().size()>0) {
 				stmt.close();
 				sqlString ="insert into manual ";
 				sqlString+="(manual_location,manual_description,manual_last_update_date)";
@@ -219,42 +221,58 @@ public class DbOp implements DataStore {
 	}
 	@Override
 	public CallTreeEntry[] getAllCallTreeEntry() {
-		ArrayList<CallTreeEntry> result=new ArrayList<CallTreeEntry>();
+		Map<Integer,CallTreeEntry> result=new TreeMap<Integer,CallTreeEntry>();
 		CallTreeEntry callTreeEntry;
 		CallTree callTree;
+		int callTreeEntryId=-1;
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 	 
-		sqlString ="select a.*,c.* from ";  
-		sqlString+="callTreeEntry a inner join callTreeEntry_calltree b ";
-		sqlString+="on a.callTreeEntry_id = b.callTreeEntry_id ";
-		sqlString+="inner join calltree c ";
-		sqlString+="on b.calltree_id= c.calltree_id ";
-		sqlString+="order by a.division,system_name,a.callTreeEntry_id";
+		sqlString ="select a.*,c.*,e.* from ";
+		sqlString+="callTreeEntry a ";
+		sqlString+="left outer join calltreeentry_manual b on a.calltreeEntry_id = b.calltreeEntry_id ";
+		sqlString+="left outer join manual c on b.manual_id=c.manual_id ";
+		sqlString+="inner join calltreeentry_calltree d on a.calltreeentry_id=d.calltreeentry_Id ";
+		sqlString+="inner join calltree e on e.calltree_id=d.calltree_id ";
+		sqlString+="order by a.division,system_name,a.callTreeEntry_id ";
 		try
 		{
 			stmt=dbConn.prepareStatement(sqlString);
 			rs=stmt.executeQuery();
 			while (rs.next())
 			{
-				callTreeEntry =new CallTreeEntry();
-				callTreeEntry.setDivision(rs.getString("division"));
-				callTreeEntry.setLocation(rs.getString("location"));
-				callTreeEntry.setMissionCritical(rs.getString("mission_Critical"));
-				callTreeEntry.setLogRecipients(rs.getString("log_recipients"));
-				callTreeEntry.setServiceLevel(rs.getString("service_level"));
-				callTreeEntry.setStatus(rs.getInt("status"));
-				callTreeEntry.setSystemName(rs.getString("system_name"));
-				callTreeEntry.setTimeToEscalate(rs.getString("time_to_escalate"));
-				callTreeEntry.setTimeToStartProcedure(rs.getString("time_to_start_procedure"));
-				callTreeEntry.setCallTreeEntryId(rs.getInt("callTreeEntry_id"));
-				
-				callTree=new CallTree();
-				callTree.setCallTreeId(rs.getInt("calltree_id"));
-				callTree.setCallTreeDetail(rs.getString("calltree_detail"));
-	
-				callTreeEntry.setCallTree(callTree);
-				result.add(callTreeEntry);
+				if (result.containsKey(rs.getInt("calltreeentry_id"))) {
+					callTreeEntry = result.remove(rs.getInt("calltreeentry_id"));
+				} else {
+					callTreeEntry =new CallTreeEntry();
+					callTreeEntry.setDivision(rs.getString("division"));
+					callTreeEntry.setLocation(rs.getString("location"));
+					callTreeEntry.setMissionCritical(rs.getString("mission_Critical"));
+					callTreeEntry.setLogRecipients(rs.getString("log_recipients"));
+					callTreeEntry.setServiceLevel(rs.getString("service_level"));
+					callTreeEntry.setStatus(rs.getInt("status"));
+					callTreeEntry.setSystemName(rs.getString("system_name"));
+					callTreeEntry.setTimeToEscalate(rs.getString("time_to_escalate"));
+					callTreeEntry.setTimeToStartProcedure(rs.getString("time_to_start_procedure"));
+					callTreeEntry.setCallTreeEntryId(rs.getInt("callTreeEntry_id"));
+					
+					callTree=new CallTree();
+					callTree.setCallTreeId(rs.getInt("calltree_id"));
+					callTree.setCallTreeDetail(rs.getString("calltree_detail"));
+		
+					callTreeEntry.setCallTree(callTree);
+				}
+				if (rs.getString("manual_id") != null) {
+					Manual manual=new Manual();
+					manual.setManualId(rs.getInt("manual_id"));
+					manual.setManualLocation(rs.getString("manual_Location"));
+					manual.setDescription(rs.getString("manual_description"));
+					manual.setLastUpdateDate(rs.getString("manual_last_update_date"));
+					ArrayList<Manual>manuals=callTreeEntry.getManuals();
+					manuals.add(manual);
+					callTreeEntry.setManuals(manuals);
+				}
+				result.put(callTreeEntry.getCallTreeEntryId(), callTreeEntry);
 			}
 		}
 		catch (Exception e) 
@@ -265,7 +283,7 @@ public class DbOp implements DataStore {
 		{
 			releaseResource(rs, stmt);
 		}
-		return result.toArray(new CallTreeEntry[0]);
+		return result.values().toArray(new CallTreeEntry[0]);
 	}	
 	@Override
 	public CallTreeEntry[] getCallTreeEntryByCallTreeId(int callTreeId)throws Exception {
@@ -407,14 +425,31 @@ public class DbOp implements DataStore {
 		return updateSuccess;
 	}	
 	@Override
-	public boolean updateManuals(int callTreeEntryId, Manual[] manuals) {
+	public boolean updateManuals(CallTreeEntry callTreeEntry) throws Exception {
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 		boolean updateSuccess=false;
-		logger.debug("update operation manual for call entry Id.="+callTreeEntryId);
-		for (Manual manual : manuals) {
-			logger.debug(manual.getDescription());
+		logger.debug("update operation manual for call entry Id.="+callTreeEntry.getCallTreeEntryId());
+		
+		try {
+			dbConn.setAutoCommit(false);
+			sqlString = "delete from calltreeentry_manual where calltreeEntry_id=?";
+			stmt=dbConn.prepareStatement(sqlString);
+			stmt.setInt(1, callTreeEntry.getCallTreeEntryId());
+			for (Manual manual : callTreeEntry.getManuals()) {
+				logger.debug(manual.getManualId()+","+manual.getDescription());
+			}
+
+		} catch (Exception e) {
+			dbConn.rollback();
+			e.printStackTrace();
+			callTreeEntry=null;
 		}
+		finally 
+		{
+			dbConn.setAutoCommit(true);
+			releaseResource(rs, stmt);
+		}		
 		return updateSuccess;
 	}
 //----------------------------------------------------------------------------------------------------------------------	

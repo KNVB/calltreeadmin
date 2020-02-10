@@ -41,8 +41,10 @@ export class ManualListComponent implements ControlValueAccessor {
       this.manuals=[];
     }
     this.manuals.push(manual);
+    this.onChange(this.manuals);
   }
   removeManual(index: number) {
     this.manuals.splice(index, 1);
+    this.onChange(this.manuals);
   }
 }

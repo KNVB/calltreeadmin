@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Manual } from '../classes/Manual';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CallTreeEntry } from '../classes/CallTreeEntry';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,14 +18,9 @@ export class ManualService {
     return this.http.post(serviceURL, requestParams).pipe(map((res: Manual[]) => res));
   }
 
-  updateManuals(callTreeEntryId: number, manuals: Manual[]): Observable<boolean> {
+  updateManuals(callTreeEntry: CallTreeEntry): Observable<boolean> {
     const serviceURL = this.url + 'updateManuals';
-    
-    let requestParams = new HttpParams();
-    requestParams = requestParams.append('callTreeEntryId', callTreeEntryId.toString());
-    requestParams = requestParams.append('manuals', JSON.stringify(manuals));
-    
-   /*
+    /*
     To the following code working, a lot of work in server side need to do.
     Please refer the following web page for detail:
     https://stackoverflow.com/questions/39635108/java-jersey-creating-own-injection-resolver-with-paraminjectionresolver-stra/39636141#39636141
@@ -34,6 +30,6 @@ export class ManualService {
     requestParams['callTreeEntryId']=callTreeEntryId;
     requestParams ['manuals']=manuals;
     */
-    return this.http.post(serviceURL, requestParams).pipe(map((res: boolean) => res));
+    return this.http.post(serviceURL,callTreeEntry).pipe(map((res: boolean) => res));
   }
 }

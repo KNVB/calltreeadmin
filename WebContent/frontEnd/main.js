@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>Edit a Operation Manual</h2>\r\n<form #manualEditForm=\"ngForm\" (ngSubmit)=\"onSubmit(manualEditForm)\" novalidate>\r\n  <input type=hidden name=\"callTreeEntryId\" [(ngModel)]=\"this.callTreeEntryId\">\r\n  <app-manual-list  \r\n    name=\"manuals\" \r\n    [message]=\"this.message\"\r\n    [(ngModel)]=\"this.manuals\">\r\n  </app-manual-list>\r\n  <mat-dialog-actions>\r\n    <button mat-raised-button type=\"submit\" color=\"primary\" class=\"Update-btn\">Save</button>\r\n    <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"closeDialog()\">Close</button>\r\n  </mat-dialog-actions>\r\n</form>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>Edit a Operation Manual</h2>\r\n<form #manualEditForm=\"ngForm\" (ngSubmit)=\"onSubmit(manualEditForm)\" novalidate>\r\n  <input type=hidden name=\"callTreeEntryId\" [(ngModel)]=\"this.callTreeEntryId\">\r\n  <app-manual-list  \r\n    name=\"manuals\" \r\n    [message]=\"this.message\"\r\n    [(ngModel)]=\"this.callTreeEntry.manuals\">\r\n  </app-manual-list>\r\n  <mat-dialog-actions>\r\n    <button mat-raised-button type=\"submit\" color=\"primary\" class=\"Update-btn\">Save</button>\r\n    <button mat-raised-button type=\"button\" class=\"Discard-btn\" (click)=\"closeDialog()\">Close</button>\r\n  </mat-dialog-actions>\r\n</form>\r\n");
 
 /***/ }),
 
@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"headerRow\">\r\n      <div>\r\n      {{message}}\r\n      </div>\r\n      <div>\r\n        <button \r\n          mat-raised-button \r\n          type=\"button\" \r\n          color=\"primary\" \r\n          class=\"Update-btn\" \r\n          (click)=\"addManual()\">\r\n              Add Operation Manual\r\n            </button>\r\n      </div>\r\n    </div>\r\n    <div *ngFor=\"let manual of this.manuals; let i = index\" class=\"manualRow\" >\r\n      <div>\r\n        <mat-form-field>\r\n        <mat-label>Manual Location</mat-label>\r\n            <input\r\n              matInput\r\n              required\r\n              type=\"text\"\r\n              [(ngModel)]=\"manual.manualLocation\"\r\n              name=\"manualLocation{{i}}\"\r\n              #manualLocationValidator=\"ngModel\">\r\n            <mat-error *ngIf=\"manualLocationValidator.hasError('required')\">\r\n              Manual location is <strong>required</strong>\r\n            </mat-error>\r\n        </mat-form-field>  \r\n      </div>\r\n      <div>\r\n        <mat-form-field>\r\n            <mat-label>Manual Description</mat-label>\r\n            <input\r\n              matInput\r\n              required\r\n              type=\"text\"\r\n              [(ngModel)]=\"manual.description\"\r\n              name=\"manualDesc{{i}}\"\r\n              #manualDescValidator=\"ngModel\">\r\n            <mat-error *ngIf=\"manualDescValidator.hasError('required')\">\r\n              Manual Description is <strong>required</strong>\r\n            </mat-error>\r\n        </mat-form-field>\r\n      </div>\r\n      <div>\r\n        <mat-form-field style=\"width:100%\">\r\n            <mat-label>Last Update Date</mat-label>\r\n            <input\r\n              matInput\r\n              required\r\n              type=\"text\"\r\n              [(ngModel)]=\"manual.lastUpdateDate\"\r\n              name=\"manualLastUpdateDate{{i}}\"\r\n              #manualLastUpdateDateValidator=\"ngModel\">\r\n            <mat-error *ngIf=\"manualLastUpdateDateValidator.hasError('required')\">\r\n              Last Update Date is <strong>required</strong>\r\n            </mat-error>\r\n        </mat-form-field>\r\n      </div>\r\n      <div class=\"removeButton\">\r\n         <button\r\n            style=\"font-weight: bold;font-size: 30px;vertical-align: middle;\"\r\n            mat-raised-button type=\"button\"\r\n            color=\"primary\"\r\n            class=\"Update-btn\"\r\n            (click)=\"removeManual(i)\">\r\n              -\r\n          </button>\r\n      </div>\r\n    </div>\r\n  </div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"headerRow\">\r\n      <div>\r\n      {{message}}\r\n      </div>\r\n      <div>\r\n        <button \r\n          mat-raised-button \r\n          type=\"button\" \r\n          color=\"primary\" \r\n          class=\"Update-btn\" \r\n          (click)=\"addManual()\">\r\n              Add Operation Manual\r\n            </button>\r\n      </div>\r\n    </div>\r\n    <div *ngFor=\"let manual of this.manuals; let i = index\" class=\"manualRow\" >\r\n      <div>\r\n        <mat-form-field>\r\n        <mat-label>Manual Location</mat-label>\r\n            <input\r\n              matInput\r\n              required\r\n              type=\"text\"\r\n              (ngModelChange)=\"onChange(this.manuals)\"\r\n              [(ngModel)]=\"manual.manualLocation\"\r\n              name=\"manualLocation{{i}}\"\r\n              #manualLocationValidator=\"ngModel\">\r\n            <mat-error *ngIf=\"manualLocationValidator.hasError('required')\">\r\n              Manual location is <strong>required</strong>\r\n            </mat-error>\r\n        </mat-form-field>  \r\n      </div>\r\n      <div>\r\n        <mat-form-field>\r\n            <mat-label>Manual Description</mat-label>\r\n            <input\r\n              matInput\r\n              required\r\n              (ngModelChange)=\"onChange(this.manuals)\"\r\n              type=\"text\"\r\n              [(ngModel)]=\"manual.description\"\r\n              name=\"manualDesc{{i}}\"\r\n              #manualDescValidator=\"ngModel\">\r\n            <mat-error *ngIf=\"manualDescValidator.hasError('required')\">\r\n              Manual Description is <strong>required</strong>\r\n            </mat-error>\r\n        </mat-form-field>\r\n      </div>\r\n      <div>\r\n        <mat-form-field style=\"width:100%\">\r\n            <mat-label>Last Update Date</mat-label>\r\n            <input\r\n              matInput\r\n              required\r\n              (ngModelChange)=\"onChange(this.manuals)\"\r\n              type=\"text\"\r\n              [(ngModel)]=\"manual.lastUpdateDate\"\r\n              name=\"manualLastUpdateDate{{i}}\"\r\n              #manualLastUpdateDateValidator=\"ngModel\">\r\n            <mat-error *ngIf=\"manualLastUpdateDateValidator.hasError('required')\">\r\n              Last Update Date is <strong>required</strong>\r\n            </mat-error>\r\n        </mat-form-field>\r\n      </div>\r\n      <div class=\"removeButton\">\r\n         <button\r\n            style=\"font-weight: bold;font-size: 30px;vertical-align: middle;\"\r\n            mat-raised-button type=\"button\"\r\n            color=\"primary\"\r\n            class=\"Update-btn\"\r\n            (click)=\"removeManual(i)\">\r\n              -\r\n          </button>\r\n      </div>\r\n    </div>\r\n  </div>");
 
 /***/ }),
 
@@ -752,6 +752,7 @@ let CallTreeEntryEditorComponent = class CallTreeEntryEditorComponent {
     }
     addCallTreeEntry() {
         let message = '';
+        console.log(this.callTreeEntry.manuals);
         this.callTreeEntryService.addCallTreeEntry(this.callTreeEntry).subscribe((res) => {
             if (res !== null) {
                 message += 'Add Call Tree Entry success.';
@@ -1035,8 +1036,7 @@ let CallTreeEntryMaintenanceComponent = class CallTreeEntryMaintenanceComponent 
         dialogConfig.autoFocus = false; // do not set focus on the first form element
         dialogConfig.width = '900px';
         dialogConfig.data = {
-            callTreeEntryId: callTreeEntry.callTreeEntryId,
-            systemName: callTreeEntry.systemName
+            callTreeEntry,
         };
         const dialogRef = this.dialog.open(_manual_editor_manual_editor_component__WEBPACK_IMPORTED_MODULE_7__["ManualEditorComponent"], dialogConfig);
     }
@@ -1211,13 +1211,10 @@ let ManualEditorComponent = class ManualEditorComponent {
         this.dialog = dialog;
         this.dialogRef = dialogRef;
         this.data = data;
-        this.callTreeEntryId = data.callTreeEntryId;
-        this.systemName = data.systemName;
-        this.manualService.getManualsByCallTreeEntryId(this.callTreeEntryId).subscribe((res) => {
-            this.manuals = res;
-            this.message = this.systemName + ' has ' + ((this.manuals == null) ? "0" : this.manuals.length);
-            this.message += ' operation manual(s)';
-        });
+        this.callTreeEntry = data.callTreeEntry;
+        this.message = this.callTreeEntry.systemName + ' has ';
+        this.message += ((this.callTreeEntry.manuals == null) ? "0" : this.callTreeEntry.manuals.length);
+        this.message += ' operation manual(s)';
     }
     closeDialog() {
         this.dialog.closeAll();
@@ -1229,14 +1226,13 @@ let ManualEditorComponent = class ManualEditorComponent {
             this.closeDialog();
         }
         else {
-            console.log(form.valid);
             if (form.valid) {
                 this.updateManual();
             }
         }
     }
     updateManual() {
-        this.manualService.updateManuals(this.callTreeEntryId, this.manuals).subscribe((res) => {
+        this.manualService.updateManuals(this.callTreeEntry).subscribe((res) => {
             console.log("Go");
         });
     }
@@ -1458,9 +1454,11 @@ let ManualListComponent = ManualListComponent_1 = class ManualListComponent {
             this.manuals = [];
         }
         this.manuals.push(manual);
+        this.onChange(this.manuals);
     }
     removeManual(index) {
         this.manuals.splice(index, 1);
+        this.onChange(this.manuals);
     }
 };
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1959,22 +1957,19 @@ let ManualService = class ManualService {
         requestParams = requestParams.append('callTreeEntryId', callTreeEntryId.toString());
         return this.http.post(serviceURL, requestParams).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
     }
-    updateManuals(callTreeEntryId, manuals) {
+    updateManuals(callTreeEntry) {
         const serviceURL = this.url + 'updateManuals';
-        let requestParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]();
-        requestParams = requestParams.append('callTreeEntryId', callTreeEntryId.toString());
-        requestParams = requestParams.append('manuals', JSON.stringify(manuals));
         /*
-         To the following code working, a lot of work in server side need to do.
-         Please refer the following web page for detail:
-         https://stackoverflow.com/questions/39635108/java-jersey-creating-own-injection-resolver-with-paraminjectionresolver-stra/39636141#39636141
-         */
+        To the following code working, a lot of work in server side need to do.
+        Please refer the following web page for detail:
+        https://stackoverflow.com/questions/39635108/java-jersey-creating-own-injection-resolver-with-paraminjectionresolver-stra/39636141#39636141
+        */
         /*
          let requestParams = {};
          requestParams['callTreeEntryId']=callTreeEntryId;
          requestParams ['manuals']=manuals;
          */
-        return this.http.post(serviceURL, requestParams).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
+        return this.http.post(serviceURL, callTreeEntry).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
     }
 };
 ManualService.ctorParameters = () => [

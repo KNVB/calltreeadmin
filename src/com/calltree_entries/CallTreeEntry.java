@@ -1,5 +1,7 @@
 package com.calltree_entries;
 
+import java.util.ArrayList;
+
 public class CallTreeEntry {
 	public static final int active=1;
 	public static final int inactive=0;
@@ -16,9 +18,8 @@ public class CallTreeEntry {
 	private int callTreeEntryId;
 	private float version=0.0f;
 
-	private Manual[] manuals=null;
+	private ArrayList<Manual> manuals=new ArrayList<Manual>();
 	
-
 	public CallTreeEntry() {
 		
 	}
@@ -110,11 +111,11 @@ public class CallTreeEntry {
 		this.status = status;
 	}
 
-	public Manual[] getManuals() {
+	public ArrayList<Manual>getManuals() {
 		return manuals;
 	}
 
-	public void setManuals(Manual[] manuals) {
+	public void setManuals(ArrayList<Manual> manuals) {
 		this.manuals = manuals;
 	}
 	public float getVersion() {

@@ -69,6 +69,7 @@ export class CallTreeEntryEditorComponent implements OnInit {
               }
   addCallTreeEntry() {
     let message = '';
+    console.log(this.callTreeEntry.manuals);
     this.callTreeEntryService.addCallTreeEntry(this.callTreeEntry).subscribe((res: CallTreeEntry) => {
       if (res !== null) {
         message += 'Add Call Tree Entry success.';

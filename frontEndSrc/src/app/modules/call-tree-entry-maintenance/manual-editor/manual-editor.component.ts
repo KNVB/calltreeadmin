@@ -1,8 +1,9 @@
+import { CallTreeEntry } from 'src/app/classes/CallTreeEntry';
 import { Component, Inject } from '@angular/core';
-import { Manual } from 'src/app/classes/Manual';
 import { ManualService } from 'src/app/services/manual.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-manual-editor',
@@ -10,21 +11,18 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./manual-editor.component.css']
 })
 export class ManualEditorComponent {
+  callTreeEntry: CallTreeEntry;
   callTreeEntryId: number;
-  manuals: Manual[];
+  manuals;
   message: string;
-  systemName: string;
   constructor(public manualService: ManualService,
               public dialog: MatDialog,
               private dialogRef: MatDialogRef<ManualEditorComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
-                this.callTreeEntryId = data.callTreeEntryId;
-                this.systemName = data.systemName;
-                this.manualService.getManualsByCallTreeEntryId(this.callTreeEntryId).subscribe((res: Manual[]) => {
-                  this.manuals = res;
-                  this.message = this.systemName + ' has ' +((this.manuals==null)?"0":this.manuals.length);
-                  this.message +=' operation manual(s)';
-                });
+                this.callTreeEntry=data.callTreeEntry;
+                this.message = this.callTreeEntry.systemName + ' has ';
+                this.message +=((this.callTreeEntry.manuals==null)?"0":this.callTreeEntry.manuals.length);
+                this.message +=' operation manual(s)';
               }
   
   closeDialog() {
@@ -37,7 +35,6 @@ export class ManualEditorComponent {
     if (form.pristine && form.valid) {
       this.closeDialog();
     } else {
-      console.log(form.valid);
       if (form.valid) {
         this.updateManual();
       }
@@ -45,7 +42,7 @@ export class ManualEditorComponent {
   }
   
   updateManual() {
-    this.manualService.updateManuals(this.callTreeEntryId,this.manuals).subscribe((res: boolean) => {
+    this.manualService.updateManuals(this.callTreeEntry).subscribe((res: boolean) => {
       console.log("Go");
     });
   }
