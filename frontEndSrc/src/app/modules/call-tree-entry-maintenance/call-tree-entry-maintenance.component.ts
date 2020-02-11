@@ -5,7 +5,7 @@ import { CallTreeEntryEditorComponent } from './call-tree-entry-editor/call-tree
 import { Component, ViewChild } from '@angular/core';
 import { ConfirmationBoxComponent } from '../utility/components/confirmation-box/confirmation-box.component';
 import {ManualEditorComponent} from './manual-editor/manual-editor.component';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 

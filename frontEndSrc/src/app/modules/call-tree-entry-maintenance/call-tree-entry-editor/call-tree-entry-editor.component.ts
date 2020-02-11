@@ -2,7 +2,7 @@ import { CallTreeEntry } from 'src/app/classes/CallTreeEntry';
 import { CallTreeEntryService } from 'src/app/services/call-tree-entry.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Manual } from 'src/app/classes/Manual';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
 
 

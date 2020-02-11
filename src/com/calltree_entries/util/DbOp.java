@@ -224,7 +224,6 @@ public class DbOp implements DataStore {
 		Map<Integer,CallTreeEntry> result=new TreeMap<Integer,CallTreeEntry>();
 		CallTreeEntry callTreeEntry;
 		CallTree callTree;
-		int callTreeEntryId=-1;
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 	 
@@ -431,16 +430,49 @@ public class DbOp implements DataStore {
 		boolean updateSuccess=false;
 		logger.debug("update operation manual for call entry Id.="+callTreeEntry.getCallTreeEntryId());
 		
-		try {
+		try 
+		{
 			dbConn.setAutoCommit(false);
-			sqlString = "delete from calltreeentry_manual where calltreeEntry_id=?";
+			sqlString  ="delete from manual ";
+			sqlString+="where  manual_id in (select manual_id from calltreeentry_manual where calltreeEntry_id=?)";
 			stmt=dbConn.prepareStatement(sqlString);
 			stmt.setInt(1, callTreeEntry.getCallTreeEntryId());
+			stmt.executeUpdate();
+			stmt.close();
+			
+			sqlString  ="delete from calltreeentry_manual where calltreeEntry_id=?";
+			stmt=dbConn.prepareStatement(sqlString);
+			stmt.setInt(1, callTreeEntry.getCallTreeEntryId());
+			stmt.executeUpdate();
+			stmt.close();
+			
 			for (Manual manual : callTreeEntry.getManuals()) {
-				logger.debug(manual.getManualId()+","+manual.getDescription());
+				sqlString ="insert into manual ";
+				sqlString+="(manual_location,manual_description,manual_last_update_date,manual_id)";
+				sqlString+="values (?,?,?,?)";
+				
+				stmt=dbConn.prepareStatement(sqlString);
+				stmt.setString(1, manual.getManualLocation());
+				stmt.setString(2, manual.getDescription());
+				stmt.setString(3, manual.getLastUpdateDate());
+				stmt.setInt(4,manual.getManualId());
+				stmt.executeUpdate();
+				stmt.close();
+				
+				sqlString ="insert into callTreeEntry_manual ";
+				sqlString+="(callTreeEntry_id,manual_id)";
+				sqlString+="values(?,?)";
+				
+				stmt=dbConn.prepareStatement(sqlString);
+				stmt.setInt(1,callTreeEntry.getCallTreeEntryId());
+				stmt.setInt(2,manual.getManualId());
+				stmt.executeUpdate();
+				stmt.close();
 			}
-
-		} catch (Exception e) {
+			dbConn.commit();
+			updateSuccess=true;
+		} 
+		catch (Exception e) {
 			dbConn.rollback();
 			e.printStackTrace();
 			callTreeEntry=null;

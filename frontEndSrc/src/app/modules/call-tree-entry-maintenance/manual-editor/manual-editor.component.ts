@@ -1,7 +1,7 @@
 import { CallTreeEntry } from 'src/app/classes/CallTreeEntry';
 import { Component, Inject } from '@angular/core';
 import { ManualService } from 'src/app/services/manual.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
 
 
@@ -43,7 +43,15 @@ export class ManualEditorComponent {
   
   updateManual() {
     this.manualService.updateManuals(this.callTreeEntry).subscribe((res: boolean) => {
-      console.log("Go");
+      let message ='';
+      if (res) {
+        message = 'The operation manual information is updated successfully.';
+      } else {
+        message = 'The operation manual information is failed to update.';
+      }
+      alert(message);
+      
+      this.dialogRef.close();
     });
   }
 }
