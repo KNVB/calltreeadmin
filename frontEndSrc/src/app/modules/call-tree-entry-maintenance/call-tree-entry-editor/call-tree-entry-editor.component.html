@@ -140,17 +140,11 @@
           <div style="display:flex;flex-direction: column;">
             <mat-radio-button style="padding-bottom: 5px;" [value]="1">Create an individual CallTree</mat-radio-button>
             <div tyle="display:flex;" *ngIf="(callTreeType==1)">
-              Call Tree Detail:
-              <ckeditor
-                required
-                name="callTreeDetail"
-                [config]="callTreeDetailEditorConfig"
-                #callTreeDetail1="ngModel"
-                [(ngModel)]="this.callTreeEntry.callTree.callTreeDetail">
-              </ckeditor>
-              <mat-error *ngIf="(callTreeDetail1.touched || callTreeEntryEditForm.submitted)  && callTreeDetail1.hasError('required')">
-                Call tree is <strong>required</strong>
-              </mat-error>
+             <app-rich-text-editor  
+              name="callTreeDetail"
+              [form]="callTreeEntryEditForm"
+              [(ngModel)]="this.callTreeEntry.callTree.callTreeDetail">
+            </app-rich-text-editor>
             </div>
           </div>
           <div style="display:flex;flex-direction: column;padding-top: 5px;">

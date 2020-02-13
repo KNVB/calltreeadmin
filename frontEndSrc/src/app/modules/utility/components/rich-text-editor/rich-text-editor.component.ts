@@ -15,7 +15,7 @@ import { NgForm } from '@angular/forms';
 })
 export class RichTextEditorComponent implements ControlValueAccessor{
   callTreeDetail;
-  @Input('callTreeEditForm') callTreeEditForm:NgForm;
+  @Input('form') form:NgForm;
   ckeditorConfig = {extraPlugins: 'colorbutton',
                     removeButtons: 'BGColor,BulletedList,PasteFromWord,PasteText',
                     toolbarGroups: [
@@ -29,9 +29,7 @@ export class RichTextEditorComponent implements ControlValueAccessor{
   onChange: (value) => {};
   onTouched: () => {};
   writeValue(obj: any) {  
-    if (obj != null) {
-      this.callTreeDetail = obj;
-    }  
+    this.callTreeDetail = obj;
   }
 
   registerOnChange(fn: any) {
@@ -40,5 +38,8 @@ export class RichTextEditorComponent implements ControlValueAccessor{
 
   registerOnTouched(fn: any) {
     this.onTouched = fn;
+  }
+  forwardEvent(evt) {
+    this.onChange(evt);
   }
 }

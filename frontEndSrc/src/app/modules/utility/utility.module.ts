@@ -16,8 +16,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
+import {RichTextEditorComponent } from './components/rich-text-editor/rich-text-editor.component';
 import {SystemNameValidatorDirective} from './directives/system-name-validator.directive';
-import { RichTextEditorComponent } from './components/rich-text-editor/rich-text-editor.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +50,7 @@ import { RichTextEditorComponent } from './components/rich-text-editor/rich-text
             DivisionValidatorDirective,
             LogRecipientValidatorDirective,
             ManualListComponent,
+            RichTextEditorComponent,
             SystemNameValidatorDirective,
           ]
 })
