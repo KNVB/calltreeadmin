@@ -1,0 +1,11 @@
+Call Tree Detail:
+<ckeditor
+    required
+    name="callTreeDetail"
+    [config]="ckeditorConfig"
+    #callTreeDetail1="ngModel"
+    [(ngModel)]="callTreeDetail">
+</ckeditor>
+<mat-error *ngIf="(callTreeDetail1.touched || callTreeEditForm.submitted)  && callTreeDetail1.hasError('required')">
+    Call tree is <strong>required</strong>
+</mat-error>
