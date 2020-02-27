@@ -1,5 +1,5 @@
-import { Component,forwardRef, Input} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { Component, forwardRef,Input} from '@angular/core';
+import {ControlContainer,ControlValueAccessor,NgForm,NG_VALUE_ACCESSOR} from '@angular/forms';
 import { Manual } from 'src/app/classes/Manual';
 @Component({
   selector: 'app-manual-list',
@@ -10,21 +10,19 @@ import { Manual } from 'src/app/classes/Manual';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => ManualListComponent),
       multi: true
-    }
-  ]
+    },
+  ],
+  viewProviders:[{
+    provide: ControlContainer, useExisting: NgForm
+  }]
 })
 export class ManualListComponent implements ControlValueAccessor {
-  manuals: Manual[];
-  @Input ('message') message: string;
-  constructor() { 
-
-  }
+  @Input()manuals: Manual[];
+  @Input() message:string;
   onChange: (value) => {};
   onTouched: () => {};
   writeValue(obj: any) {  
-    if (obj != null) {
-      this.manuals = obj;
-    }  
+     this.manuals = obj;
   }
 
   registerOnChange(fn: any) {
@@ -41,10 +39,8 @@ export class ManualListComponent implements ControlValueAccessor {
       this.manuals=[];
     }
     this.manuals.push(manual);
-    this.onChange(this.manuals);
   }
   removeManual(index: number) {
     this.manuals.splice(index, 1);
-    this.onChange(this.manuals);
   }
 }

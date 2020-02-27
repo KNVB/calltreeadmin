@@ -13,7 +13,7 @@ public interface DataStore {
 	public CallTreeEntry addCallTreeEntry(CallTreeEntry callTreeEntry) throws Exception;
 	public boolean updateCallTree(CallTree callTree) throws Exception;
 	public boolean updateCallTreeEntry(CallTreeEntry callTreeEntry) throws Exception;
-	public boolean updateManuals(CallTreeEntry callTreeEntry) throws Exception;
+	public boolean updateCallTreeEntryManualsMapping(CallTreeEntry callTreeEntry) throws Exception;
 	
 	public boolean enableCallTreeEntry(int callTreeEntryId) throws Exception;
 	public boolean disableCallTreeEntry(int callTreeEntryId) throws Exception;

@@ -32,18 +32,18 @@ public class ManualService {
 		return Response.ok(result).build();
 	}
 	
-	@Path("/updateManuals")
+	@Path("/updateCallTreeEntryManualsMapping")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateManuals (CallTreeEntry callTreeEntry) throws Exception {
-		logger.debug("updateManuals is called");
+	public Response updateCallTreeEntryManualsMapping (CallTreeEntry callTreeEntry) throws Exception {
+		logger.debug("updateCallTreeEntryManualsMapping is called");
 		 boolean updateResult=false;
 		 DbOp dbo=null;
 		 try 
 		 {
 			dbo=new DbOp();
-			updateResult=dbo.updateManuals(callTreeEntry);
+			updateResult=dbo.updateCallTreeEntryManualsMapping(callTreeEntry);
 		 }	
 		 catch (Exception err)
 		 {

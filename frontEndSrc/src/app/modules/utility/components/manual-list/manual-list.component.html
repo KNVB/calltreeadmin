@@ -14,7 +14,7 @@
             </button>
       </div>
     </div>
-    <div *ngFor="let manual of this.manuals; let i = index" class="manualRow" >
+    <div #manuals *ngFor="let manual of this.manuals; let i = index" class="manualRow" >
       <div>
         <mat-form-field>
         <mat-label>Manual Location</mat-label>
@@ -22,7 +22,6 @@
               matInput
               required
               type="text"
-              (ngModelChange)="onChange(this.manuals)"
               [(ngModel)]="manual.manualLocation"
               name="manualLocation{{i}}"
               #manualLocationValidator="ngModel">
@@ -37,7 +36,6 @@
             <input
               matInput
               required
-              (ngModelChange)="onChange(this.manuals)"
               type="text"
               [(ngModel)]="manual.description"
               name="manualDesc{{i}}"
@@ -53,7 +51,6 @@
             <input
               matInput
               required
-              (ngModelChange)="onChange(this.manuals)"
               type="text"
               [(ngModel)]="manual.lastUpdateDate"
               name="manualLastUpdateDate{{i}}"

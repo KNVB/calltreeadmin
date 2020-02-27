@@ -103,31 +103,11 @@ public class DbOp implements DataStore {
 			stmt.executeUpdate();
 			if (callTreeEntry.getManuals().size()>0) {
 				stmt.close();
-				sqlString ="insert into manual ";
-				sqlString+="(manual_location,manual_description,manual_last_update_date)";
-				sqlString+="values (?,?,?)";
-				
-				insertMappingSqlString ="insert into callTreeEntry_manual ";
-				insertMappingSqlString+="(callTreeEntry_id,manual_id)";
-				insertMappingSqlString+="values(?,?)";
+		
 				for (Manual manual:callTreeEntry.getManuals()) {
 					logger.debug(objectMapper.writeValueAsString(manual));
-					stmt=dbConn.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
-					stmt.setString(1, manual.getManualLocation());
-					stmt.setString(2, manual.getDescription());
-					stmt.setString(3, manual.getLastUpdateDate());
-					stmt.executeUpdate();
-					rs = stmt.getGeneratedKeys();
-					rs.next();
-					manualId=rs.getInt(1);
-					rs.close();
-					stmt.close();
-					stmt=dbConn.prepareStatement(insertMappingSqlString);
-					stmt.setInt(1,callTreeEntryId);
-					stmt.setInt(2,manualId);
-					stmt.executeUpdate();
-					stmt.close();
-					rs.close();
+					manualId=this.addManual(manual);
+					this.addCallTreeEntryManualMapping(callTreeEntry.getCallTreeEntryId(), manualId); 
 				}
 			}
 			dbConn.commit();
@@ -424,7 +404,7 @@ public class DbOp implements DataStore {
 		return updateSuccess;
 	}	
 	@Override
-	public boolean updateManuals(CallTreeEntry callTreeEntry) throws Exception {
+	public boolean updateCallTreeEntryManualsMapping(CallTreeEntry callTreeEntry) throws Exception {
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 		boolean updateSuccess=false;
@@ -447,27 +427,8 @@ public class DbOp implements DataStore {
 			stmt.close();
 			
 			for (Manual manual : callTreeEntry.getManuals()) {
-				sqlString ="insert into manual ";
-				sqlString+="(manual_location,manual_description,manual_last_update_date,manual_id)";
-				sqlString+="values (?,?,?,?)";
-				
-				stmt=dbConn.prepareStatement(sqlString);
-				stmt.setString(1, manual.getManualLocation());
-				stmt.setString(2, manual.getDescription());
-				stmt.setString(3, manual.getLastUpdateDate());
-				stmt.setInt(4,manual.getManualId());
-				stmt.executeUpdate();
-				stmt.close();
-				
-				sqlString ="insert into callTreeEntry_manual ";
-				sqlString+="(callTreeEntry_id,manual_id)";
-				sqlString+="values(?,?)";
-				
-				stmt=dbConn.prepareStatement(sqlString);
-				stmt.setInt(1,callTreeEntry.getCallTreeEntryId());
-				stmt.setInt(2,manual.getManualId());
-				stmt.executeUpdate();
-				stmt.close();
+				int manualId=this.addManual(manual);
+				this.addCallTreeEntryManualMapping(callTreeEntry.getCallTreeEntryId(), manualId); 
 			}
 			dbConn.commit();
 			updateSuccess=true;
@@ -483,6 +444,53 @@ public class DbOp implements DataStore {
 			releaseResource(rs, stmt);
 		}		
 		return updateSuccess;
+	}
+//----------------------------------------------------------------------------------------------------------------------	
+	private void addCallTreeEntryManualMapping(int  callTreeEntryId,int manualId) throws Exception{
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		try {
+			sqlString ="insert into callTreeEntry_manual ";
+			sqlString+="(callTreeEntry_id,manual_id)";
+			sqlString+="values(?,?)";
+			
+			stmt=dbConn.prepareStatement(sqlString);
+			stmt.setInt(1,callTreeEntryId);
+			stmt.setInt(2,manualId);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally 
+		{
+			releaseResource(rs, stmt);
+		}
+	}
+	private int addManual(Manual manual) throws Exception {
+		int manualId=-1;
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		sqlString ="insert into manual ";
+		sqlString+="(manual_location,manual_description,manual_last_update_date)";
+		sqlString+="values (?,?,?)";
+		
+		try {
+			stmt=dbConn.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, manual.getManualLocation());
+			stmt.setString(2, manual.getDescription());
+			stmt.setString(3, manual.getLastUpdateDate());
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			rs.next();
+			manualId=rs.getInt(1);	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally 
+		{
+			releaseResource(rs, stmt);
+		}
+		return manualId;
 	}
 //----------------------------------------------------------------------------------------------------------------------	
 	/**

@@ -1,11 +1,16 @@
-import { Component,forwardRef, Input } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import { NgForm } from '@angular/forms';
+import { Component,forwardRef, Input,ViewChild } from '@angular/core';
+import {ControlValueAccessor,NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { NgForm,FormControl } from '@angular/forms';
 @Component({
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => RichTextEditorComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: RichTextEditorComponent,
       multi: true
     }
   ],
@@ -16,6 +21,7 @@ import { NgForm } from '@angular/forms';
 export class RichTextEditorComponent implements ControlValueAccessor{
   callTreeDetail;
   @Input('form') form:NgForm;
+  @ViewChild("callTreeDetail1", { static: true }) control: FormControl;
   ckeditorConfig = {extraPlugins: 'colorbutton',
                     removeButtons: 'BGColor,BulletedList,PasteFromWord,PasteText',
                     toolbarGroups: [
@@ -41,5 +47,9 @@ export class RichTextEditorComponent implements ControlValueAccessor{
   }
   forwardEvent(evt) {
     this.onChange(evt);
+    this.onTouched();
+  }
+  validate(c:FormControl) {
+    return this.control.errors;
   }
 }

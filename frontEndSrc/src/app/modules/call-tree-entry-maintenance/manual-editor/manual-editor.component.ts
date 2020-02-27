@@ -36,13 +36,13 @@ export class ManualEditorComponent {
       this.closeDialog();
     } else {
       if (form.valid) {
-        this.updateManual();
+        this.updateCallTreeEntryManualsMapping();
       }
     }
   }
   
-  updateManual() {
-    this.manualService.updateManuals(this.callTreeEntry).subscribe((res: boolean) => {
+  updateCallTreeEntryManualsMapping() {
+    this.manualService.updateCallTreeEntryManualsMapping(this.callTreeEntry).subscribe((res: boolean) => {
       let message ='';
       if (res) {
         message = 'The operation manual information is updated successfully.';
