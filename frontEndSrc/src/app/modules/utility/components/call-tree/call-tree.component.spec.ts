@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RichTextEditorComponent } from './rich-text-editor.component';
+import { CallTreeComponent } from './call-tree.component';
 
-describe('RichTextEditorComponent', () => {
-  let component: RichTextEditorComponent;
-  let fixture: ComponentFixture<RichTextEditorComponent>;
+describe('CallTreeComponent', () => {
+  let component: CallTreeComponent;
+  let fixture: ComponentFixture<CallTreeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RichTextEditorComponent ]
+      declarations: [ CallTreeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RichTextEditorComponent);
+    fixture = TestBed.createComponent(CallTreeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

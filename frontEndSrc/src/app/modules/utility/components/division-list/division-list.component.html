@@ -1,0 +1,24 @@
+<mat-form-field>
+    <mat-label>Division</mat-label>
+    <input 
+        [(ngModel)]="divisionModel"
+        [matAutocomplete]="divisions"
+        (ngModelChange)="autoCompleteFilter($event)"
+        [divisionValidator]="this.divisionList"
+        matInput
+        name="division"
+        required
+        type=text
+        #division="ngModel">
+    <mat-error *ngIf="division.hasError('invalidDivisionName')">
+        {{division.errors['invalidDivisionName']}} is not a valid divison name.    
+    </mat-error>
+    <mat-error *ngIf="division.hasError('required')">
+        Division Name is <strong>required</strong>
+    </mat-error>
+    <mat-autocomplete  #divisions="matAutocomplete">
+        <mat-option *ngFor="let division of this.filteredDivisionList" [value]="division">
+          {{ division }}
+        </mat-option>
+      </mat-autocomplete>
+</mat-form-field>

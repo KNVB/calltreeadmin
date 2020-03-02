@@ -103,6 +103,7 @@ export class CallTreeEntryEditorComponent implements OnInit {
   onSubmit(form: NgForm) {
     console.log('form.dirty=' + form.dirty);
     console.log('form.valid=' + form.valid);
+    console.log(form.controls);
     if (form.pristine && form.valid) {
       this.closeDialog();
     } else {
