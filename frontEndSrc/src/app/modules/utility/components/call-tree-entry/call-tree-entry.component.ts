@@ -1,6 +1,7 @@
 import { Component,forwardRef, Input } from '@angular/core';
-import { CallTreeEntry } from '../CallTreeEntry';
+
 import { ControlContainer, NgForm,NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CallTreeEntry } from 'src/app/classes/CallTreeEntry';
 
 @Component({
   providers:
@@ -14,19 +15,18 @@ import { ControlContainer, NgForm,NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'app-call-tree-entry',
   styleUrls: ['./call-tree-entry.component.css'],
   templateUrl: './call-tree-entry.component.html',
-  viewProviders:[{
+  viewProviders: [{
     provide: ControlContainer, useExisting: NgForm
   }]
-  
+
 })
 export class CallTreeEntryComponent {
-  @Input()callTreeEntry:CallTreeEntry;
-  @Input() divisionList:string[];
+  @Input()callTreeEntry: CallTreeEntry;
+  @Input() divisionList: string[];
   activeCallTreeEntry = CallTreeEntry.active;
   inActiveCallTreeEntry = CallTreeEntry.inactive;
-  serviceLevelList = [1, 2, 3];  
-  constructor() { 
+  serviceLevelList = [1, 2, 3];
+  constructor() {
 
   }
-  
 }

@@ -1,6 +1,7 @@
 import { Component,forwardRef, OnInit, Input } from '@angular/core';
 import { ControlContainer,  ControlValueAccessor ,NgForm,NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CallTree } from '../CallTree';
+import { CallTree } from 'src/app/classes/CallTree';
+
 
 @Component({
   providers: [
@@ -18,8 +19,8 @@ import { CallTree } from '../CallTree';
   }]
 })
 export class CallTreeComponent implements OnInit, ControlValueAccessor  {
-  @Input()callTree:CallTree;
-  
+  @Input()callTree: CallTree;
+
   ckeditorConfig = {extraPlugins: 'colorbutton',
                     removeButtons: 'BGColor,BulletedList,PasteFromWord,PasteText',
                     toolbarGroups: [

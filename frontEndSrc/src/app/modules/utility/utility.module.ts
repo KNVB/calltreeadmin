@@ -1,12 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CKEditorModule } from 'ckeditor4-angular';
+import { CallTreeComponent } from './components/call-tree/call-tree.component';
+import { CallTreeEntryComponent } from './components/call-tree-entry/call-tree-entry.component';
 import { ConfirmationBoxComponent } from './components/confirmation-box/confirmation-box.component';
-import { DivisionListInputBoxComponent } from './components/division-list-input-box/division-list-input-box.component';
+import { DivisionListComponent } from './components/division-list/division-list.component';
 import { DivisionValidatorDirective } from './directives/division-validator.directive';
 import { FormsModule } from '@angular/forms';
 import { LogRecipientValidatorDirective } from './directives/log-recipient-validator.directive';
 import {ManualListComponent} from './components/manual-list/manual-list.component';
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CKEditorModule } from 'ckeditor4-angular';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -16,18 +19,22 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
-import {RichTextEditorComponent } from './components/rich-text-editor/rich-text-editor.component';
 import {SystemNameValidatorDirective} from './directives/system-name-validator.directive';
+
+
+
 
 @NgModule({
   declarations: [
+                  CallTreeComponent,
+                  CallTreeEntryComponent,
                   ConfirmationBoxComponent,
-                  DivisionListInputBoxComponent,
+                  DivisionListComponent,
                   DivisionValidatorDirective,
                   LogRecipientValidatorDirective,
                   ManualListComponent,
                   SystemNameValidatorDirective,
-                  RichTextEditorComponent,
+
                 ],
   imports: [
     CKEditorModule,
