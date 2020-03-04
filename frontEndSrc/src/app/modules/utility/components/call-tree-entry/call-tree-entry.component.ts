@@ -8,7 +8,7 @@ import { CallTreeEntry } from 'src/app/classes/CallTreeEntry';
             [
               {
                 provide: NG_VALUE_ACCESSOR,
-                useExisting: forwardRef(() =>CallTreeEntryComponent),
+                useExisting: forwardRef(() => CallTreeEntryComponent),
                 multi: true
               },
             ],
@@ -22,10 +22,9 @@ import { CallTreeEntry } from 'src/app/classes/CallTreeEntry';
 })
 export class CallTreeEntryComponent {
   @Input()callTreeEntry: CallTreeEntry;
-  @Input() divisionList: string[];
   activeCallTreeEntry = CallTreeEntry.active;
   inActiveCallTreeEntry = CallTreeEntry.inactive;
-  serviceLevelList = [1, 2, 3];
+  serviceLevelList = ['1', '2', '3'];
   constructor() {
 
   }

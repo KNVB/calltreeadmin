@@ -10,12 +10,7 @@
       <td [innerHtml]="callTreeEntry.systemName|safeHtml"></td>
     </tr>
   </table>
-  <app-rich-text-editor  
-    name="callTreeDetail"
-    [form]="callTreeEditForm"
-    [(ngModel)]="this.callTree.callTreeDetail">
-  </app-rich-text-editor>
-
+  <app-call-tree [callTree]="this.callTree"></app-call-tree>
   <mat-dialog-actions>
     <button mat-raised-button type="submit" color="primary" class="Update-btn">Save</button>
     <button mat-raised-button type="button" class="Discard-btn" (click)="closeDialog()">Close</button>

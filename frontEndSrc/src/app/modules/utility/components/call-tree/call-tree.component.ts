@@ -20,7 +20,7 @@ import { CallTree } from 'src/app/classes/CallTree';
 })
 export class CallTreeComponent implements OnInit, ControlValueAccessor  {
   @Input()callTree: CallTree;
-
+  callTreeType = 1;
   ckeditorConfig = {extraPlugins: 'colorbutton',
                     removeButtons: 'BGColor,BulletedList,PasteFromWord,PasteText',
                     toolbarGroups: [
@@ -31,13 +31,20 @@ export class CallTreeComponent implements OnInit, ControlValueAccessor  {
                         { name: 'paragraph', groups: [ 'list' ] },
                       ]
                     };
+  sharedCallTreeDetail: string;
   constructor() { }
-  onChange= (value) => {};
-  onTouched= () => {};
+  onCallTreeTypeChange(callTreeType) {
+    if (callTreeType === 1) {// new a individual call tree
+      this.callTree.callTreeId = -1;
+      this.sharedCallTreeDetail = '';
+    }
+  }
+  onChange = (value) => {};
+  onTouched = () => {};
   ngOnInit(): void {
   }
   writeValue(obj: any) {
-    if(obj != null){
+    if (obj != null) {
       this.callTree = obj;
     }
   }

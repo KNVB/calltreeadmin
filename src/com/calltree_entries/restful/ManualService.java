@@ -11,11 +11,9 @@ import javax.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.calltree_entries.CallTree;
 import com.calltree_entries.CallTreeEntry;
 import com.calltree_entries.Manual;
 import com.calltree_entries.util.DbOp;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/ManualService")
 public class ManualService {

@@ -19,38 +19,34 @@ export class ManualEditorComponent {
               public dialog: MatDialog,
               private dialogRef: MatDialogRef<ManualEditorComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
-                this.callTreeEntry=data.callTreeEntry;
+                this.callTreeEntry = data.callTreeEntry;
                 this.message = this.callTreeEntry.systemName + ' has ';
-                this.message +=((this.callTreeEntry.manuals==null)?"0":this.callTreeEntry.manuals.length);
-                this.message +=' operation manual(s)';
+                this.message += ((this.callTreeEntry.manuals == null) ? '0' : this.callTreeEntry.manuals.length);
+                this.message += ' operation manual(s)';
               }
-  
+
   closeDialog() {
     this.dialog.closeAll();
   }
-  
+
   onSubmit(form: NgForm){
     console.log('form.dirty=' + form.dirty);
     console.log('form.valid=' + form.valid);
-    if (form.pristine && form.valid) {
-      this.closeDialog();
-    } else {
-      if (form.valid) {
+    if (form.valid) {
         this.updateCallTreeEntryManualsMapping();
-      }
     }
   }
-  
+
   updateCallTreeEntryManualsMapping() {
     this.manualService.updateCallTreeEntryManualsMapping(this.callTreeEntry).subscribe((res: boolean) => {
-      let message ='';
+      let message = '';
       if (res) {
         message = 'The operation manual information is updated successfully.';
       } else {
         message = 'The operation manual information is failed to update.';
       }
       alert(message);
-      
+
       this.dialogRef.close();
     });
   }

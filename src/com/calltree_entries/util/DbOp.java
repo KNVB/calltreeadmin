@@ -47,7 +47,6 @@ public class DbOp implements DataStore {
 		int callTreeId,callTreeEntryId=-1,manualId;
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
-		String insertMappingSqlString;
 		try
 		{
 			sqlString ="insert into callTreeEntry ";
@@ -209,11 +208,11 @@ public class DbOp implements DataStore {
 	 
 		sqlString ="select a.*,c.*,e.* from ";
 		sqlString+="callTreeEntry a ";
-		sqlString+="left outer join calltreeentry_manual b on a.calltreeEntry_id = b.calltreeEntry_id ";
+		sqlString+="left outer join callTreeEntry_manual b on a.calltreeEntry_id = b.calltreeEntry_id "; 
 		sqlString+="left outer join manual c on b.manual_id=c.manual_id ";
-		sqlString+="inner join calltreeentry_calltree d on a.calltreeentry_id=d.calltreeentry_Id ";
+		sqlString+="inner join callTreeEntry_calltree d on a.calltreeEntry_id=d.calltreeEntry_Id "; 
 		sqlString+="inner join calltree e on e.calltree_id=d.calltree_id ";
-		sqlString+="order by a.division,system_name,a.callTreeEntry_id ";
+		sqlString+="order by a.division,system_name,a.callTreeEntry_id";
 		try
 		{
 			stmt=dbConn.prepareStatement(sqlString);
@@ -414,13 +413,13 @@ public class DbOp implements DataStore {
 		{
 			dbConn.setAutoCommit(false);
 			sqlString  ="delete from manual ";
-			sqlString+="where  manual_id in (select manual_id from calltreeentry_manual where calltreeEntry_id=?)";
+			sqlString+="where  manual_id in (select manual_id from callTreeEntry_manual where calltreeEntry_id=?)";
 			stmt=dbConn.prepareStatement(sqlString);
 			stmt.setInt(1, callTreeEntry.getCallTreeEntryId());
 			stmt.executeUpdate();
 			stmt.close();
-			
-			sqlString  ="delete from calltreeentry_manual where calltreeEntry_id=?";
+
+			sqlString  ="delete from callTreeEntry_manual where calltreeEntry_id=?";
 			stmt=dbConn.prepareStatement(sqlString);
 			stmt.setInt(1, callTreeEntry.getCallTreeEntryId());
 			stmt.executeUpdate();

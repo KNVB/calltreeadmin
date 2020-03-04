@@ -1,6 +1,6 @@
 import { CallTreeEntry } from 'src/app/classes/CallTreeEntry';
 import { CallTreeEntryService } from 'src/app/services/call-tree-entry.service';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Manual } from 'src/app/classes/Manual';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
@@ -11,102 +11,71 @@ import { NgForm } from '@angular/forms';
   templateUrl: './call-tree-entry-editor.component.html',
   styleUrls: ['./call-tree-entry-editor.component.css']
 })
-export class CallTreeEntryEditorComponent implements OnInit {
-  action: string;
-  manualMessage = 'Operation Manual(Optional):';
-  activeCallTreeEntry = CallTreeEntry.active;
-  inActiveCallTreeEntry = CallTreeEntry.inactive;
-  callTreeEntry: CallTreeEntry = null;
-  callTreeType = 1;
-  divisionToSystem = [];
-  systemToCalltree = [];
-  serviceLevelList = ['1', '2', '3'];
-
-  sharedCallTreeId: number;
-  sharedDivision: string;
-  sharedDivisionList: string[];
-  sharedCallTreeDetail: string;
-  sharedSystemNameList: string[];
-  callTreeDetailEditorConfig = {extraPlugins: 'colorbutton',
-                    removeButtons: 'BGColor,BulletedList,PasteFromWord,PasteText',
-                    toolbarGroups: [
-                        { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-                        { name: 'colors', groups: [ 'colors' ] },
-                        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
-                        { name: 'paragraph', groups: [ 'list' ] },
-                      ]
-                    };
-  constructor(private callTreeEntryService: CallTreeEntryService,
-              public dialog: MatDialog,
-              private dialogRef: MatDialogRef<CallTreeEntryEditorComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
-                const callTreeEntryId = data.callTreeEntryId;
-                this.action = data.action;
-                if ( callTreeEntryId === -1) {
-                  this.callTreeEntry = new CallTreeEntry();
-                }
-                data.callTreeEntryList.forEach((sharedCallTreeEntry: CallTreeEntry) => {
-                  if ( callTreeEntryId > -1) {
-                    if (sharedCallTreeEntry.callTreeEntryId === callTreeEntryId) {
-                      this.callTreeEntry = sharedCallTreeEntry;
+export class CallTreeEntryEditorComponent{
+    action: string;
+    callTreeType = 1;
+    callTreeEntry: CallTreeEntry = null;
+    divisionToSystem: string[] = [];
+    manualMessage = 'Operation Manual(Optional):';
+    sharedCallTreeDetail = '';
+    sharedDivision: string;
+    sharedDivisionList: string[];
+    sharedSystemNameList: string[];
+    systemToCalltree = [];
+    constructor(private callTreeEntryService: CallTreeEntryService,
+                public dialog: MatDialog,
+                private dialogRef: MatDialogRef<CallTreeEntryEditorComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: any) {
+                  this.action = data.action;
+                  if ( data.callTreeEntryId === -1) {
+                    this.callTreeEntry = new CallTreeEntry();
+                  }
+                  data.callTreeEntryList.forEach((sharedCallTreeEntry: CallTreeEntry) => {
+                    if ( data.callTreeEntryId > -1) {
+                      if (sharedCallTreeEntry.callTreeEntryId === data.callTreeEntryId) {
+                        this.callTreeEntry = sharedCallTreeEntry;
+                      }
                     }
-                  }
-                  if (!this.divisionToSystem.hasOwnProperty(sharedCallTreeEntry.division)) {
-                    this.divisionToSystem[sharedCallTreeEntry.division] = [];
-                  }
-                  this.divisionToSystem[sharedCallTreeEntry.division].push(sharedCallTreeEntry.systemName);
-
-                  if (!this.systemToCalltree.hasOwnProperty(sharedCallTreeEntry.systemName)) {
-                    this.systemToCalltree[sharedCallTreeEntry.systemName] = [];
-                  }
-                  this.systemToCalltree[sharedCallTreeEntry.systemName] = sharedCallTreeEntry.callTree;
-                });
-                this.sharedDivisionList = Object.keys(this.divisionToSystem);
-                /*
-                console.log(this.systemToCalltree);
-                console.log(this.divisionToSystem);
-                */
+                    if (!this.divisionToSystem.hasOwnProperty(sharedCallTreeEntry.division)) {
+                      this.divisionToSystem[sharedCallTreeEntry.division] = [];
+                    }
+                    this.divisionToSystem[sharedCallTreeEntry.division].push(sharedCallTreeEntry.systemName);
+                    if (!this.systemToCalltree.hasOwnProperty(sharedCallTreeEntry.systemName)) {
+                      this.systemToCalltree[sharedCallTreeEntry.systemName] = [];
+                    }
+                    this.systemToCalltree[sharedCallTreeEntry.systemName] = sharedCallTreeEntry.callTree;
+                  });
+                  console.log(this.callTreeEntry.serviceLevel);
+                  this.sharedDivisionList = Object.keys(this.divisionToSystem).sort();
               }
-  addCallTreeEntry() {
-    let message = '';
-    console.log(this.callTreeEntry.manuals);
-    this.callTreeEntryService.addCallTreeEntry(this.callTreeEntry).subscribe((res: CallTreeEntry) => {
-      if (res !== null) {
-        message += 'Add Call Tree Entry success.';
-        this.callTreeEntry = res;
-        this.dialogRef.close({addSuccess: res, action: this.action, callTreeEntry: this.callTreeEntry});
-      } else {
-        message += 'Add Call Tree Entry failure.';
+    addCallTreeEntry() {
+      let message = '';
+      console.log(this.callTreeEntry.manuals);
+      this.callTreeEntryService.addCallTreeEntry(this.callTreeEntry).subscribe((res: CallTreeEntry) => {
+        if (res !== null) {
+          message += 'Add Call Tree Entry success.';
+          this.callTreeEntry = res;
+          this.dialogRef.close({addSuccess: res, action: this.action, callTreeEntry: this.callTreeEntry});
+        } else {
+          message += 'Add Call Tree Entry failure.';
+        }
+        alert(message);
+        console.log('action:' + this.action);
+      });
+    }
+    closeDialog() {
+      this.dialog.closeAll();
+    }
+    onCallTreeTypeChange(callTreeType) {
+      if (callTreeType === 1) {// new a individual call tree
+        this.callTreeEntry.callTree.callTreeId = -1;
       }
-      alert(message);
-      console.log('action:' + this.action);
-    });
-  }
-  addManual() {
-    const manual = new Manual();
-    this.callTreeEntry.manuals.push(manual);
-  }
-  closeDialog() {
-    this.dialog.closeAll();
-  }
-  ngOnInit() {
-  }
-  onCallTreeTypeChange(callTreeType) {
-    if (callTreeType === 1) {// new a individual call tree
-      this.callTreeEntry.callTree.callTreeId = -1;
+    }
+    onSharedDivisionChange(division) {
+      this.sharedSystemNameList = [...this.divisionToSystem[division]]; // Clone Array
       this.sharedCallTreeDetail = '';
     }
-  }
-  onSharedDivisionChange(division) {
-    this.sharedSystemNameList = this.divisionToSystem[division];
-  }
-  onSubmit(form: NgForm) {
-    console.log('form.dirty=' + form.dirty);
-    console.log('form.valid=' + form.valid);
-    console.log(form.controls);
-    if (form.pristine && form.valid) {
-      this.closeDialog();
-    } else {
+    onSubmit(form: NgForm) {
       if (form.valid) {
         switch (this.action) {
           case 'Add': this.addCallTreeEntry();
@@ -116,27 +85,23 @@ export class CallTreeEntryEditorComponent implements OnInit {
         }
       }
     }
-  }
-  removeManual(index: number) {
-    this.callTreeEntry.manuals.splice(index, 1);
-  }
-  updateCallTreeDetail(event) {
-    const target = event.source.selected._element.nativeElement;
-    const systemName = target.innerText.trim();
-    this.sharedCallTreeDetail = this.systemToCalltree[systemName].callTreeDetail;
-    this.sharedCallTreeDetail = this.sharedCallTreeDetail.replace(/<br \/>/g, '');
-  }
-  updateCallTreeEntry() {
-    let message = '';
-    this.callTreeEntryService.updateCallTreeEntry(this.callTreeEntry).subscribe((res: boolean) => {
-      if (res) {
-        message += 'Update Call Tree Entry success.';
-        this.dialogRef.close({addSuccess: res, action: this.action, callTreeEntry: this.callTreeEntry});
-      } else {
-        message += 'Update Call Tree Entry failure.';
-      }
-      alert(message);
-      console.log('action:' + this.action);
-    });
-  }
+    updateCallTreeDetail(event) {
+      const target = event.source.selected._element.nativeElement;
+      const systemName = target.innerText.trim();
+      this.sharedCallTreeDetail = this.systemToCalltree[systemName].callTreeDetail;
+      this.sharedCallTreeDetail = this.sharedCallTreeDetail.replace(/<br \/>/g, '');
+    }
+    updateCallTreeEntry() {
+      let message = '';
+      this.callTreeEntryService.updateCallTreeEntry(this.callTreeEntry).subscribe((res: boolean) => {
+        if (res) {
+          message += 'Update Call Tree Entry success.';
+          this.dialogRef.close({addSuccess: res, action: this.action, callTreeEntry: this.callTreeEntry});
+        } else {
+          message += 'Update Call Tree Entry failure.';
+        }
+        alert(message);
+        console.log('action:' + this.action);
+      });
+    }
 }

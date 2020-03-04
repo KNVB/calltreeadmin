@@ -50,14 +50,15 @@ import {SystemNameValidatorDirective} from './directives/system-name-validator.d
     MatSortModule,
     MatTableModule,
   ],
-  entryComponents: [ConfirmationBoxComponent, DivisionListInputBoxComponent],
+  entryComponents: [ConfirmationBoxComponent, ],
   exports: [
+            CallTreeComponent,
+            CallTreeEntryComponent,
             ConfirmationBoxComponent,
-            DivisionListInputBoxComponent,
+            DivisionListComponent,
             DivisionValidatorDirective,
             LogRecipientValidatorDirective,
             ManualListComponent,
-            RichTextEditorComponent,
             SystemNameValidatorDirective,
           ]
 })

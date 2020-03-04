@@ -1,5 +1,6 @@
 import { Component, forwardRef,Input,OnChanges } from '@angular/core';
 import {ControlContainer,ControlValueAccessor,NgForm,NG_VALUE_ACCESSOR,} from '@angular/forms';
+import { DivisionService } from 'src/app/services/division.service';
 @Component({
   providers: [
                 {
@@ -16,14 +17,18 @@ import {ControlContainer,ControlValueAccessor,NgForm,NG_VALUE_ACCESSOR,} from '@
   }]
 })
 export class DivisionListComponent implements OnChanges , ControlValueAccessor {
-  divisionModel:string;
+  divisionModel: string;
   filteredDivisionList: string[];
-  divisionList=["A1","A6","D1","D3","D5","F2","F21","F22","F4","F41","F42","F5","F6","R1","R2","R3","R4"];
-  constructor() { }
+  divisionList = [];
+  constructor(private divisionService: DivisionService) {
+    this.divisionService.getActiveDivisionList().subscribe((res: string[]) => {
+      this.divisionList = res;
+    });
+  }
 
   ngOnChanges() {
     this.filteredDivisionList = this.divisionList;
-  }  
+  }
   autoCompleteFilter(evt: string) {
     this.onChange(evt);
     if (!evt) {
@@ -34,11 +39,11 @@ export class DivisionListComponent implements OnChanges , ControlValueAccessor {
       );
     }
   }
-  onChange= (value) => {};
-  onTouched= () => {};
+  onChange = (value) => {};
+  onTouched = () => {};
 
   writeValue(obj: any) {
-    if(obj != null){
+    if (obj != null){
       this.divisionModel = obj;
     }
   }

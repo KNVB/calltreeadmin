@@ -18,10 +18,10 @@ import { Manual } from 'src/app/classes/Manual';
 })
 export class ManualListComponent implements ControlValueAccessor {
   @Input()manuals: Manual[];
-  @Input() message:string;
-  onChange: (value) => {};
-  onTouched: () => {};
-  writeValue(obj: any) {  
+  @Input() message: string;
+  onChange = (value) => {};
+  onTouched = () => {};
+  writeValue(obj: any) {
      this.manuals = obj;
   }
 
@@ -36,7 +36,7 @@ export class ManualListComponent implements ControlValueAccessor {
   addManual() {
     const manual = new Manual();
     if (this.manuals === null) {
-      this.manuals=[];
+      this.manuals = [];
     }
     this.manuals.push(manual);
   }
