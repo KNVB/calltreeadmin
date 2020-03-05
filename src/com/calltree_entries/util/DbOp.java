@@ -54,7 +54,7 @@ public class DbOp implements DataStore {
 			sqlString+="time_to_start_procedure,time_to_escalate,log_recipients,status,version,location)";
 			sqlString+="values (?,?,?,?,?,?,?,?,?,?)";
 			
-			logger.debug("Add a new call tree info.");
+			logger.debug("Add a new call tree entry.");
 			logger.debug(objectMapper.writeValueAsString(callTreeEntry));
 			dbConn.setAutoCommit(false);
 			stmt=dbConn.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
