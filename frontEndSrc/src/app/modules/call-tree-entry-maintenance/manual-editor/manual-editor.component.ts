@@ -38,16 +38,8 @@ export class ManualEditorComponent {
   }
 
   updateCallTreeEntryManualsMapping() {
-    this.manualService.updateCallTreeEntryManualsMapping(this.callTreeEntry).subscribe((res: boolean) => {
-      let message = '';
-      if (res) {
-        message = 'The operation manual information is updated successfully.';
-      } else {
-        message = 'The operation manual information is failed to update.';
-      }
-      alert(message);
-
-      this.dialogRef.close();
+    this.manualService.updateCallTreeEntryManualsMapping(this.callTreeEntry).subscribe((res) => {
+      this.dialogRef.close({updateSuccess: res, returnObj: this.callTreeEntry});
     });
   }
 }

@@ -412,6 +412,7 @@ public class DbOp implements DataStore {
 		try 
 		{
 			dbConn.setAutoCommit(false);
+			
 			sqlString  ="delete from manual ";
 			sqlString+="where  manual_id in (select manual_id from callTreeEntry_manual where calltreeEntry_id=?)";
 			stmt=dbConn.prepareStatement(sqlString);
@@ -429,6 +430,7 @@ public class DbOp implements DataStore {
 				int manualId=this.addManual(manual);
 				this.addCallTreeEntryManualMapping(callTreeEntry.getCallTreeEntryId(), manualId); 
 			}
+			
 			dbConn.commit();
 			updateSuccess=true;
 		} 

@@ -37,11 +37,7 @@ export class CallTreeEditorComponent {
   }
   onSubmit(form: NgForm){
     if (form.pristine && form.valid) {
-      this.closeDialog();
-    } else {
-      if (form.valid) {
         this.updateCallTree();
-      }
     }
   }
   updateCallTree() {

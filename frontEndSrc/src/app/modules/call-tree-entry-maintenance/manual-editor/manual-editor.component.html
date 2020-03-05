@@ -1,8 +1,8 @@
 <h2 mat-dialog-title>Edit a Operation Manual</h2>
 <form #manualEditForm="ngForm" (ngSubmit)="onSubmit(manualEditForm)" novalidate>
   <input type=hidden name="callTreeEntryId" [(ngModel)]="this.callTreeEntryId">
-  <app-manual-list  
-    name="manuals" 
+  <app-manual-list
+    name="manuals"
     [message]="this.message"
     [manuals]="this.callTreeEntry.manuals">
   </app-manual-list>

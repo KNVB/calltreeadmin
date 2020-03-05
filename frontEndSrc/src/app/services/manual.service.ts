@@ -20,7 +20,7 @@ export class ManualService {
 
   updateCallTreeEntryManualsMapping(callTreeEntry: CallTreeEntry): Observable<boolean> {
     const serviceURL = this.url + 'updateCallTreeEntryManualsMapping';
-    console.log(callTreeEntry);
+    //console.log(callTreeEntry);
     /*
     To the following code working, a lot of work in server side need to do.
     Please refer the following web page for detail:

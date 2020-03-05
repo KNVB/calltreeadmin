@@ -7,6 +7,7 @@ import { ConfirmationBoxComponent } from '../utility/components/confirmation-box
 import {ManualEditorComponent} from './manual-editor/manual-editor.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
+import { MatTable } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
 
 
@@ -23,6 +24,7 @@ export class CallTreeEntryMaintenanceComponent  {
   callTreeEntryDataSource: MatTableDataSource<CallTreeEntry>;
   callTreeEntryTemplate = new CallTreeEntry();
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatTable, {static: false}) table; // initialize
   displayedColumns: string[] = ['division', 'systemName', 'location', 'serviceLevel', 'missionCritical',
                                 'timeToStartProcedure', 'contact', 'timeToEscalate', 'logRecipients',
                                 'manual', 'status',  'action'];
@@ -30,7 +32,7 @@ export class CallTreeEntryMaintenanceComponent  {
               public dialog: MatDialog) {
     this.callTreeEntryService.getAllCallTreeEntry().subscribe((res: CallTreeEntry[]) => {
       this.callTreeEntryList = res;
-      this.callTreeEntryDataSource = new MatTableDataSource<CallTreeEntry>(res);
+      this.callTreeEntryDataSource = new MatTableDataSource<CallTreeEntry>(this.callTreeEntryList);
       this.callTreeEntryDataSource.sort = this.sort;
       this.callTreeEntryDataSource.filterPredicate = (callTreeEntry: CallTreeEntry, filter: string) => {
         let result = false;
@@ -158,9 +160,31 @@ export class CallTreeEntryMaintenanceComponent  {
     dialogConfig.autoFocus = false; // do not set focus on the first form element
     dialogConfig.width = '900px';
     dialogConfig.data = {
-      callTreeEntry,
+      callTreeEntry: JSON.parse(JSON.stringify(callTreeEntry)),
     };
     const dialogRef = this.dialog.open(ManualEditorComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res !== undefined) {
+        let c: CallTreeEntry;
+        let message = '';
+        console.log('updateSuccess=' + res.updateSuccess);
+        if (res.updateSuccess) {
+          const updatedCallTreeEntry = res.returnObj;
+          message = 'The operation manual information is updated successfully.';
+          for (let i = 0; i < this.callTreeEntryList.length; i++) {
+            c = this.callTreeEntryList[i];
+            if (c.callTreeEntryId === updatedCallTreeEntry.callTreeEntryId) {
+              this.callTreeEntryList[i] = JSON.parse(JSON.stringify(updatedCallTreeEntry));
+              this.refreshDataSource();
+              break;
+            }
+          }
+        } else {
+          message = 'The operation manual information is failed to update.';
+        }
+        alert(message);
+      }
+    });
   }
   refreshDataSource() {
     this.callTreeEntryList = this.callTreeEntryDataSource.sortData(this.callTreeEntryList, this.sort);
