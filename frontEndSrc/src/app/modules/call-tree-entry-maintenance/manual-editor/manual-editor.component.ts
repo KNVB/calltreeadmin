@@ -29,7 +29,7 @@ export class ManualEditorComponent {
     this.dialog.closeAll();
   }
 
-  onSubmit(form: NgForm){
+  onSubmit(form: NgForm) {
     console.log('form.dirty=' + form.dirty);
     console.log('form.valid=' + form.valid);
     if (form.valid) {

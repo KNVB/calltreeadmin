@@ -4,10 +4,9 @@ import { CallTreeEditorComponent } from './call-tree-editor/call-tree-editor.com
 import { CallTreeEntryEditorComponent } from './call-tree-entry-editor/call-tree-entry-editor.component';
 import { Component, ViewChild } from '@angular/core';
 import { ConfirmationBoxComponent } from '../utility/components/confirmation-box/confirmation-box.component';
-import {ManualEditorComponent} from './manual-editor/manual-editor.component';
+import { ManualEditorComponent } from './manual-editor/manual-editor.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
 
 
@@ -23,11 +22,13 @@ export class CallTreeEntryMaintenanceComponent  {
   callTreeEntryList: CallTreeEntry[];
   callTreeEntryDataSource: MatTableDataSource<CallTreeEntry>;
   callTreeEntryTemplate = new CallTreeEntry();
+  divisionToSystem: string[] = [];
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatTable, {static: false}) table; // initialize
   displayedColumns: string[] = ['division', 'systemName', 'location', 'serviceLevel', 'missionCritical',
                                 'timeToStartProcedure', 'contact', 'timeToEscalate', 'logRecipients',
                                 'manual', 'status',  'action'];
+  sharedDivisionList: string[];
+  systemToCalltree = [];
   constructor(private callTreeEntryService: CallTreeEntryService,
               public dialog: MatDialog) {
     this.callTreeEntryService.getAllCallTreeEntry().subscribe((res: CallTreeEntry[]) => {
@@ -51,6 +52,17 @@ export class CallTreeEntryMaintenanceComponent  {
         result = result || (callTreeEntry.timeToStartProcedure.trim().toLowerCase().indexOf(filter) !== -1);
         return result;
       };
+      this.callTreeEntryList.forEach((sharedCallTreeEntry: CallTreeEntry) => {
+        if (!this.divisionToSystem.hasOwnProperty(sharedCallTreeEntry.division)) {
+          this.divisionToSystem[sharedCallTreeEntry.division] = [];
+        }
+        this.divisionToSystem[sharedCallTreeEntry.division].push(sharedCallTreeEntry.systemName);
+        if (!this.systemToCalltree.hasOwnProperty(sharedCallTreeEntry.systemName)) {
+          this.systemToCalltree[sharedCallTreeEntry.systemName] = [];
+        }
+        this.systemToCalltree[sharedCallTreeEntry.systemName] = sharedCallTreeEntry.callTree;
+      });
+      this.sharedDivisionList = Object.keys(this.divisionToSystem).sort();
     });
   }
   applyFilter(filterValue: string) {
@@ -94,23 +106,33 @@ export class CallTreeEntryMaintenanceComponent  {
 
     dialogConfig.data = {
       action,
-      callTreeEntryId: callTreeEntry.callTreeEntryId,
-      callTreeEntryList : this.callTreeEntryList,
+      callTreeEntry: JSON.parse(JSON.stringify(callTreeEntry)),
+      divisionToSystem: this.divisionToSystem,
+      sharedDivisionList: this.sharedDivisionList,
+      systemToCalltree: this.systemToCalltree,
     };
     const dialogRef = this.dialog.open(CallTreeEntryEditorComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((res) => {
       if (res !== undefined) {
+        let message = '';
         switch (res.action) {
           case 'Add': if (res.addSuccess) {
                         this.callTreeEntryList.push(res.callTreeEntry);
                         this.refreshDataSource();
+                        message = 'Add Call Tree Entry success.';
+                      } else {
+                        message = 'Add Call Tree Entry failure.';
                       }
                       break;
           case 'Edit': if (res.updateSuccess) {
                         this.updateCallTreeEntryTable(res.callTreeEntry);
-                      }
+                        message = 'Update Call Tree Entry success.';
+                       } else {
+                        message = 'Update Call Tree Entry failure.';
+                       }
                        break;
         }
+        alert(message);
       }
     });
   }
