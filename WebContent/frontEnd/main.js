@@ -281,11 +281,11 @@ function CallTreeEditorComponent_tr_11_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](4, "safeHtml");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const callTreeEntry_r122 = ctx.$implicit;
+    const callTreeEntry_r7646 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](callTreeEntry_r122.division);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](callTreeEntry_r7646.division);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("innerHtml", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](4, 2, callTreeEntry_r122.systemName), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeHtml"]);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("innerHtml", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](4, 2, callTreeEntry_r7646.systemName), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeHtml"]);
 } }
 class CallTreeEditorComponent {
     constructor(callTreeService, dialog, dialogRef, data) {
@@ -311,32 +311,24 @@ class CallTreeEditorComponent {
         this.dialog.closeAll();
     }
     onSubmit(form) {
-        if (form.pristine && form.valid) {
+        if (form.valid) {
             this.updateCallTree();
         }
     }
     updateCallTree() {
         this.callTreeService.updateCallTree(this.callTree).subscribe((res) => {
-            let message = '';
-            if (res) {
-                message += 'Update Call Tree success.';
-                this.dialogRef.close();
-            }
-            else {
-                message += 'Update Call Tree Entry failure.';
-            }
-            alert(message);
+            this.dialogRef.close({ callTree: this.callTree, updateSuccess: res });
         });
     }
 }
 CallTreeEditorComponent.ɵfac = function CallTreeEditorComponent_Factory(t) { return new (t || CallTreeEditorComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_call_tree_service__WEBPACK_IMPORTED_MODULE_2__["CallTreeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_1__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])); };
 CallTreeEditorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CallTreeEditorComponent, selectors: [["app-call-tree-editor"]], decls: 21, vars: 4, consts: [["mat-dialog-title", ""], ["novalidate", "", 3, "ngSubmit"], ["callTreeEditForm", "ngForm"], [4, "ngFor", "ngForOf"], [3, "callTree"], ["mat-raised-button", "", "type", "submit", "color", "primary", 1, "Update-btn"], ["mat-raised-button", "", "type", "button", 1, "Discard-btn", 3, "click"], [2, "text-align", "center"], [3, "innerHtml"]], template: function CallTreeEditorComponent_Template(rf, ctx) { if (rf & 1) {
-        const _r123 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        const _r7647 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h2", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Edit a Call Tree");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "form", 1, 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function CallTreeEditorComponent_Template_form_ngSubmit_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r123); const _r120 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](3); return ctx.onSubmit(_r120); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function CallTreeEditorComponent_Template_form_ngSubmit_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7647); const _r7644 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](3); return ctx.onSubmit(_r7644); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, " Modify this call tree is/are affected the following system(s): ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "table");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "tr");
@@ -364,15 +356,15 @@ CallTreeEditorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵ
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](19, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](20);
     } if (rf & 2) {
-        const _r120 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](3);
+        const _r7644 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](11);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.callTreeEntryList);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("callTree", ctx.callTree);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("\nDirty:", _r120.dirty, "");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("\nDirty:", _r7644.dirty, "");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("\nValid:", _r120.valid, "\n");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("\nValid:", _r7644.valid, "\n");
     } }, directives: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_1__["MatDialogTitle"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgForm"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], _utility_components_call_tree_call_tree_component__WEBPACK_IMPORTED_MODULE_5__["CallTreeComponent"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_1__["MatDialogActions"], _angular_material_button__WEBPACK_IMPORTED_MODULE_6__["MatButton"]], pipes: [src_app_pipes_safe_html_pipe__WEBPACK_IMPORTED_MODULE_7__["SafeHtml"]], styles: ["table[_ngcontent-%COMP%]\r\n{\r\n  border-collapse: collapse;\r\n}\r\ntable[_ngcontent-%COMP%], td[_ngcontent-%COMP%], th[_ngcontent-%COMP%]\r\n{\r\n  border: 1px solid black;\r\n}\r\ntr[_ngcontent-%COMP%]:nth-child(even) \r\n{\r\n  background-color: #f2f2f2;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cnktbWFpbnRlbmFuY2UvY2FsbC10cmVlLWVkaXRvci9jYWxsLXRyZWUtZWRpdG9yLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0VBRUUseUJBQXlCO0FBQzNCO0FBQ0E7O0VBRUUsdUJBQXVCO0FBQ3pCO0FBQ0E7O0VBRUUseUJBQXlCO0FBQzNCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cnktbWFpbnRlbmFuY2UvY2FsbC10cmVlLWVkaXRvci9jYWxsLXRyZWUtZWRpdG9yLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZVxyXG57XHJcbiAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcclxufVxyXG50YWJsZSwgdGQsIHRoXHJcbntcclxuICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcclxufVxyXG50cjpudGgtY2hpbGQoZXZlbikgXHJcbntcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjJmMmYyO1xyXG59XHJcbiJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CallTreeEditorComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
@@ -720,9 +712,9 @@ function CallTreeEntryMaintenanceComponent_td_17_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const element_r6977 = ctx.$implicit;
+    const element_r7777 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate1"](" ", element_r6977.division, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate1"](" ", element_r7777.division, " ");
 } }
 function CallTreeEntryMaintenanceComponent_th_19_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 32);
@@ -734,9 +726,9 @@ function CallTreeEntryMaintenanceComponent_td_20_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const element_r6978 = ctx.$implicit;
+    const element_r7778 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate1"](" ", element_r6978.systemName, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate1"](" ", element_r7778.systemName, " ");
 } }
 function CallTreeEntryMaintenanceComponent_th_22_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 30);
@@ -747,8 +739,8 @@ function CallTreeEntryMaintenanceComponent_td_23_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](0, "td", 33);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵpipe"](1, "safeHtml");
 } if (rf & 2) {
-    const element_r6979 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("innerHTML", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵpipeBind1"](1, 1, element_r6979.location), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsanitizeHtml"]);
+    const element_r7779 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("innerHTML", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵpipeBind1"](1, 1, element_r7779.location), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsanitizeHtml"]);
 } }
 function CallTreeEntryMaintenanceComponent_th_25_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 30);
@@ -765,9 +757,9 @@ function CallTreeEntryMaintenanceComponent_td_26_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const element_r6980 = ctx.$implicit;
+    const element_r7780 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](element_r6980.serviceLevel);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](element_r7780.serviceLevel);
 } }
 function CallTreeEntryMaintenanceComponent_th_28_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 30);
@@ -779,9 +771,9 @@ function CallTreeEntryMaintenanceComponent_td_29_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const element_r6981 = ctx.$implicit;
+    const element_r7781 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](element_r6981.missionCritical);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](element_r7781.missionCritical);
 } }
 function CallTreeEntryMaintenanceComponent_th_31_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 30);
@@ -798,9 +790,9 @@ function CallTreeEntryMaintenanceComponent_td_32_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const element_r6982 = ctx.$implicit;
+    const element_r7782 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](element_r6982.timeToStartProcedure);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](element_r7782.timeToStartProcedure);
 } }
 function CallTreeEntryMaintenanceComponent_th_34_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 30);
@@ -808,10 +800,10 @@ function CallTreeEntryMaintenanceComponent_th_34_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } }
 function CallTreeEntryMaintenanceComponent_td_35_Template(rf, ctx) { if (rf & 1) {
-    const _r6985 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
+    const _r7785 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "td", 35);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](1, "a", 37);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CallTreeEntryMaintenanceComponent_td_35_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r6985); const element_r6983 = ctx.$implicit; const ctx_r6984 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r6984.popupDialog("EditCallTree", element_r6983); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CallTreeEntryMaintenanceComponent_td_35_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r7785); const element_r7783 = ctx.$implicit; const ctx_r7784 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r7784.popupDialog("EditCallTree", element_r7783); });
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](2, "Edit CallTree");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
@@ -830,9 +822,9 @@ function CallTreeEntryMaintenanceComponent_td_38_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const element_r6986 = ctx.$implicit;
+    const element_r7786 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate1"](" ", element_r6986.timeToEscalate, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate1"](" ", element_r7786.timeToEscalate, " ");
 } }
 function CallTreeEntryMaintenanceComponent_th_40_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 30);
@@ -845,8 +837,8 @@ function CallTreeEntryMaintenanceComponent_td_41_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](0, "td", 38);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵpipe"](1, "safeHtml");
 } if (rf & 2) {
-    const element_r6987 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("innerHTML", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵpipeBind1"](1, 1, element_r6987.logRecipients), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsanitizeHtml"]);
+    const element_r7787 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("innerHTML", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵpipeBind1"](1, 1, element_r7787.logRecipients), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsanitizeHtml"]);
 } }
 function CallTreeEntryMaintenanceComponent_th_43_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 30);
@@ -854,10 +846,10 @@ function CallTreeEntryMaintenanceComponent_th_43_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } }
 function CallTreeEntryMaintenanceComponent_td_44_Template(rf, ctx) { if (rf & 1) {
-    const _r6990 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
+    const _r7790 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "td", 35);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](1, "a", 37);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CallTreeEntryMaintenanceComponent_td_44_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r6990); const element_r6988 = ctx.$implicit; const ctx_r6989 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r6989.popupDialog("EditManual", element_r6988); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CallTreeEntryMaintenanceComponent_td_44_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r7790); const element_r7788 = ctx.$implicit; const ctx_r7789 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r7789.popupDialog("EditManual", element_r7788); });
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](2, "Edit Manual Info");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
@@ -870,9 +862,9 @@ function CallTreeEntryMaintenanceComponent_th_46_Template(rf, ctx) { if (rf & 1)
 function CallTreeEntryMaintenanceComponent_td_47_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](0, "td", 33);
 } if (rf & 2) {
-    const element_r6991 = ctx.$implicit;
-    const ctx_r6972 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("innerHTML", element_r6991.status === ctx_r6972.activeCallTreeEntry ? "Active" : "Inactive", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsanitizeHtml"]);
+    const element_r7791 = ctx.$implicit;
+    const ctx_r7772 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("innerHTML", element_r7791.status === ctx_r7772.activeCallTreeEntry ? "Active" : "Inactive", _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsanitizeHtml"]);
 } }
 function CallTreeEntryMaintenanceComponent_th_49_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 30);
@@ -880,24 +872,24 @@ function CallTreeEntryMaintenanceComponent_th_49_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } }
 function CallTreeEntryMaintenanceComponent_td_50_a_4_Template(rf, ctx) { if (rf & 1) {
-    const _r6997 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
+    const _r7797 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "a", 37);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CallTreeEntryMaintenanceComponent_td_50_a_4_Template_a_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r6997); const element_r6992 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]().$implicit; const ctx_r6995 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r6995.popupDialog("Disable", element_r6992); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CallTreeEntryMaintenanceComponent_td_50_a_4_Template_a_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r7797); const element_r7792 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]().$implicit; const ctx_r7795 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r7795.popupDialog("Disable", element_r7792); });
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1, "Disable");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } }
 function CallTreeEntryMaintenanceComponent_td_50_a_5_Template(rf, ctx) { if (rf & 1) {
-    const _r7000 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
+    const _r7800 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "a", 37);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CallTreeEntryMaintenanceComponent_td_50_a_5_Template_a_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r7000); const element_r6992 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]().$implicit; const ctx_r6998 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r6998.popupDialog("Enable", element_r6992); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CallTreeEntryMaintenanceComponent_td_50_a_5_Template_a_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r7800); const element_r7792 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]().$implicit; const ctx_r7798 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r7798.popupDialog("Enable", element_r7792); });
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1, "Enable");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } }
 function CallTreeEntryMaintenanceComponent_td_50_Template(rf, ctx) { if (rf & 1) {
-    const _r7002 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
+    const _r7802 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "td", 39);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](1, "a", 37);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CallTreeEntryMaintenanceComponent_td_50_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r7002); const element_r6992 = ctx.$implicit; const ctx_r7001 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r7001.popupDialog("Edit", element_r6992); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function CallTreeEntryMaintenanceComponent_td_50_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r7802); const element_r7792 = ctx.$implicit; const ctx_r7801 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r7801.popupDialog("Edit", element_r7792); });
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](2, "Edit");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](3, "|");
@@ -905,12 +897,12 @@ function CallTreeEntryMaintenanceComponent_td_50_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](5, CallTreeEntryMaintenanceComponent_td_50_a_5_Template, 2, 0, "a", 40);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const element_r6992 = ctx.$implicit;
-    const ctx_r6974 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]();
+    const element_r7792 = ctx.$implicit;
+    const ctx_r7774 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", element_r6992.status === ctx_r6974.activeCallTreeEntry);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", element_r7792.status === ctx_r7774.activeCallTreeEntry);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", element_r6992.status === ctx_r6974.inActiveCallTreeEntry);
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", element_r7792.status === ctx_r7774.inActiveCallTreeEntry);
 } }
 function CallTreeEntryMaintenanceComponent_tr_51_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](0, "tr", 41);
@@ -970,34 +962,39 @@ class CallTreeEntryMaintenanceComponent {
         filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
         this.callTreeEntryDataSource.filter = filterValue;
     }
-    popupDialog(action, callTreeEntry) {
-        switch (action) {
-            case 'Add':
-            case 'Edit':
-                this.popupCallTreeEntryEditor(action, callTreeEntry);
-                break;
-            case 'Disable':
-            case 'Enable':
-                this.popupConfirmationBox(action, callTreeEntry);
-                break;
-            case 'EditCallTree':
-                this.popupCallTreeEditor(callTreeEntry);
-                break;
-            case 'EditManual':
-                this.popupManualEditor(callTreeEntry);
-                break;
-        }
-    }
     popupCallTreeEditor(callTreeEntry) {
+        let message = '';
         const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
         // dialogConfig.disableClose = true;
         // dialogConfig.minHeight = '600px';
         dialogConfig.autoFocus = false; // do not set focus on the first form element
         dialogConfig.width = '900px';
         dialogConfig.data = {
-            callTree: callTreeEntry.callTree,
+            callTree: Object.assign({}, callTreeEntry.callTree),
         };
         const dialogRef = this.dialog.open(_call_tree_editor_call_tree_editor_component__WEBPACK_IMPORTED_MODULE_1__["CallTreeEditorComponent"], dialogConfig);
+        dialogRef.afterClosed().subscribe((res) => {
+            if (res !== undefined) {
+                if (res.updateSuccess) {
+                    message = 'Update Call Tree success.';
+                    const updatedCallTree = res.callTree;
+                    let c;
+                    callTreeEntry.callTree = updatedCallTree;
+                    for (let i = 0; i < this.callTreeEntryList.length; i++) {
+                        c = this.callTreeEntryList[i];
+                        if (c.callTreeEntryId === callTreeEntry.callTreeEntryId) {
+                            this.callTreeEntryList[i] = JSON.parse(JSON.stringify(callTreeEntry));
+                            this.refreshDataSource();
+                            break;
+                        }
+                    }
+                }
+                else {
+                    message = 'Update Call Tree Entry failure.';
+                }
+                alert(message);
+            }
+        });
     }
     popupCallTreeEntryEditor(action, callTreeEntry) {
         const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
@@ -1080,6 +1077,24 @@ class CallTreeEntryMaintenanceComponent {
                 }
             }
         });
+    }
+    popupDialog(action, callTreeEntry) {
+        switch (action) {
+            case 'Add':
+            case 'Edit':
+                this.popupCallTreeEntryEditor(action, callTreeEntry);
+                break;
+            case 'Disable':
+            case 'Enable':
+                this.popupConfirmationBox(action, callTreeEntry);
+                break;
+            case 'EditCallTree':
+                this.popupCallTreeEditor(callTreeEntry);
+                break;
+            case 'EditManual':
+                this.popupManualEditor(callTreeEntry);
+                break;
+        }
     }
     popupManualEditor(callTreeEntry) {
         const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();

@@ -73,7 +73,7 @@ public class DbOp implements DataStore {
 			rs.next();
 			callTreeEntryId=rs.getInt(1);
 			callTreeEntry.setCallTreeEntryId(callTreeEntryId);
-			logger.debug("new call tree Info Id="+callTreeEntryId);
+			logger.debug("new call tree entry Id="+callTreeEntryId);
 			rs.close();
 			stmt.close();
 			if (callTreeEntry.getCallTree().getCallTreeId()==-1) {

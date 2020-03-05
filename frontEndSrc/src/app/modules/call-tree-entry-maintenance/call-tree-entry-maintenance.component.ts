@@ -70,21 +70,8 @@ export class CallTreeEntryMaintenanceComponent  {
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.callTreeEntryDataSource.filter = filterValue;
   }
-  popupDialog(action: string, callTreeEntry: CallTreeEntry) {
-    switch (action) {
-      case 'Add':
-      case 'Edit':  this.popupCallTreeEntryEditor(action, callTreeEntry);
-                    break;
-      case 'Disable':
-      case 'Enable': this.popupConfirmationBox(action, callTreeEntry);
-                     break;
-      case 'EditCallTree': this.popupCallTreeEditor(callTreeEntry);
-                           break;
-      case 'EditManual': this.popupManualEditor(callTreeEntry);
-                         break;
-    }
-  }
   popupCallTreeEditor(callTreeEntry: CallTreeEntry) {
+    let message = '';
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.disableClose = true;
     // dialogConfig.minHeight = '600px';
@@ -92,9 +79,30 @@ export class CallTreeEntryMaintenanceComponent  {
     dialogConfig.autoFocus = false; // do not set focus on the first form element
     dialogConfig.width = '900px';
     dialogConfig.data = {
-      callTree: callTreeEntry.callTree,
+      callTree: {...callTreeEntry.callTree} ,
     };
     const dialogRef = this.dialog.open(CallTreeEditorComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res !== undefined) {
+        if (res.updateSuccess) {
+          message = 'Update Call Tree success.';
+          const updatedCallTree = res.callTree;
+          let c: CallTreeEntry;
+          callTreeEntry.callTree = updatedCallTree;
+          for (let i = 0; i < this.callTreeEntryList.length; i++) {
+            c = this.callTreeEntryList[i];
+            if (c.callTreeEntryId === callTreeEntry.callTreeEntryId) {
+              this.callTreeEntryList[i] = JSON.parse(JSON.stringify(callTreeEntry));
+              this.refreshDataSource();
+              break;
+            }
+          }
+        } else {
+          message = 'Update Call Tree Entry failure.';
+        }
+        alert(message);
+      }
+    });
   }
   popupCallTreeEntryEditor(action: string, callTreeEntry: CallTreeEntry) {
     const dialogConfig = new MatDialogConfig();
@@ -174,6 +182,20 @@ export class CallTreeEntryMaintenanceComponent  {
         }
       }
     });
+  }
+  popupDialog(action: string, callTreeEntry: CallTreeEntry) {
+    switch (action) {
+      case 'Add':
+      case 'Edit':  this.popupCallTreeEntryEditor(action, callTreeEntry);
+                    break;
+      case 'Disable':
+      case 'Enable': this.popupConfirmationBox(action, callTreeEntry);
+                     break;
+      case 'EditCallTree': this.popupCallTreeEditor(callTreeEntry);
+                           break;
+      case 'EditManual': this.popupManualEditor(callTreeEntry);
+                         break;
+    }
   }
   popupManualEditor(callTreeEntry: CallTreeEntry) {
     const dialogConfig = new MatDialogConfig();

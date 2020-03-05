@@ -36,20 +36,13 @@ export class CallTreeEditorComponent {
     this.dialog.closeAll();
   }
   onSubmit(form: NgForm){
-    if (form.pristine && form.valid) {
-        this.updateCallTree();
+    if (form.valid) {
+      this.updateCallTree();
     }
   }
   updateCallTree() {
     this.callTreeService.updateCallTree(this.callTree).subscribe((res: boolean) => {
-      let message = '';
-      if (res) {
-        message += 'Update Call Tree success.';
-        this.dialogRef.close();
-      } else {
-        message += 'Update Call Tree Entry failure.';
-      }
-      alert(message);
+      this.dialogRef.close({callTree: this.callTree, updateSuccess: res});
     });
   }
 }
