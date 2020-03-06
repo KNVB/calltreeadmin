@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.calltree_entries.CallTreeEntry;
-import com.calltree_entries.Manual;
+import com.calltree_entries.OperationResult;
 import com.calltree_entries.util.DbOp;
 
 @Path("/ManualService")
@@ -25,7 +25,7 @@ public class ManualService {
 	public Response getManualsByCallTreeEntryId(@FormParam("callTreeEntryId") int callTreeEntryId) throws Exception {
 		logger.debug("getManualsByCallTreeEntryId is called,callTreeEntryId="+callTreeEntryId);
 		DbOp dbo=new DbOp();
-		Manual[] result= dbo.getManualsByCallTreeEntryId(callTreeEntryId);
+		OperationResult result= dbo.getManualsByCallTreeEntryId(callTreeEntryId);
 		dbo.close();
 		return Response.ok(result).build();
 	}

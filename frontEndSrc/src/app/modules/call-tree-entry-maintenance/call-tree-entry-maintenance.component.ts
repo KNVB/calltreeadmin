@@ -8,6 +8,7 @@ import { ManualEditorComponent } from './manual-editor/manual-editor.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { OperationResult } from 'src/app/classes/OperationResult';
 
 
 
@@ -31,38 +32,43 @@ export class CallTreeEntryMaintenanceComponent  {
   systemToCalltree = [];
   constructor(private callTreeEntryService: CallTreeEntryService,
               public dialog: MatDialog) {
-    this.callTreeEntryService.getAllCallTreeEntry().subscribe((res: CallTreeEntry[]) => {
-      this.callTreeEntryList = res;
-      this.callTreeEntryDataSource = new MatTableDataSource<CallTreeEntry>(this.callTreeEntryList);
-      this.callTreeEntryDataSource.sort = this.sort;
-      this.callTreeEntryDataSource.filterPredicate = (callTreeEntry: CallTreeEntry, filter: string) => {
-        let result = false;
-        result = result || (callTreeEntry.division.trim().toLowerCase().indexOf(filter) !== -1);
-        result = result || (callTreeEntry.systemName.trim().toLowerCase().indexOf(filter) !== -1);
-        result = result || (callTreeEntry.location.trim().toLowerCase().indexOf(filter) !== -1);
-        result = result || (callTreeEntry.logRecipients.trim().toLowerCase().indexOf(filter) !== -1);
-        result = result || (callTreeEntry.missionCritical.trim().toLowerCase().indexOf(filter) !== -1);
-        result = result || (callTreeEntry.serviceLevel.toString().trim().toLowerCase().indexOf(filter) !== -1);
-        if (callTreeEntry.status === CallTreeEntry.active) {
-          result = result || ('active'.indexOf(filter) !== -1);
-        } else {
-          result = result || ('inactive'.indexOf(filter) !== -1);
-        }
-        result = result || (callTreeEntry.timeToEscalate.trim().toLowerCase().indexOf(filter) !== -1);
-        result = result || (callTreeEntry.timeToStartProcedure.trim().toLowerCase().indexOf(filter) !== -1);
-        return result;
-      };
-      this.callTreeEntryList.forEach((sharedCallTreeEntry: CallTreeEntry) => {
-        if (!this.divisionToSystem.hasOwnProperty(sharedCallTreeEntry.division)) {
-          this.divisionToSystem[sharedCallTreeEntry.division] = [];
-        }
-        this.divisionToSystem[sharedCallTreeEntry.division].push(sharedCallTreeEntry.systemName);
-        if (!this.systemToCalltree.hasOwnProperty(sharedCallTreeEntry.systemName)) {
-          this.systemToCalltree[sharedCallTreeEntry.systemName] = [];
-        }
-        this.systemToCalltree[sharedCallTreeEntry.systemName] = sharedCallTreeEntry.callTree;
-      });
-      this.sharedDivisionList = Object.keys(this.divisionToSystem).sort();
+    this.callTreeEntryService.getAllCallTreeEntry().subscribe((res: OperationResult) => {
+      if (res.success) {
+        this.callTreeEntryList = res.returnObj;
+        this.callTreeEntryDataSource = new MatTableDataSource<CallTreeEntry>(this.callTreeEntryList);
+        this.callTreeEntryDataSource.sort = this.sort;
+        this.callTreeEntryDataSource.filterPredicate = (callTreeEntry: CallTreeEntry, filter: string) => {
+          let result = false;
+          result = result || (callTreeEntry.division.trim().toLowerCase().indexOf(filter) !== -1);
+          result = result || (callTreeEntry.systemName.trim().toLowerCase().indexOf(filter) !== -1);
+          result = result || (callTreeEntry.location.trim().toLowerCase().indexOf(filter) !== -1);
+          result = result || (callTreeEntry.logRecipients.trim().toLowerCase().indexOf(filter) !== -1);
+          result = result || (callTreeEntry.missionCritical.trim().toLowerCase().indexOf(filter) !== -1);
+          result = result || (callTreeEntry.serviceLevel.toString().trim().toLowerCase().indexOf(filter) !== -1);
+          if (callTreeEntry.status === CallTreeEntry.active) {
+            result = result || ('active'.indexOf(filter) !== -1);
+          } else {
+            result = result || ('inactive'.indexOf(filter) !== -1);
+          }
+          result = result || (callTreeEntry.timeToEscalate.trim().toLowerCase().indexOf(filter) !== -1);
+          result = result || (callTreeEntry.timeToStartProcedure.trim().toLowerCase().indexOf(filter) !== -1);
+          return result;
+        };
+        this.callTreeEntryList.forEach((sharedCallTreeEntry: CallTreeEntry) => {
+          if (!this.divisionToSystem.hasOwnProperty(sharedCallTreeEntry.division)) {
+            this.divisionToSystem[sharedCallTreeEntry.division] = [];
+          }
+          this.divisionToSystem[sharedCallTreeEntry.division].push(sharedCallTreeEntry.systemName);
+          if (!this.systemToCalltree.hasOwnProperty(sharedCallTreeEntry.systemName)) {
+            this.systemToCalltree[sharedCallTreeEntry.systemName] = [];
+          }
+          this.systemToCalltree[sharedCallTreeEntry.systemName] = sharedCallTreeEntry.callTree;
+        });
+        this.sharedDivisionList = Object.keys(this.divisionToSystem).sort();
+      } else {
+        alert('Failed to get all the Call Tree Entry');
+      }
+
     });
   }
   applyFilter(filterValue: string) {

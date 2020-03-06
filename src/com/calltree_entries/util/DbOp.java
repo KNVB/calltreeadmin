@@ -17,6 +17,7 @@ import com.calltree_entries.CallTree;
 import com.calltree_entries.CallTreeEntry;
 import com.calltree_entries.Division;
 import com.calltree_entries.Manual;
+import com.calltree_entries.OperationResult;
 import com.calltree_entries.Utility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -43,10 +44,11 @@ public class DbOp implements DataStore {
 		dbConn= DriverManager.getConnection(jdbcURL,dbUserName,dbUserPwd);
 	}
 	@Override
-	public CallTreeEntry addCallTreeEntry(CallTreeEntry callTreeEntry) throws Exception {
+	public OperationResult addCallTreeEntry(CallTreeEntry callTreeEntry) throws Exception {
 		int callTreeId,callTreeEntryId=-1,manualId;
-		ResultSet rs = null;
+		OperationResult or=new OperationResult(); 
 		PreparedStatement stmt = null;
+		ResultSet rs = null; 
 		try
 		{
 			sqlString ="insert into callTreeEntry ";
@@ -102,14 +104,17 @@ public class DbOp implements DataStore {
 			stmt.executeUpdate();
 			if (callTreeEntry.getManuals().size()>0) {
 				stmt.close();
-		
+
 				for (Manual manual:callTreeEntry.getManuals()) {
 					logger.debug(objectMapper.writeValueAsString(manual));
 					manualId=this.addManual(manual);
-					this.addCallTreeEntryManualMapping(callTreeEntry.getCallTreeEntryId(), manualId); 
+					this.addCallTreeEntryManualMapping(callTreeEntry.getCallTreeEntryId(), manualId);
+					manual.setManualId(manualId);
 				}
 			}
 			dbConn.commit();
+			or.success=true;
+			or.returnObj = callTreeEntry;
 		}
 		catch (Exception e) 
 		{
@@ -122,7 +127,7 @@ public class DbOp implements DataStore {
 			dbConn.setAutoCommit(true);
 			releaseResource(rs, stmt);
 		}
-		return callTreeEntry;
+		return or;
 	}
 	@Override
 	public boolean disableCallTreeEntry(int callTreeEntryId) throws Exception {
@@ -173,10 +178,11 @@ public class DbOp implements DataStore {
 		return updateSuccess;
 	}
 	@Override
-	public String[] getActiveDivisionNameList() {
-		ResultSet rs = null;
+	public OperationResult getActiveDivisionNameList() {
+		ArrayList<String> result=new ArrayList<String>();
+		OperationResult or=new OperationResult();
 		PreparedStatement stmt = null;
-		ArrayList<String> result=new ArrayList<String>(); 
+		ResultSet rs = null; 
 		sqlString="select * from division where status=? order by division_name";
 		try
 		{
@@ -187,6 +193,7 @@ public class DbOp implements DataStore {
 			{
 				result.add(rs.getString("division_name"));
 			}
+			or.success=true;
 		}
 		catch (Exception e) 
 		{
@@ -196,16 +203,18 @@ public class DbOp implements DataStore {
 		{
 			releaseResource(rs, stmt);
 		}
-		return result.toArray(new String[0]);
+		or.returnObj=result.toArray(new String[0]);
+		return or;
 	}
 	@Override
-	public CallTreeEntry[] getAllCallTreeEntry() {
+	public OperationResult getAllCallTreeEntry() {
 		Map<Integer,CallTreeEntry> result=new TreeMap<Integer,CallTreeEntry>();
 		CallTreeEntry callTreeEntry;
 		CallTree callTree;
-		ResultSet rs = null;
+		OperationResult or =new OperationResult();
 		PreparedStatement stmt = null;
-	 
+		ResultSet rs = null;
+		
 		sqlString ="select a.*,c.*,e.* from ";
 		sqlString+="callTreeEntry a ";
 		sqlString+="left outer join callTreeEntry_manual b on a.calltreeEntry_id = b.calltreeEntry_id "; 
@@ -252,6 +261,7 @@ public class DbOp implements DataStore {
 				}
 				result.put(callTreeEntry.getCallTreeEntryId(), callTreeEntry);
 			}
+			or.success=true;
 		}
 		catch (Exception e) 
 		{
@@ -261,14 +271,18 @@ public class DbOp implements DataStore {
 		{
 			releaseResource(rs, stmt);
 		}
-		return result.values().toArray(new CallTreeEntry[0]);
+		or.returnObj=result.values().toArray(new CallTreeEntry[0]);
+		return or;
 	}	
 	@Override
-	public CallTreeEntry[] getCallTreeEntryByCallTreeId(int callTreeId)throws Exception {
+	public OperationResult getCallTreeEntryByCallTreeId(int callTreeId)throws Exception {
 		ArrayList<CallTreeEntry> result=new ArrayList<CallTreeEntry>();
 		CallTreeEntry callTreeEntry;
-		ResultSet rs = null;
+		
+		OperationResult or=new OperationResult();
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		logger.debug("call tree Id="+callTreeId);
 		try
 		{
 			sqlString ="select a.* from ";  
@@ -292,6 +306,7 @@ public class DbOp implements DataStore {
 				callTreeEntry.setCallTreeEntryId(rs.getInt("callTreeEntry_id"));
 				result.add(callTreeEntry);
 			}
+			or.success=true;
 		}
 		catch (Exception e) 
 		{
@@ -301,14 +316,17 @@ public class DbOp implements DataStore {
 		{
 			releaseResource(rs, stmt);
 		}
-		return result.toArray(new CallTreeEntry[0]);
+		or.returnObj=result.toArray(new CallTreeEntry[0]);
+		return or;
 	}
 	@Override
-	public Manual[] getManualsByCallTreeEntryId(int callTreeEntryId)throws Exception {
+	public OperationResult getManualsByCallTreeEntryId(int callTreeEntryId)throws Exception {
 		ArrayList<Manual> result=new ArrayList<Manual>();
 		Manual manual;
-		ResultSet rs = null;
+		
+		OperationResult or=new OperationResult();
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		try
 		{
 			sqlString ="select a.* from ";
@@ -334,7 +352,8 @@ public class DbOp implements DataStore {
 		{
 			releaseResource(rs, stmt);
 		}
-		return result.toArray(new Manual[0]);
+		or.returnObj=result.toArray(new Manual[0]);
+		return or;
 	}	
 	@Override
 	public boolean updateCallTree(CallTree callTree) throws Exception {
@@ -366,8 +385,8 @@ public class DbOp implements DataStore {
 	@Override
 	public boolean updateCallTreeEntry(CallTreeEntry callTreeEntry) throws Exception {
 		boolean updateSuccess=false;
-		ResultSet rs = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		try
 		{
 			sqlString ="update callTreeEntry ";

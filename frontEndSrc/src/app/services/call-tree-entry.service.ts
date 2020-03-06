@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { OperationResult } from '../classes/OperationResult';
 
 
 
@@ -13,13 +14,13 @@ export class CallTreeEntryService {
   url = '../RestfulServices/CallTreeEntry/';
   constructor(private http: HttpClient) { }
 
-  addCallTreeEntry(callTreeEntry: CallTreeEntry): Observable<CallTreeEntry> {
+  addCallTreeEntry(callTreeEntry: CallTreeEntry): Observable<OperationResult> {
     const serviceURL = this.url + 'addCallTreeEntry';
-    return this.http.post(serviceURL , callTreeEntry).pipe(map((res:CallTreeEntry) => res));
+    return this.http.post(serviceURL , callTreeEntry).pipe(map((res: OperationResult) => res));
   }
-  getAllCallTreeEntry(): Observable<CallTreeEntry[]> {
+  getAllCallTreeEntry(): Observable<OperationResult> {
     const serviceURL = this.url + 'getAllCallTreeEntry';
-    return this.http.get(serviceURL).pipe(map((res: CallTreeEntry[]) => res));
+    return this.http.get(serviceURL).pipe(map((res: OperationResult) => res));
   }
   updateCallTreeEntry(callTreeEntry: CallTreeEntry): Observable<boolean> {
     const serviceURL = this.url + 'updateCallTreeEntry';

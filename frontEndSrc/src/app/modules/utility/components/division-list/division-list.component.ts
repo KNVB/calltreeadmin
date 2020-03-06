@@ -1,6 +1,7 @@
 import { Component, forwardRef,Input,OnChanges } from '@angular/core';
 import {ControlContainer,ControlValueAccessor,NgForm,NG_VALUE_ACCESSOR,} from '@angular/forms';
 import { DivisionService } from 'src/app/services/division.service';
+import { OperationResult } from 'src/app/classes/OperationResult';
 @Component({
   providers: [
                 {
@@ -21,8 +22,12 @@ export class DivisionListComponent implements OnChanges , ControlValueAccessor {
   filteredDivisionList: string[];
   divisionList = [];
   constructor(private divisionService: DivisionService) {
-    this.divisionService.getActiveDivisionList().subscribe((res: string[]) => {
-      this.divisionList = res;
+    this.divisionService.getActiveDivisionList().subscribe((res: OperationResult) => {
+      if (res.success) {
+        this.divisionList = res.returnObj;
+      } else {
+        alert('Failed to get the active division list');
+      }
     });
   }
 

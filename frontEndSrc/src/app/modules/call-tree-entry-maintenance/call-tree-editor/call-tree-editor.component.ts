@@ -4,6 +4,7 @@ import { CallTreeService } from 'src/app/services/call-tree.service';
 import { Component, Inject} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
+import { OperationResult } from 'src/app/classes/OperationResult';
 
 @Component({
   selector: 'app-call-tree-editor',
@@ -28,8 +29,12 @@ export class CallTreeEditorComponent {
               private dialogRef: MatDialogRef<CallTreeEditorComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
                 this.callTree = data.callTree;
-                this.callTreeService.getCallTreeEntryByCallTreeId(this.callTree.callTreeId).subscribe((res: CallTreeEntry[]) => {
-                  this.callTreeEntryList = res;
+                this.callTreeService.getCallTreeEntryByCallTreeId(this.callTree.callTreeId).subscribe((res: OperationResult) => {
+                  if (res.success) {
+                    this.callTreeEntryList = res.returnObj;
+                  } else {
+                    alert('Failed to get CallTreeEntry for CallTreeId=' + this.callTree.callTreeId);
+                  }
                 });
               }
   closeDialog() {

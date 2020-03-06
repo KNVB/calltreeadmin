@@ -4,6 +4,7 @@ import { Manual } from '../classes/Manual';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { CallTreeEntry } from '../classes/CallTreeEntry';
+import { OperationResult } from '../classes/OperationResult';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,11 +12,11 @@ export class ManualService {
   url = '../RestfulServices/ManualService/';
   constructor(private http: HttpClient) { }
 
-  getManualsByCallTreeEntryId(callTreeEntryId: number): Observable<Manual[]> {
+  getManualsByCallTreeEntryId(callTreeEntryId: number): Observable<OperationResult> {
     const serviceURL = this.url + 'getManualsByCallTreeEntryId';
     let requestParams = new HttpParams();
     requestParams = requestParams.append('callTreeEntryId', callTreeEntryId.toString());
-    return this.http.post(serviceURL, requestParams).pipe(map((res: Manual[]) => res));
+    return this.http.post(serviceURL, requestParams).pipe(map((res: OperationResult) => res));
   }
 
   updateCallTreeEntryManualsMapping(callTreeEntry: CallTreeEntry): Observable<boolean> {

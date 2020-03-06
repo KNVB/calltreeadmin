@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.calltree_entries.OperationResult;
 import com.calltree_entries.util.DbOp;
 @Path("/DivisionService")
 public class DivisionService {
@@ -21,8 +22,8 @@ public class DivisionService {
 	public Response getActiveDivisionNameList() throws Exception {
 		logger.debug("getActiveDivisionList is called");
 		DbOp dbo=new DbOp();
-		String [] result=dbo.getActiveDivisionNameList();
+		OperationResult or=dbo.getActiveDivisionNameList();
 		dbo.close();
-		return Response.ok(result).build();
+		return Response.ok(or).build();
 	}
 }

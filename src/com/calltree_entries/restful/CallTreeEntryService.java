@@ -12,22 +12,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.calltree_entries.CallTreeEntry;
+import com.calltree_entries.OperationResult;
 import com.calltree_entries.util.DbOp;
 
 @Path("/CallTreeEntry")
 public class CallTreeEntryService {
 	private static final Logger logger = LogManager.getLogger(Class.class.getSimpleName());
 	
-	@Path("/getAllCallTreeEntry")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllCallTreeEntry() throws Exception {
-		logger.debug("getAllCallTreeEntry is called");
-		DbOp dbo=new DbOp();
-		CallTreeEntry[] result= dbo.getAllCallTreeEntry();
-		dbo.close();
-		return Response.ok(result).build();
-	}
+	
 	
 	@Path("/addCallTreeEntry")
 	@POST
@@ -36,22 +28,20 @@ public class CallTreeEntryService {
 	public Response addCallTreeEntry (CallTreeEntry callTreeEntry) throws Exception {
 		logger.debug("addCallTreeEntry is called");
 		DbOp dbo=new DbOp();
-		CallTreeEntry resultCallTreeEntry=dbo.addCallTreeEntry(callTreeEntry);
+		OperationResult or=dbo.addCallTreeEntry(callTreeEntry);
 		dbo.close();
-		return Response.ok(resultCallTreeEntry).build();
+		return Response.ok(or).build();
 	}
-	@Path("/updateCallTreeEntry")
+	@Path("/disableCallTreeEntry")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateCallTreeEntry (CallTreeEntry callTreeEntry) throws Exception {
-		logger.debug("updateCallTreeEntry is called");
+	public Response disableCallTreeEntry(@FormParam("callTreeEntryId") int callTreeEntryId) throws Exception {
+		logger.debug("disableCallTreeEntry is called");
 		DbOp dbo=new DbOp();
-		boolean updateResult=dbo.updateCallTreeEntry(callTreeEntry);
+		boolean updateResult=dbo.disableCallTreeEntry(callTreeEntryId);
 		dbo.close();
 		return Response.ok(updateResult).build();
-	}
-	
+	}	
 	@Path("/enableCallTreeEntry")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -62,13 +52,25 @@ public class CallTreeEntryService {
 		dbo.close();
 		return Response.ok(updateResult).build();
 	}
-	@Path("/disableCallTreeEntry")
+	
+	@Path("/getAllCallTreeEntry")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllCallTreeEntry() throws Exception {
+		logger.debug("getAllCallTreeEntry is called");
+		DbOp dbo=new DbOp();
+		OperationResult result= dbo.getAllCallTreeEntry();
+		dbo.close();
+		return Response.ok(result).build();
+	}
+	@Path("/updateCallTreeEntry")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response disableCallTreeEntry(@FormParam("callTreeEntryId") int callTreeEntryId) throws Exception {
-		logger.debug("disableCallTreeEntry is called");
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateCallTreeEntry (CallTreeEntry callTreeEntry) throws Exception {
+		logger.debug("updateCallTreeEntry is called");
 		DbOp dbo=new DbOp();
-		boolean updateResult=dbo.disableCallTreeEntry(callTreeEntryId);
+		boolean updateResult=dbo.updateCallTreeEntry(callTreeEntry);
 		dbo.close();
 		return Response.ok(updateResult).build();
 	}

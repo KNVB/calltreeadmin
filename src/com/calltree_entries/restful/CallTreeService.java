@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.calltree_entries.CallTree;
-import com.calltree_entries.CallTreeEntry;
+import com.calltree_entries.OperationResult;
 import com.calltree_entries.util.DbOp;
 
 @Path("/CallTree")
@@ -25,9 +25,9 @@ public class CallTreeService {
 	public Response getCallTreeEntryByCallTreeId(@FormParam("callTreeId") int callTreeId) throws Exception {
 		logger.debug("getCallTreeEntryByCallTreeId is called,callTreeId="+callTreeId);
 		DbOp dbo=new DbOp();
-		CallTreeEntry[] result= dbo.getCallTreeEntryByCallTreeId(callTreeId);
+		OperationResult or= dbo.getCallTreeEntryByCallTreeId(callTreeId);
 		dbo.close();
-		return Response.ok(result).build();
+		return Response.ok(or).build();
 	}
 	@Path("/updateCallTree")
 	@POST

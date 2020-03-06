@@ -3,6 +3,7 @@ import { CallTreeEntryService } from 'src/app/services/call-tree-entry.service';
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
+import { OperationResult } from 'src/app/classes/OperationResult';
 
 @Component({
   selector: 'app-call-tree-entry-editor',
@@ -31,8 +32,8 @@ export class CallTreeEntryEditorComponent{
                   this.systemToCalltree = data.systemToCalltree;
               }
     addCallTreeEntry() {
-      this.callTreeEntryService.addCallTreeEntry(this.callTreeEntry).subscribe((res: CallTreeEntry) => {
-        this.dialogRef.close({addSuccess: res, action: this.action, callTreeEntry: this.callTreeEntry});
+      this.callTreeEntryService.addCallTreeEntry(this.callTreeEntry).subscribe((res: OperationResult) => {
+        this.dialogRef.close({action: this.action, addSuccess: res.success, callTreeEntry: res.returnObj});
       });
     }
     closeDialog() {
@@ -60,8 +61,8 @@ export class CallTreeEntryEditorComponent{
     updateCallTreeDetail(event) {
       const target = event.source.selected._element.nativeElement;
       const systemName = target.innerText.trim();
-      this.sharedCallTreeDetail = this.systemToCalltree[systemName].callTreeDetail;
-      this.sharedCallTreeDetail = this.sharedCallTreeDetail.replace(/<br \/>/g, '');
+      this.callTreeEntry.callTree.callTreeDetail = this.systemToCalltree[systemName].callTreeDetail;
+      this.sharedCallTreeDetail = this.callTreeEntry.callTree.callTreeDetail.replace(/<br \/>/g, '');
     }
     updateCallTreeEntry() {
       this.callTreeEntryService.updateCallTreeEntry(this.callTreeEntry).subscribe((res: boolean) => {
