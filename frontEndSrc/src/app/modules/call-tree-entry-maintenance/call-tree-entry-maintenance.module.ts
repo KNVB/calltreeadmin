@@ -15,6 +15,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
 import { SafeHtml } from 'src/app/pipes/safe-html.pipe';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {UtilityModule } from '../utility/utility.module';
@@ -43,6 +44,7 @@ import {UtilityModule } from '../utility/utility.module';
             MatSelectModule,
             MatSortModule,
             MatTableModule,
+            MatTabsModule,
             TextFieldModule,
             UtilityModule,
            ],

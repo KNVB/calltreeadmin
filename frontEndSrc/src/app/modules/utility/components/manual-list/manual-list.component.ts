@@ -1,4 +1,4 @@
-import { Component, forwardRef,Input} from '@angular/core';
+import { Component, forwardRef, Input} from '@angular/core';
 import {ControlContainer, ControlValueAccessor,NgForm,NG_VALUE_ACCESSOR} from '@angular/forms';
 import { Manual } from 'src/app/classes/Manual';
 @Component({

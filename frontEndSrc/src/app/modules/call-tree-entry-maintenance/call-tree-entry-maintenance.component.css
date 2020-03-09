@@ -12,6 +12,10 @@
   font:bold 20px arial;
   font-weight:bold;
 }
+.centerOnly
+{
+  text-align: center;
+}
 .container
 {
   /*
@@ -52,7 +56,6 @@
 .mat-cell
 {
   font:12px Calibri;
-  text-align: center;
   padding-left:3px;
 }
 .mat-header-cell {
