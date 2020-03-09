@@ -20,9 +20,6 @@ import { SafeHtml } from 'src/app/pipes/safe-html.pipe';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {UtilityModule } from '../utility/utility.module';
 
-
-
-
 @NgModule({
   declarations: [
                 CallTreeEditorComponent,

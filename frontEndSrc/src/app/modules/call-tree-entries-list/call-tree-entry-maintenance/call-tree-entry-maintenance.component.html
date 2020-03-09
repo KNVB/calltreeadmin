@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{ action }} A Call Tree Entry</h2>
+<form #callTreeEntryEditForm="ngForm" (ngSubmit)="onSubmit(callTreeEntryEditForm)" novalidate>
+  <div mat-dialog-content>
+    <mat-tab-group>
+      <mat-tab label="Entry Attributes">
+        <!--
+        <app-call-tree-entry-editor
+          [callTreeEntry]="callTreeEntry">
+        </app-call-tree-entry-editor>
+        -->
+      </mat-tab>
+      <mat-tab label="Call Tree">
+      <!--
+        <app-call-tree-editor></app-call-tree-editor>
+      -->
+      </mat-tab>
+      <mat-tab label="Operation Manual(Optional)">
+      <!--
+        <app-manual-editor></app-manual-editor>
+      -->
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <mat-dialog-actions>
+    <button mat-raised-button type="submit" color="primary" class="Update-btn">Save</button>
+    <button mat-raised-button type="button" class="Discard-btn" (click)="closeDialog()">Close</button>
+  </mat-dialog-actions>
+</form>
