@@ -1,1 +1,135 @@
-<p>call-tree-entry-editor works!</p>
+<div ngModelGroup="attributes">
+  <app-division-list
+    name="division"
+    [(ngModel)]="this.callTreeEntry.division">
+  </app-division-list>
+  <mat-form-field style="width:60%;">
+    <mat-label>System</mat-label>
+      <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          required name="systemName"
+          #systemName="ngModel"
+          [(ngModel)]="this.callTreeEntry.systemName">
+      </textarea>
+      <mat-error [hidden]="systemName.valid || systemName.pristine">
+          System Name is <strong>required</strong>
+      </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field style="width:90%;">
+    <mat-label>Location</mat-label>
+      <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          required
+          name="location"
+          #location="ngModel"
+          [(ngModel)]="this.callTreeEntry.location">
+      </textarea>
+    <mat-error [hidden]="location.valid || location.pristine">
+      Location is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Service Level</mat-label>
+    <mat-select
+      [(ngModel)]="this.callTreeEntry.serviceLevel"
+      name="serviceLevel"
+      #serviceLevel="ngModel"
+      required>
+      <mat-option *ngFor="let serviceLevelValue of this.serviceLevelList" [value]="serviceLevelValue">
+        {{serviceLevelValue}}
+      </mat-option>
+    </mat-select>
+    <mat-error [hidden]="serviceLevel.valid || serviceLevel.pristine">
+      Service Level is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Mission Critical</mat-label>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="this.callTreeEntry.missionCritical"
+      required
+      name="missionCritical"
+      #missionCritical="ngModel">
+    <mat-error [hidden]="missionCritical.valid || missionCritical.pristine">
+      Missiong Critical is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field style="width:250px">
+    <mat-label>Appreciation Log Recipients</mat-label>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="5"
+      required
+      appLogRecipientValidator
+      name="logRecipients"
+      #logRecipients="ngModel"
+      [(ngModel)]="this.callTreeEntry.logRecipients"></textarea>
+    <mat-error *ngIf="logRecipients.hasError('required')">
+      Appreciation Log Recipients is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="logRecipients.hasError('email')">
+      {{logRecipients.errors['email']}} is not a valid email address.
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="this.callTreeEntry.status" name="status" #status="ngModel">
+      <mat-option [value]="activeCallTreeEntry">Active</mat-option>
+      <mat-option [value]="inActiveCallTreeEntry">Inactive</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field style="width:350px">
+    <mat-label>
+      Time Interval to start established procedures
+    </mat-label>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="5"
+      required
+      name="timeToStartProcedure"
+      #timeToStartProcedure="ngModel"
+      [(ngModel)]="this.callTreeEntry.timeToStartProcedure">
+    </textarea>
+    <mat-error [hidden]="timeToStartProcedure.valid||timeToStartProcedure.pristine">
+      Time Interval to start established procedures is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field style="width:300px">
+    <mat-label>
+      Time Interval to escalate if no reply
+    </mat-label>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="5"
+      required
+      name="timeToEscalate"
+      #timeToEscalate="ngModel"
+      [(ngModel)]="this.callTreeEntry.timeToEscalate">
+    </textarea>
+    <mat-error [hidden]="timeToEscalate.valid||timeToEscalate.pristine">
+      Time Interval to escalate if no reply is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+</div>

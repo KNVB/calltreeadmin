@@ -9,13 +9,12 @@ public class CallTreeEntry {
 	private String division=new String();
 	private String systemName=new String();
 	private String location=new String();
-	private String serviceLevel=new String();
 	private String missionCritical=new String();
 	private String timeToStartProcedure=new String();
 	private String timeToEscalate=new String();
 	private String logRecipients=new String();
 	private int status=CallTreeEntry.inactive;	
-	private int callTreeEntryId;
+	private int callTreeEntryId,serviceLevel;
 	private float version=0.0f;
 
 	private ArrayList<Manual> manuals=new ArrayList<Manual>();
@@ -63,11 +62,11 @@ public class CallTreeEntry {
 		this.location = location;
 	}
 
-	public String getServiceLevel() {
+	public int getServiceLevel() {
 		return serviceLevel;
 	}
 
-	public void setServiceLevel(String serviceLevel) {
+	public void setServiceLevel(int serviceLevel) {
 		this.serviceLevel = serviceLevel;
 	}
 
