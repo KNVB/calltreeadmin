@@ -9,7 +9,7 @@ import {ManualListComponent} from './components/manual-list/manual-list.componen
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CKEditorModule } from 'ckeditor4-angular';
+import {CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -20,9 +20,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {SystemNameValidatorDirective} from './directives/system-name-validator.directive';
-
-
-
 
 @NgModule({
   declarations: [
@@ -52,8 +49,8 @@ import {SystemNameValidatorDirective} from './directives/system-name-validator.d
   ],
   entryComponents: [ConfirmationBoxComponent, ],
   exports: [
-            CallTreeComponent,
-            CallTreeEntryComponent,
+          //  CallTreeComponent,
+          //  CallTreeEntryComponent,
             ConfirmationBoxComponent,
             DivisionListComponent,
             DivisionValidatorDirective,

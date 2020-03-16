@@ -1,10 +1,10 @@
-import {CallTreeEditorComponent} from './call-tree-editor/call-tree-editor.component';
+import { CallTreeEditorComponent } from './call-tree-editor/call-tree-editor.component';
 import {CallTreeEntriesListComponent } from './call-tree-entries-list.component';
-import {CallTreeEntryEditorComponent } from './call-tree-entry-editor/call-tree-entry-editor.component';
+import { CallTreeEntryEditorComponent } from './call-tree-entry-editor/call-tree-entry-editor.component';
 import {CallTreeEntryMaintenanceComponent } from './call-tree-entry-maintenance/call-tree-entry-maintenance.component';
-import {CKEditorModule } from 'ckeditor4-angular';
+import {CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ManualEditorComponent } from './manual-editor/manual-editor.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
@@ -20,6 +20,8 @@ import { NgModule } from '@angular/core';
 import { SafeHtml } from 'src/app/pipes/safe-html.pipe';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {UtilityModule } from '../utility/utility.module';
+
+
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import {UtilityModule } from '../utility/utility.module';
             MatSortModule,
             MatTableModule,
             MatTabsModule,
+            ReactiveFormsModule,
             TextFieldModule,
             UtilityModule,
           ]

@@ -62,7 +62,7 @@ public class DbOp implements DataStore {
 			stmt=dbConn.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1,callTreeEntry.getDivision());
 			stmt.setString(2,callTreeEntry.getSystemName());
-			stmt.setString(3,callTreeEntry.getServiceLevel());
+			stmt.setInt(3,callTreeEntry.getServiceLevel());
 			stmt.setString(4,callTreeEntry.getMissionCritical());
 			stmt.setString(5,callTreeEntry.getTimeToStartProcedure());
 			stmt.setString(6,callTreeEntry.getTimeToEscalate());
@@ -236,7 +236,7 @@ public class DbOp implements DataStore {
 					callTreeEntry.setLocation(rs.getString("location"));
 					callTreeEntry.setMissionCritical(rs.getString("mission_Critical"));
 					callTreeEntry.setLogRecipients(rs.getString("log_recipients"));
-					callTreeEntry.setServiceLevel(rs.getString("service_level"));
+					callTreeEntry.setServiceLevel(rs.getInt("service_level"));
 					callTreeEntry.setStatus(rs.getInt("status"));
 					callTreeEntry.setSystemName(rs.getString("system_name"));
 					callTreeEntry.setTimeToEscalate(rs.getString("time_to_escalate"));
@@ -298,7 +298,7 @@ public class DbOp implements DataStore {
 				callTreeEntry.setLocation(rs.getString("location"));
 				callTreeEntry.setMissionCritical(rs.getString("mission_Critical"));
 				callTreeEntry.setLogRecipients(rs.getString("log_recipients"));
-				callTreeEntry.setServiceLevel(rs.getString("service_level"));
+				callTreeEntry.setServiceLevel(rs.getInt("service_level"));
 				callTreeEntry.setStatus(rs.getInt("status"));
 				callTreeEntry.setSystemName(rs.getString("system_name"));
 				callTreeEntry.setTimeToEscalate(rs.getString("time_to_escalate"));
@@ -399,7 +399,7 @@ public class DbOp implements DataStore {
 			stmt=dbConn.prepareStatement(sqlString);
 			stmt.setString(1,callTreeEntry.getDivision());
 			stmt.setString(2,callTreeEntry.getSystemName());
-			stmt.setString(3,callTreeEntry.getServiceLevel());
+			stmt.setInt(3,callTreeEntry.getServiceLevel());
 			stmt.setString(4,callTreeEntry.getMissionCritical());
 			stmt.setString(5,callTreeEntry.getTimeToStartProcedure());
 			stmt.setString(6,callTreeEntry.getTimeToEscalate());

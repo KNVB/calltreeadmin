@@ -1,14 +1,18 @@
 <h2 mat-dialog-title>{{ action }} A Call Tree Entry</h2>
-<form #callTreeEntryEditForm="ngForm" (ngSubmit)="onSubmit(callTreeEntryEditForm)" novalidate>
+<form [formGroup]="callTreeEntryEditForm">
   <div mat-dialog-content>
     <mat-tab-group>
       <mat-tab label="Entry Attributes">
         <app-call-tree-entry-editor
-          [callTreeEntry]="callTreeEntry">
+          [callTreeEntry]="callTreeEntry"
+          formControlName="callTreeEntryForm">
         </app-call-tree-entry-editor>
       </mat-tab>
       <mat-tab label="Call Tree">
-        <app-call-tree-editor></app-call-tree-editor>
+        <app-call-tree-editor
+        [callTree]="callTreeEntry.callTree"
+        formControlName="callTreeForm">
+      </app-call-tree-editor>
       </mat-tab>
       <mat-tab label="Operation Manual(Optional)">
         <app-manual-editor></app-manual-editor>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CallTree } from 'src/app/classes/CallTree';
 
 @Component({
   selector: 'app-call-tree-editor',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./call-tree-editor.component.css']
 })
 export class CallTreeEditorComponent implements OnInit {
-
+  @Input () callTree: CallTree;
   constructor() { }
 
   ngOnInit(): void {

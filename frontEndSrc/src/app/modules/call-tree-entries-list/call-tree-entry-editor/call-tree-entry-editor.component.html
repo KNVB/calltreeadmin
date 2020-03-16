@@ -1,8 +1,26 @@
-<div ngModelGroup="attributes">
-  <app-division-list
-    name="division"
-    [(ngModel)]="this.callTreeEntry.division">
-  </app-division-list>
+<br>
+<div [formGroup]="callTreeEntryForm">
+  <input type=hidden formControlName="callTreeEntryId">
+  <mat-form-field>
+    <mat-label>Division</mat-label>
+    <input
+      matInput
+      formControlName="division"
+      type="text"
+      [matAutocomplete]="auto"
+      required>
+    <mat-error *ngIf="division.hasError('required')">
+        Division Name is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="division.hasError('invalidDivisionName')">
+        {{division.errors['invalidDivisionName']}} is not a valid divison name.
+    </mat-error>
+    <mat-autocomplete  #auto="matAutocomplete">
+        <mat-option *ngFor="let division of this.filteredDivisionList|async" [value]="division">
+          {{ division }}
+        </mat-option>
+      </mat-autocomplete>
+  </mat-form-field>
   <mat-form-field style="width:60%;">
     <mat-label>System</mat-label>
       <textarea
@@ -11,9 +29,8 @@
           #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"
           cdkAutosizeMaxRows="5"
-          required name="systemName"
-          #systemName="ngModel"
-          [(ngModel)]="this.callTreeEntry.systemName">
+          required
+          formControlName="systemName">
       </textarea>
       <mat-error [hidden]="systemName.valid || systemName.pristine">
           System Name is <strong>required</strong>
@@ -29,9 +46,7 @@
           cdkAutosizeMinRows="1"
           cdkAutosizeMaxRows="5"
           required
-          name="location"
-          #location="ngModel"
-          [(ngModel)]="this.callTreeEntry.location">
+          formControlName="location">
       </textarea>
     <mat-error [hidden]="location.valid || location.pristine">
       Location is <strong>required</strong>
@@ -41,9 +56,7 @@
   <mat-form-field>
     <mat-label>Service Level</mat-label>
     <mat-select
-      [(ngModel)]="this.callTreeEntry.serviceLevel"
-      name="serviceLevel"
-      #serviceLevel="ngModel"
+      formControlName="serviceLevel"
       required>
       <mat-option *ngFor="let serviceLevelValue of this.serviceLevelList" [value]="serviceLevelValue">
         {{serviceLevelValue}}
@@ -58,10 +71,8 @@
     <input
       matInput
       type="text"
-      [(ngModel)]="this.callTreeEntry.missionCritical"
       required
-      name="missionCritical"
-      #missionCritical="ngModel">
+      formControlName="missionCritical">
     <mat-error [hidden]="missionCritical.valid || missionCritical.pristine">
       Missiong Critical is <strong>required</strong>
     </mat-error>
@@ -76,9 +87,8 @@
       cdkAutosizeMaxRows="5"
       required
       appLogRecipientValidator
-      name="logRecipients"
-      #logRecipients="ngModel"
-      [(ngModel)]="this.callTreeEntry.logRecipients"></textarea>
+      formControlName="logRecipients">
+    </textarea>
     <mat-error *ngIf="logRecipients.hasError('required')">
       Appreciation Log Recipients is <strong>required</strong>
     </mat-error>
@@ -88,7 +98,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Status</mat-label>
-    <mat-select [(ngModel)]="this.callTreeEntry.status" name="status" #status="ngModel">
+    <mat-select formControlName="status">
       <mat-option [value]="activeCallTreeEntry">Active</mat-option>
       <mat-option [value]="inActiveCallTreeEntry">Inactive</mat-option>
     </mat-select>
@@ -105,9 +115,7 @@
       cdkAutosizeMinRows="1"
       cdkAutosizeMaxRows="5"
       required
-      name="timeToStartProcedure"
-      #timeToStartProcedure="ngModel"
-      [(ngModel)]="this.callTreeEntry.timeToStartProcedure">
+      formControlName="timeToStartProcedure">
     </textarea>
     <mat-error [hidden]="timeToStartProcedure.valid||timeToStartProcedure.pristine">
       Time Interval to start established procedures is <strong>required</strong>
@@ -124,9 +132,7 @@
       cdkAutosizeMinRows="1"
       cdkAutosizeMaxRows="5"
       required
-      name="timeToEscalate"
-      #timeToEscalate="ngModel"
-      [(ngModel)]="this.callTreeEntry.timeToEscalate">
+      formControlName="timeToEscalate">
     </textarea>
     <mat-error [hidden]="timeToEscalate.valid||timeToEscalate.pristine">
       Time Interval to escalate if no reply is <strong>required</strong>
