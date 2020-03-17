@@ -16,7 +16,7 @@
             </button>
       </div>
     </div>
-    <div formArrayName="manualItemList" class="manualRow">
+    <div formArrayName="manualItemList">
       <div *ngFor="let item of manualItemList.controls; let i = index;" [formGroupName]="i" class="manualRow">
         <input type=hidden formControlName="manualId">
         <div>

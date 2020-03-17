@@ -1633,11 +1633,13 @@ CallTreeEntryMaintenanceComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ManualEditorComponent", function() { return ManualEditorComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
-/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/input */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
+/* harmony import */ var src_app_classes_Manual__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/classes/Manual */ "./src/app/classes/Manual.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
+/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/input */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
+
 
 
 
@@ -1671,7 +1673,7 @@ function ManualEditorComponent_div_10_mat_error_19_Template(rf, ctx) { if (rf & 
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 function ManualEditorComponent_div_10_Template(rf, ctx) { if (rf & 1) {
-    const _r567 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    const _r435 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "input", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div");
@@ -1703,21 +1705,21 @@ function ManualEditorComponent_div_10_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "div", 13);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "button", 14);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ManualEditorComponent_div_10_Template_button_click_21_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r567); const i_r562 = ctx.index; const ctx_r566 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r566.removeManual(i_r562); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ManualEditorComponent_div_10_Template_button_click_21_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r435); const i_r430 = ctx.index; const ctx_r434 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r434.removeManual(i_r430); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](22, " - ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const i_r562 = ctx.index;
-    const ctx_r560 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formGroupName", i_r562);
+    const i_r430 = ctx.index;
+    const ctx_r428 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formGroupName", i_r430);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r560.manualItemList.controls[i_r562].get("manualLocation").hasError("required"));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r428.manualItemList.controls[i_r430].get("manualLocation").hasError("required"));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r560.manualItemList.controls[i_r562].get("description").hasError("required"));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r428.manualItemList.controls[i_r430].get("description").hasError("required"));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r560.manualItemList.controls[i_r562].get("lastUpdateDate").hasError("required"));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r428.manualItemList.controls[i_r430].get("lastUpdateDate").hasError("required"));
 } }
 class ManualEditorComponent {
     constructor(fb) {
@@ -1725,15 +1727,20 @@ class ManualEditorComponent {
         this.manualItemList = this.fb.array([]);
     }
     addManual() {
+        const manualTemplate = new src_app_classes_Manual__WEBPACK_IMPORTED_MODULE_1__["Manual"]();
+        this.addManualItem(manualTemplate);
+    }
+    addManualItem(manualObject) {
+        const manualItem = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({});
+        manualItem.addControl('manualId', new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](manualObject.manualId, []));
+        manualItem.addControl('description', new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](manualObject.description, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]));
+        manualItem.addControl('manualLocation', new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](manualObject.manualLocation, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]));
+        manualItem.addControl('lastUpdateDate', new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](manualObject.lastUpdateDate, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]));
+        this.manualItemList.push(manualItem);
     }
     ngOnInit() {
         for (const manual of this.manuals) {
-            const manualItem = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({});
-            manualItem.addControl('manualId', new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](manual.manualId, []));
-            manualItem.addControl('description', new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](manual.description, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
-            manualItem.addControl('manualLocation', new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](manual.manualLocation, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
-            manualItem.addControl('lastUpdateDate', new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](manual.lastUpdateDate, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]));
-            this.manualItemList.push(manualItem);
+            this.addManualItem(manual);
         }
         this.manualsForm = this.fb.group({ manualItemList: this.manualItemList });
         console.log(this.manualsForm);
@@ -1747,6 +1754,7 @@ class ManualEditorComponent {
         console.log('manualsForm registerOnTouch');
     }
     removeManual(i) {
+        this.manualItemList.removeAt(i);
     }
     validate(_) {
         console.log('manualsForm Form.valid=' + this.manualsForm.valid);
@@ -1757,19 +1765,19 @@ class ManualEditorComponent {
         value && this.manualsForm.setValue(value, { emitEvent: false });
     }
 }
-ManualEditorComponent.ɵfac = function ManualEditorComponent_Factory(t) { return new (t || ManualEditorComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"])); };
+ManualEditorComponent.ɵfac = function ManualEditorComponent_Factory(t) { return new (t || ManualEditorComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"])); };
 ManualEditorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ManualEditorComponent, selectors: [["app-manual-editor"]], inputs: { manuals: "manuals", callTreeEntryId: "callTreeEntryId" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([
             {
-                provide: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NG_VALUE_ACCESSOR"],
+                provide: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NG_VALUE_ACCESSOR"],
                 useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(() => ManualEditorComponent),
                 multi: true
             },
             {
-                provide: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NG_VALIDATORS"],
+                provide: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NG_VALIDATORS"],
                 useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(() => ManualEditorComponent),
                 multi: true,
             }
-        ])], decls: 11, vars: 3, consts: [[3, "formGroup"], [1, "container"], [1, "headerRow"], ["mat-raised-button", "", "type", "button", "color", "primary", 1, "Update-btn", 3, "click"], ["formArrayName", "manualItemList", 1, "manualRow"], ["class", "manualRow", 3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "manualRow", 3, "formGroupName"], ["type", "hidden", "formControlName", "manualId"], ["matInput", "", "required", "", "type", "text", "formControlName", "manualLocation"], [4, "ngIf"], ["matInput", "", "type", "text", "required", "", "formControlName", "description"], [2, "width", "100%"], ["matInput", "", "required", "", "type", "text", "formControlName", "lastUpdateDate"], [1, "removeButton"], ["mat-raised-button", "", "type", "button", "color", "primary", 1, "Update-btn", 2, "font-weight", "bold", "font-size", "30px", "vertical-align", "middle", 3, "click"]], template: function ManualEditorComponent_Template(rf, ctx) { if (rf & 1) {
+        ])], decls: 11, vars: 3, consts: [[3, "formGroup"], [1, "container"], [1, "headerRow"], ["mat-raised-button", "", "type", "button", "color", "primary", 1, "Update-btn", 3, "click"], ["formArrayName", "manualItemList"], ["class", "manualRow", 3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "manualRow", 3, "formGroupName"], ["type", "hidden", "formControlName", "manualId"], ["matInput", "", "required", "", "type", "text", "formControlName", "manualLocation"], [4, "ngIf"], ["matInput", "", "type", "text", "required", "", "formControlName", "description"], [2, "width", "100%"], ["matInput", "", "required", "", "type", "text", "formControlName", "lastUpdateDate"], [1, "removeButton"], ["mat-raised-button", "", "type", "button", "color", "primary", 1, "Update-btn", 2, "font-weight", "bold", "font-size", "30px", "vertical-align", "middle", 3, "click"]], template: function ManualEditorComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 1);
@@ -1796,18 +1804,18 @@ ManualEditorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵde
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx.message, " ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.manualItemList.controls);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_material_button__WEBPACK_IMPORTED_MODULE_2__["MatButton"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormArrayName"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupName"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_5__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["RequiredValidator"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__["MatError"]], styles: [".container[_ngcontent-%COMP%]\r\n{\r\n  width:100%;\r\n  display:-webkit-box;\r\n  display:flex;\r\n  -webkit-box-orient:vertical;\r\n  -webkit-box-direction:normal;\r\n          flex-direction:column;\r\n  \r\n}\r\n.headerRow[_ngcontent-%COMP%]\r\n{\r\n  width:100%;\r\n  display:-webkit-box;\r\n  display:flex;\r\n  -webkit-box-orient:horizontal;\r\n  -webkit-box-direction:normal;\r\n          flex-direction:row;\r\n  -webkit-box-pack:justify;\r\n          justify-content:space-between;\r\n  padding-bottom: 10px;\r\n  \r\n}\r\n.manualRow[_ngcontent-%COMP%]\r\n{\r\n  width:100%;\r\n  display:-webkit-box;\r\n  display:flex;\r\n  -webkit-box-orient:horizontal;\r\n  -webkit-box-direction:normal;\r\n          flex-direction:row;\r\n  -webkit-box-pack:space-evenly;\r\n          justify-content:space-evenly;\r\n  \r\n}\r\n.manualRow[_ngcontent-%COMP%]    > div[_ngcontent-%COMP%]\r\n{\r\n  \r\n  -webkit-box-flex: 1;\r\n          flex: 1 1 auto;\r\n}\r\n.manualRow[_ngcontent-%COMP%]    > div[_ngcontent-%COMP%]    > mat-form-field[_ngcontent-%COMP%]\r\n{\r\n  width:95%\r\n}\r\n.removeButton[_ngcontent-%COMP%]\r\n{\r\n  display:-webkit-box;\r\n  display:flex;\r\n  -webkit-box-pack:center;\r\n          justify-content:center;\r\n  -webkit-box-align:center;\r\n          align-items:center;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cmllcy1saXN0L21hbnVhbC1lZGl0b3IvbWFudWFsLWVkaXRvci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztFQUVFLFVBQVU7RUFDVixtQkFBWTtFQUFaLFlBQVk7RUFDWiwyQkFBcUI7RUFBckIsNEJBQXFCO1VBQXJCLHFCQUFxQjtFQUNyQjs7R0FFQztBQUNIO0FBQ0E7O0VBRUUsVUFBVTtFQUNWLG1CQUFZO0VBQVosWUFBWTtFQUNaLDZCQUFrQjtFQUFsQiw0QkFBa0I7VUFBbEIsa0JBQWtCO0VBQ2xCLHdCQUE2QjtVQUE3Qiw2QkFBNkI7RUFDN0Isb0JBQW9CO0VBQ3BCOztHQUVDO0FBQ0g7QUFDQTs7RUFFRSxVQUFVO0VBQ1YsbUJBQVk7RUFBWixZQUFZO0VBQ1osNkJBQWtCO0VBQWxCLDRCQUFrQjtVQUFsQixrQkFBa0I7RUFDbEIsNkJBQTRCO1VBQTVCLDRCQUE0QjtFQUM1Qjs7R0FFQztBQUNIO0FBQ0E7O0VBRUU7O0dBRUM7RUFDRCxtQkFBYztVQUFkLGNBQWM7QUFDaEI7QUFDQTs7RUFFRTtBQUNGO0FBQ0E7O0VBRUUsbUJBQVk7RUFBWixZQUFZO0VBQ1osdUJBQXNCO1VBQXRCLHNCQUFzQjtFQUN0Qix3QkFBa0I7VUFBbEIsa0JBQWtCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cmllcy1saXN0L21hbnVhbC1lZGl0b3IvbWFudWFsLWVkaXRvci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lclxyXG57XHJcbiAgd2lkdGg6MTAwJTtcclxuICBkaXNwbGF5OmZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246Y29sdW1uO1xyXG4gIC8qXHJcbiAgYm9yZGVyOjFweCBzb2xpZCByZWQ7XHJcbiAgKi9cclxufVxyXG4uaGVhZGVyUm93XHJcbntcclxuICB3aWR0aDoxMDAlO1xyXG4gIGRpc3BsYXk6ZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjpyb3c7XHJcbiAganVzdGlmeS1jb250ZW50OnNwYWNlLWJldHdlZW47XHJcbiAgcGFkZGluZy1ib3R0b206IDEwcHg7XHJcbiAgLypcclxuICBib3JkZXI6MXB4IHNvbGlkIGJsdWU7XHJcbiAgKi9cclxufVxyXG4ubWFudWFsUm93XHJcbntcclxuICB3aWR0aDoxMDAlO1xyXG4gIGRpc3BsYXk6ZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjpyb3c7XHJcbiAganVzdGlmeS1jb250ZW50OnNwYWNlLWV2ZW5seTtcclxuICAvKlxyXG4gIGJvcmRlcjoxcHggc29saWQgZ3JlZW47XHJcbiAgKi9cclxufVxyXG4ubWFudWFsUm93ID4gZGl2XHJcbntcclxuICAvKlxyXG4gIGJvcmRlcjoxcHggc29saWQgYnJvd247XHJcbiAgKi9cclxuICBmbGV4OiAxIDEgYXV0bztcclxufVxyXG4ubWFudWFsUm93ID4gZGl2ID5tYXQtZm9ybS1maWVsZFxyXG57XHJcbiAgd2lkdGg6OTUlXHJcbn1cclxuLnJlbW92ZUJ1dHRvblxyXG57XHJcbiAgZGlzcGxheTpmbGV4O1xyXG4gIGp1c3RpZnktY29udGVudDpjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6Y2VudGVyO1xyXG59XHJcbiJdfQ== */"] });
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroupDirective"], _angular_material_button__WEBPACK_IMPORTED_MODULE_3__["MatButton"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormArrayName"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroupName"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControlName"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_6__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["RequiredValidator"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatError"]], styles: [".container[_ngcontent-%COMP%]\r\n{\r\n  width:100%;\r\n  display:-webkit-box;\r\n  display:flex;\r\n  -webkit-box-orient:vertical;\r\n  -webkit-box-direction:normal;\r\n          flex-direction:column;\r\n  \r\n}\r\n.headerRow[_ngcontent-%COMP%]\r\n{\r\n  width:100%;\r\n  display:-webkit-box;\r\n  display:flex;\r\n  -webkit-box-orient:horizontal;\r\n  -webkit-box-direction:normal;\r\n          flex-direction:row;\r\n  -webkit-box-pack:justify;\r\n          justify-content:space-between;\r\n  padding-bottom: 10px;\r\n  \r\n}\r\n.manualRow[_ngcontent-%COMP%]\r\n{\r\n  width:100%;\r\n  display:-webkit-box;\r\n  display:flex;\r\n  -webkit-box-orient:horizontal;\r\n  -webkit-box-direction:normal;\r\n          flex-direction:row;\r\n  -webkit-box-pack:space-evenly;\r\n          justify-content:space-evenly;\r\n  \r\n}\r\n.manualRow[_ngcontent-%COMP%]    > div[_ngcontent-%COMP%]\r\n{\r\n  \r\n  -webkit-box-flex: 1;\r\n          flex: 1 1 auto;\r\n}\r\n.manualRow[_ngcontent-%COMP%]    > div[_ngcontent-%COMP%]    > mat-form-field[_ngcontent-%COMP%]\r\n{\r\n  width:95%\r\n}\r\n.removeButton[_ngcontent-%COMP%]\r\n{\r\n  display:-webkit-box;\r\n  display:flex;\r\n  -webkit-box-pack:center;\r\n          justify-content:center;\r\n  -webkit-box-align:center;\r\n          align-items:center;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cmllcy1saXN0L21hbnVhbC1lZGl0b3IvbWFudWFsLWVkaXRvci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztFQUVFLFVBQVU7RUFDVixtQkFBWTtFQUFaLFlBQVk7RUFDWiwyQkFBcUI7RUFBckIsNEJBQXFCO1VBQXJCLHFCQUFxQjtFQUNyQjs7R0FFQztBQUNIO0FBQ0E7O0VBRUUsVUFBVTtFQUNWLG1CQUFZO0VBQVosWUFBWTtFQUNaLDZCQUFrQjtFQUFsQiw0QkFBa0I7VUFBbEIsa0JBQWtCO0VBQ2xCLHdCQUE2QjtVQUE3Qiw2QkFBNkI7RUFDN0Isb0JBQW9CO0VBQ3BCOztHQUVDO0FBQ0g7QUFDQTs7RUFFRSxVQUFVO0VBQ1YsbUJBQVk7RUFBWixZQUFZO0VBQ1osNkJBQWtCO0VBQWxCLDRCQUFrQjtVQUFsQixrQkFBa0I7RUFDbEIsNkJBQTRCO1VBQTVCLDRCQUE0QjtFQUM1Qjs7R0FFQztBQUNIO0FBQ0E7O0VBRUU7O0dBRUM7RUFDRCxtQkFBYztVQUFkLGNBQWM7QUFDaEI7QUFDQTs7RUFFRTtBQUNGO0FBQ0E7O0VBRUUsbUJBQVk7RUFBWixZQUFZO0VBQ1osdUJBQXNCO1VBQXRCLHNCQUFzQjtFQUN0Qix3QkFBa0I7VUFBbEIsa0JBQWtCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9jYWxsLXRyZWUtZW50cmllcy1saXN0L21hbnVhbC1lZGl0b3IvbWFudWFsLWVkaXRvci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lclxyXG57XHJcbiAgd2lkdGg6MTAwJTtcclxuICBkaXNwbGF5OmZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246Y29sdW1uO1xyXG4gIC8qXHJcbiAgYm9yZGVyOjFweCBzb2xpZCByZWQ7XHJcbiAgKi9cclxufVxyXG4uaGVhZGVyUm93XHJcbntcclxuICB3aWR0aDoxMDAlO1xyXG4gIGRpc3BsYXk6ZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjpyb3c7XHJcbiAganVzdGlmeS1jb250ZW50OnNwYWNlLWJldHdlZW47XHJcbiAgcGFkZGluZy1ib3R0b206IDEwcHg7XHJcbiAgLypcclxuICBib3JkZXI6MXB4IHNvbGlkIGJsdWU7XHJcbiAgKi9cclxufVxyXG4ubWFudWFsUm93XHJcbntcclxuICB3aWR0aDoxMDAlO1xyXG4gIGRpc3BsYXk6ZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjpyb3c7XHJcbiAganVzdGlmeS1jb250ZW50OnNwYWNlLWV2ZW5seTtcclxuICAvKlxyXG4gIGJvcmRlcjoxcHggc29saWQgZ3JlZW47XHJcbiAgKi9cclxufVxyXG4ubWFudWFsUm93ID4gZGl2XHJcbntcclxuICAvKlxyXG4gIGJvcmRlcjoxcHggc29saWQgYnJvd247XHJcbiAgKi9cclxuICBmbGV4OiAxIDEgYXV0bztcclxufVxyXG4ubWFudWFsUm93ID4gZGl2ID5tYXQtZm9ybS1maWVsZFxyXG57XHJcbiAgd2lkdGg6OTUlXHJcbn1cclxuLnJlbW92ZUJ1dHRvblxyXG57XHJcbiAgZGlzcGxheTpmbGV4O1xyXG4gIGp1c3RpZnktY29udGVudDpjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6Y2VudGVyO1xyXG59XHJcbiJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ManualEditorComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
                 providers: [
                     {
-                        provide: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NG_VALUE_ACCESSOR"],
+                        provide: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NG_VALUE_ACCESSOR"],
                         useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(() => ManualEditorComponent),
                         multi: true
                     },
                     {
-                        provide: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NG_VALIDATORS"],
+                        provide: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NG_VALIDATORS"],
                         useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(() => ManualEditorComponent),
                         multi: true,
                     }
@@ -1816,7 +1824,7 @@ ManualEditorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵde
                 styleUrls: ['./manual-editor.component.css'],
                 templateUrl: './manual-editor.component.html',
             }]
-    }], function () { return [{ type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"] }]; }, { manuals: [{
+    }], function () { return [{ type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] }]; }, { manuals: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
         }], callTreeEntryId: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
@@ -3219,7 +3227,7 @@ _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().boot
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\Users\cstsang\workspace\CallTreeAdmin\frontEndSrc\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Users\Roy\workspace\calltreeadmin\frontEndSrc\src\main.ts */"./src/main.ts");
 
 
 /***/ })

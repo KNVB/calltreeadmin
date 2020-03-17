@@ -35,25 +35,28 @@ import {
 export class ManualEditorComponent implements ControlValueAccessor, OnInit {
   @Input() manuals: Manual[];
   @Input() callTreeEntryId: number;
+  
   manualsForm: FormGroup;
   manualItemList: FormArray;
   message: string;
   constructor(private fb: FormBuilder) {
     this.manualItemList = this.fb.array([]);
-
-
   }
   addManual() {
-
+    const manualTemplate =new Manual();
+    this.addManualItem(manualTemplate);
+  }
+  addManualItem(manualObject: Manual) {
+    const manualItem = new FormGroup({});
+    manualItem.addControl('manualId', new FormControl(manualObject.manualId, []));
+    manualItem.addControl('description', new FormControl(manualObject.description, [Validators.required]));
+    manualItem.addControl('manualLocation', new FormControl(manualObject.manualLocation, [Validators.required]));
+    manualItem.addControl('lastUpdateDate', new FormControl(manualObject.lastUpdateDate, [Validators.required]));
+    this.manualItemList.push(manualItem);
   }
   ngOnInit(): void {
     for (const manual of this.manuals) {
-      const manualItem = new FormGroup({});
-      manualItem.addControl('manualId', new FormControl(manual.manualId, []));
-      manualItem.addControl('description', new FormControl(manual.description, [Validators.required]));
-      manualItem.addControl('manualLocation', new FormControl(manual.manualLocation, [Validators.required]));
-      manualItem.addControl('lastUpdateDate', new FormControl(manual.lastUpdateDate, [Validators.required]));
-      this.manualItemList.push(manualItem);
+      this.addManualItem(manual);
     }
     this.manualsForm =  this.fb.group({manualItemList: this.manualItemList});
     console.log(this.manualsForm);
@@ -68,7 +71,7 @@ export class ManualEditorComponent implements ControlValueAccessor, OnInit {
     console.log('manualsForm registerOnTouch');
   }
   removeManual(i: number) {
-
+    this.manualItemList.removeAt(i);
   }
   validate(_: FormControl) {
     console.log('manualsForm Form.valid=' + this.manualsForm.valid);
