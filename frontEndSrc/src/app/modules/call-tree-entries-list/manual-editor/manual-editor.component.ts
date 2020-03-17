@@ -40,7 +40,7 @@ export class ManualEditorComponent implements ControlValueAccessor, OnInit {
   message: string;
   constructor(private fb: FormBuilder) {
     this.manualItemList = this.fb.array([]);
-    this.manualsForm =  this.fb.group({manualItemList: this.manualItemList});
+
 
   }
   addManual() {
@@ -49,10 +49,13 @@ export class ManualEditorComponent implements ControlValueAccessor, OnInit {
   ngOnInit(): void {
     for (const manual of this.manuals) {
       const manualItem = new FormGroup({});
+      manualItem.addControl('manualId', new FormControl(manual.manualId, []));
       manualItem.addControl('description', new FormControl(manual.description, [Validators.required]));
       manualItem.addControl('manualLocation', new FormControl(manual.manualLocation, [Validators.required]));
+      manualItem.addControl('lastUpdateDate', new FormControl(manual.lastUpdateDate, [Validators.required]));
       this.manualItemList.push(manualItem);
     }
+    this.manualsForm =  this.fb.group({manualItemList: this.manualItemList});
     console.log(this.manualsForm);
   }
   registerOnChange(fn: any) {
@@ -63,6 +66,9 @@ export class ManualEditorComponent implements ControlValueAccessor, OnInit {
   registerOnTouched(fn: any) {
     this.manualsForm.statusChanges.subscribe(fn);
     console.log('manualsForm registerOnTouch');
+  }
+  removeManual(i: number) {
+
   }
   validate(_: FormControl) {
     console.log('manualsForm Form.valid=' + this.manualsForm.valid);
