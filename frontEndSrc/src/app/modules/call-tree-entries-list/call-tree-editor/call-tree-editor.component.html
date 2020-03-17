@@ -1,1 +1,28 @@
-<p>call-tree-editor works!</p>
+<div [formGroup]="callTreeForm">
+  <mat-radio-group formControlName="callTreeType">
+    <div style="display:flex;flex-direction: column;padding-top: 5px;">
+      <div style="display:flex;flex-direction: column;">
+        <mat-radio-button style="padding-bottom: 5px;" [value]="1">Create an individual CallTree</mat-radio-button>
+        <div style="display:flex;min-height: 200px;flex-direction: column;" *ngIf="(callTreeType.value === 1)">
+          <ckeditor
+            [config]="this.ckeditorConfig"
+            [editor]="Editor"
+            formControlName="callTreeDetail">
+          </ckeditor>
+          <mat-error style="position:relative" *ngIf="callTreeDetail.touched && callTreeDetail.hasError('required')">
+            Call tree is <strong>required</strong>
+          </mat-error>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction: column;margin-top: 5px;">
+        <mat-radio-button [value]="2">Share CallTree with the following system:</mat-radio-button>
+        <div style="display:flex;min-height: 200px;flex-direction: column;" *ngIf="(callTreeType.value === 2)">
+          <mat-select
+            required
+            formControlName="sharedDivision">
+          </mat-select>
+        </div>
+      </div>
+    </div>
+  </mat-radio-group>
+</div>

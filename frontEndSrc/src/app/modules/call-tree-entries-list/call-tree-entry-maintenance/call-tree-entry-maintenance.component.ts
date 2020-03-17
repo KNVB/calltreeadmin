@@ -2,7 +2,12 @@ import { Component, Inject} from '@angular/core';
 import { CallTreeEntry } from 'src/app/classes/CallTreeEntry';
 import { CallTreeEntryService } from 'src/app/services/call-tree-entry.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {
+        FormArray,
+        FormBuilder,
+        FormControl,
+        FormGroup
+      } from '@angular/forms';
 
 @Component({
   selector: 'app-call-tree-entry-maintenance',
@@ -14,6 +19,7 @@ export class CallTreeEntryMaintenanceComponent {
   callTreeEntryEditForm: FormGroup;
   callTreeEntry: CallTreeEntry;
   divisionToSystem: string[] = [];
+  manualsForm: FormGroup;
   sharedDivisionList: string[];
   systemToCalltree = [];
   constructor(private callTreeEntryService: CallTreeEntryService,
@@ -26,8 +32,11 @@ export class CallTreeEntryMaintenanceComponent {
                 this.divisionToSystem = data.divisionToSystem;
                 this.sharedDivisionList = data.sharedDivisionList;
                 this.systemToCalltree = data.systemToCalltree;
-                this.callTreeEntryEditForm = this.fb.group({callTreeEntryForm: new FormControl(''),
-                                                            callTreeForm: new FormControl('')});
+                this.callTreeEntryEditForm = this.fb.group({
+                                                            callTreeEntryForm: new FormControl(''),
+                                                            callTreeForm: new FormControl(''),
+                                                            manualsForm: new FormControl('')
+                                                          });
               }
   addCallTreeEntry() {
   }

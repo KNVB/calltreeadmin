@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>{{ action }} A Call Tree Entry</h2>
 <form [formGroup]="callTreeEntryEditForm">
   <div mat-dialog-content>
-    <mat-tab-group>
+    <mat-tab-group [selectedIndex]=2>
       <mat-tab label="Entry Attributes">
         <app-call-tree-entry-editor
           [callTreeEntry]="callTreeEntry"
@@ -9,13 +9,19 @@
         </app-call-tree-entry-editor>
       </mat-tab>
       <mat-tab label="Call Tree">
+        <!--
         <app-call-tree-editor
-        [callTree]="callTreeEntry.callTree"
-        formControlName="callTreeForm">
-      </app-call-tree-editor>
+          [callTree]="callTreeEntry.callTree"
+          formControlName="callTreeForm">
+        </app-call-tree-editor>
+        -->
       </mat-tab>
       <mat-tab label="Operation Manual(Optional)">
-        <app-manual-editor></app-manual-editor>
+        <app-manual-editor
+          formControlName="manualsForm"
+          [callTreeEntryId]="callTreeEntry.callTreeEntryId"
+          [manuals]="callTreeEntry.manuals">
+        </app-manual-editor>
       </mat-tab>
     </mat-tab-group>
   </div>
@@ -24,5 +30,10 @@
     <button mat-raised-button type="button" class="Discard-btn" (click)="closeDialog()">Close</button>
   </mat-dialog-actions>
 </form>
-<br>
-form.valid={{callTreeEntryEditForm.valid}}<br>
+<div>
+  form.valid={{callTreeEntryEditForm.valid}}
+</div>
+<div>
+  form.value={{callTreeEntryEditForm.value|json}}
+</div>
+

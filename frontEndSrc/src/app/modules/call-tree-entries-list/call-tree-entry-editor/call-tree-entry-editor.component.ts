@@ -72,7 +72,7 @@ export class CallTreeEntryEditorComponent implements ControlValueAccessor, OnIni
 
     this.timeToEscalate = new FormControl(this.callTreeEntry.timeToEscalate, [Validators.required]);
     this.timeToStartProcedure = new FormControl(this.callTreeEntry.timeToStartProcedure, [Validators.required]);
-    this. callTreeEntryForm = this.fb.group({
+    this.callTreeEntryForm = this.fb.group({
                                         callTreeEntryId: this.callTreeEntryId,
                                         division: this.division,
                                         location: this.location,
@@ -97,7 +97,7 @@ export class CallTreeEntryEditorComponent implements ControlValueAccessor, OnIni
         alert('Failed to get the active division list');
       }
     });
-    console.log('init');
+    console.log('callTreeEntryForm init');
   }
   private _filter(value: string): string[] {
     console.log('value=' + value);
@@ -118,14 +118,14 @@ export class CallTreeEntryEditorComponent implements ControlValueAccessor, OnIni
 
   registerOnTouched(fn: any) {
     this.callTreeEntryForm.statusChanges.subscribe(fn);
-    console.log('attributesForm registerOnTouch');
+    console.log('callTreeEntryForm registerOnTouch');
   }
   validate(_: FormControl) {
-    console.log('attributesForm.valid=' + this.callTreeEntryForm.valid);
-    return this.callTreeEntryForm.valid ? null : { attributesForm: { valid: false, }, };
+    console.log('callTreeEntryForm Form.valid=' + this.callTreeEntryForm.valid);
+    return this.callTreeEntryForm.valid ? null : { callTreeEntryForm: { valid: false, }, };
   }
   writeValue(value: any) {
-    console.log('Write Value=' + value);
+    console.log('callTreeEntryForm Write Value=' + value);
     value && this.callTreeEntryForm.setValue(value, { emitEvent: false });
   }
 }
