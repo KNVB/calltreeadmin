@@ -1,0 +1,38 @@
+<div style="display:flex;align-items: center;justify-content: center;width:100%">
+  <form #loginForm="ngForm" (ngSubmit)="login(model)">
+    <table border="0">
+      <tr>
+        <td colspan="2" style="text-align:center">Call Tree Admin. Login page</td>
+      </tr>
+      <tr>
+        <td>Login Name:</td>
+        <td>
+            <input type="text" class="form-control" id="userName" required
+            [(ngModel)]="model.userName"
+            name="userName" #userName="ngModel">
+            <div [hidden]="userName.valid || userName.pristine" style='color:red'>
+              Login Name is required
+            </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td>
+          <input type="password" name="password" required  [(ngModel)]="model.password" #password="ngModel">
+          <div [hidden]="password.valid || password.pristine" style='color:red'>
+              Password is required
+            </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align:center"><input type="submit" value="login"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div>
+{{userName.valid}}
+</div>
+<div>
+  {{userName.pristine}}
+</div>
