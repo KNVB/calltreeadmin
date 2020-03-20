@@ -5,7 +5,6 @@ import {Location} from '@angular/common';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthenResult } from '../../login/authen-result';
-import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +18,7 @@ export class AuthenticationService {
 
   login(userName: string, password: string): Observable<any> {
     let requestParams = new HttpParams();
-    const url = '../RestfulServices/loginService/doLogin';
+    const url = '../RestfulServices/AuthService/doLogin';
 
     console.log(userName, (userName !== null));
     if (userName !== null) {
@@ -33,7 +32,7 @@ export class AuthenticationService {
                 map(
                   (authenResult: AuthenResult) => {
                     if (authenResult.resultCode === 0) {
-                      // this.setCookie(authenResult.accessToken);
+                      this.token = authenResult.accessToken;
                       sessionStorage.setItem('accessToken', authenResult.accessToken);
                     }
                     return  authenResult.resultCode;
@@ -43,14 +42,6 @@ export class AuthenticationService {
                 }));
   }
   logout() {
-    this.cookieService.delete('accessToken', this.location.prepareExternalUrl(''));
-  }
-  setCookie(token: string) {
-    const helper = new JwtHelperService();
-    const expirationDate = helper.getTokenExpirationDate(token);
-    this.cookieService.set('accessToken', token,
-    expirationDate,
-    this.location.prepareExternalUrl(''),
-    document.location.hostname);
+    sessionStorage.clear();
   }
 }

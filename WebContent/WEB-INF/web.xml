@@ -16,6 +16,14 @@
     	<param-name>jersey.config.server.provider.packages</param-name>
     	<param-value>com.calltree.services</param-value>
     </init-param>
+    <init-param>
+	    <param-name>adminUserName</param-name>  
+	    <param-value>callTreeAdmin</param-value>  
+	</init-param>
+  	<init-param>
+        <param-name>adminPassword</param-name>  
+        <param-value>password</param-value>  
+	</init-param>   
   	<load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
