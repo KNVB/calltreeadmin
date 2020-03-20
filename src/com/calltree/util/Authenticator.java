@@ -36,7 +36,7 @@ public class Authenticator {
     public boolean isAuthenticated(String token,String remoteIPAddress) {
     	boolean result=true;
     	try {
-    	    Algorithm algorithm = Algorithm.HMAC256("secret");
+    	    Algorithm algorithm = Algorithm.HMAC256(remoteIPAddress);
     	    JWTVerifier verifier = JWT.require(algorithm)
     	        .withIssuer("HKO")
     	        .withClaim("isVip", "深水埗")
