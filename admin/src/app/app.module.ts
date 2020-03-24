@@ -3,6 +3,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './modules/login/auth-guard.service';
 import { AuthTokenInterceptor } from './modules/utility/auth-token.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginModule } from './modules/login/login.module';
@@ -17,6 +18,7 @@ import { UtilityModule  } from './modules/utility/utility.module';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     LoginModule,
     UtilityModule
   ],

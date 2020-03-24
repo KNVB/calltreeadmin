@@ -121,11 +121,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_login_auth_guard_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/login/auth-guard.service */ "./src/app/modules/login/auth-guard.service.ts");
 /* harmony import */ var _modules_utility_auth_token_interceptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/utility/auth-token.interceptor */ "./src/app/modules/utility/auth-token.interceptor.ts");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-/* harmony import */ var _modules_login_login_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/login/login.module */ "./src/app/modules/login/login.module.ts");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _modules_utility_utility_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/utility/utility.module */ "./src/app/modules/utility/utility.module.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/animations.js");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var _modules_login_login_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/login/login.module */ "./src/app/modules/login/login.module.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _modules_utility_utility_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/utility/utility.module */ "./src/app/modules/utility/utility.module.ts");
+
 
 
 
@@ -139,39 +141,42 @@ __webpack_require__.r(__webpack_exports__);
 
 class AppModule {
 }
-AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [_modules_login_auth_guard_service__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"],
+AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__["AppComponent"]] });
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [_modules_login_auth_guard_service__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"],
         {
-            provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HTTP_INTERCEPTORS"],
+            provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HTTP_INTERCEPTORS"],
             useClass: _modules_utility_auth_token_interceptor__WEBPACK_IMPORTED_MODULE_3__["AuthTokenInterceptor"],
             multi: true
         }], imports: [[
             _app_routing_module__WEBPACK_IMPORTED_MODULE_1__["AppRoutingModule"],
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["BrowserModule"],
-            _modules_login_login_module__WEBPACK_IMPORTED_MODULE_7__["LoginModule"],
-            _modules_utility_utility_module__WEBPACK_IMPORTED_MODULE_9__["UtilityModule"]
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"],
+            _modules_login_login_module__WEBPACK_IMPORTED_MODULE_8__["LoginModule"],
+            _modules_utility_utility_module__WEBPACK_IMPORTED_MODULE_10__["UtilityModule"]
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_0__["AppComponent"],
-        _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]], imports: [_app_routing_module__WEBPACK_IMPORTED_MODULE_1__["AppRoutingModule"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_0__["AppComponent"],
+        _home_home_component__WEBPACK_IMPORTED_MODULE_6__["HomeComponent"]], imports: [_app_routing_module__WEBPACK_IMPORTED_MODULE_1__["AppRoutingModule"],
         _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["BrowserModule"],
-        _modules_login_login_module__WEBPACK_IMPORTED_MODULE_7__["LoginModule"],
-        _modules_utility_utility_module__WEBPACK_IMPORTED_MODULE_9__["UtilityModule"]] }); })();
-/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵsetClassMetadata"](AppModule, [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["NgModule"],
+        _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"],
+        _modules_login_login_module__WEBPACK_IMPORTED_MODULE_8__["LoginModule"],
+        _modules_utility_utility_module__WEBPACK_IMPORTED_MODULE_10__["UtilityModule"]] }); })();
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵsetClassMetadata"](AppModule, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["NgModule"],
         args: [{
                 declarations: [
                     _app_component__WEBPACK_IMPORTED_MODULE_0__["AppComponent"],
-                    _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]
+                    _home_home_component__WEBPACK_IMPORTED_MODULE_6__["HomeComponent"]
                 ],
                 imports: [
                     _app_routing_module__WEBPACK_IMPORTED_MODULE_1__["AppRoutingModule"],
                     _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["BrowserModule"],
-                    _modules_login_login_module__WEBPACK_IMPORTED_MODULE_7__["LoginModule"],
-                    _modules_utility_utility_module__WEBPACK_IMPORTED_MODULE_9__["UtilityModule"]
+                    _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"],
+                    _modules_login_login_module__WEBPACK_IMPORTED_MODULE_8__["LoginModule"],
+                    _modules_utility_utility_module__WEBPACK_IMPORTED_MODULE_10__["UtilityModule"]
                 ],
                 providers: [_modules_login_auth_guard_service__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"],
                     {
-                        provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HTTP_INTERCEPTORS"],
+                        provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HTTP_INTERCEPTORS"],
                         useClass: _modules_utility_auth_token_interceptor__WEBPACK_IMPORTED_MODULE_3__["AuthTokenInterceptor"],
                         multi: true
                     }],
@@ -205,9 +210,11 @@ class HomeComponent {
     constructor(authenticationService, callTreeEntryService) {
         this.authenticationService = authenticationService;
         this.callTreeEntryService = callTreeEntryService;
-        this.callTreeEntryService.getAllCallTreeEntry().subscribe((res) => {
-            console.log(res.success);
+        /*
+        this.callTreeEntryService.getAllCallTreeEntry().subscribe((res: OperationResult) => {
+          console.log(res.success);
         });
+        */
     }
     ngOnInit() {
     }

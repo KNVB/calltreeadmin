@@ -12,9 +12,11 @@ export class HomeComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
               private callTreeEntryService: CallTreeEntryService) {
+    /*
     this.callTreeEntryService.getAllCallTreeEntry().subscribe((res: OperationResult) => {
       console.log(res.success);
     });
+    */
   }
 
   ngOnInit(): void {

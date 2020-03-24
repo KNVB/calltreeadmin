@@ -53,13 +53,22 @@ public class RestfulServicesFilter implements Filter {
 		restfulServicesURI=restfulServicesURI.replaceAll("\\*","");
 		authServiceURI= restfulServicesURI+"AuthService/";
 		requestURI = httpServletRequest.getRequestURI();
-		logger.debug("requestURI="+requestURI+",is authServiceURI="+requestURI.startsWith(authServiceURI));
+		//logger.debug("requestURI="+requestURI+",is authServiceURI="+requestURI.startsWith(authServiceURI));
 		if (requestURI.startsWith(authServiceURI)) {
 			chain.doFilter(request, response);
 		} else {
 			logger.debug("Request Header="+httpServletRequest.getHeader("Authorization"));
+			
 			String token=httpServletRequest.getHeader("Authorization").replaceAll("Bearer ", "");
 			boolean isAuthenticated=Authenticator.getInstance().isAuthenticated(token, request.getRemoteAddr());
+			if (isAuthenticated) {
+				logger.debug("Access Restful Service API "+requestURI+" permission is granted.");
+				chain.doFilter(request, response);
+			} else {
+				logger.debug("Access Restful Service API "+requestURI+" permission is denied.");
+				response.getWriter().print("{\"success\":false,\"returnObj\":null}");
+				response.flushBuffer();
+			}
 		}
 		 
 	}
